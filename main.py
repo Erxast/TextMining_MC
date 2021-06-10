@@ -17,8 +17,12 @@ def api():
     # print(rsearch.status_code)
     # print(urlsearch)
     id_all = rsearch.json()['esearchresult']['idlist']
+    # print(id_all)
     # print(len(id_all)) = 9247
-    # urlfetch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&query_key="+str(query_key)+"&WebEnv="+str(web_env)
+    for elmt in id_all :
+        urlfetch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="+str(elmt)
+        print(urlfetch)
+
     # rid = requests.get(urlfetch)
     # print(rid.status_code)
     # print(urlfetch)
