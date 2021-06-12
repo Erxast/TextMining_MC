@@ -1,7 +1,7 @@
 import requests
+import xmltodict
 
-
-def api():
+def api_pubmed():
     # Request_for_QK_&_WE
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=congenital+myopathy&retmode=json&usehistory=y')
@@ -19,13 +19,17 @@ def api():
     id_all = rsearch.json()['esearchresult']['idlist']
     # print(id_all)
     # print(len(id_all)) = 9247
-    for elmt in id_all :
-        urlfetch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="+str(elmt)
-        print(urlfetch)
+    for elmt in id_all:
+        urlfetch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="+str(elmt)+"&retmode=xml"
+        # print(urlfetch)
+        all1_art = requests.get(urlfetch)
+        dict_all1_art = xmltodict.parse(all1_art.content)
+        abstract_ = dict_all1_art["PubmedArticleSet"]["PubmedArticle"]["MedlineCitation"]["Article"]["Abstract"]
+        # print(abstract_)
+        arti_cle = open("article "+str(elmt), "w+")
+        arti_cle.write(str(abstract_))
+        arti_cle.close()
+        break
 
-    # rid = requests.get(urlfetch)
-    # print(rid.status_code)
-    # print(urlfetch)
 
-
-api()
+api_pubmed()
