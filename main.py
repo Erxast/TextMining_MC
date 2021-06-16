@@ -176,7 +176,7 @@ def work():
             file.close()
 
 
-work_on()
+work()
 
 
 def e_summary():
