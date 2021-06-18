@@ -533,7 +533,14 @@ def api_pubmed_database():
                     try:
                         date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
                     except:
-                        date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"]["MedlineDate"])
+                        complete_date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"]["MedlineDate"])
+                        date_ = ''
+                        c = 0
+                        for lettre in complete_date_:
+                            if c == 4:
+                                break
+                            date_ = date_ + lettre
+                            c += 1
                 #Add_to_db
                 article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
             list_id_100.clear()
@@ -577,7 +584,14 @@ def api_pubmed_database():
             try:
                 date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
             except:
-                date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"]["MedlineDate"])
+                complete_date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"]["MedlineDate"])
+                date_ = ''
+                c = 0
+                for lettre in complete_date_:
+                    if c == 4:
+                        break
+                    date_ = date_ + lettre
+                    c += 1
         #Add_to_db
         article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
 #     #Del_false_positive
@@ -589,7 +603,7 @@ def api_pubmed_database():
     db.close()
 
 
-api_pubmed_database()
+# api_pubmed_database()
 
 
 def database_search():
@@ -605,7 +619,7 @@ def database_search():
         class Meta:
             database = db
     db.create_tables([Article])
-    query = Article.select()
+    query = Article.select().where(Article.date == '2021')
     print(len(query))
     i = 0
     for arti in query:
