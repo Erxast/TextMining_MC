@@ -1,9 +1,9 @@
-
 import requests
 import xmltodict
 import os
 from tqdm import tqdm
 from Bio import Entrez
+from peewee import *
 
 
 class _article:
@@ -92,9 +92,6 @@ def api_pubmed():
     # arti_cle.close()
 
 
-# api_pubmed()
-
-
 def work():
     # url_ = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=33602879,33811133&retmode=xml"
     url_ = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=34129875,34120822,34117073,34112090,34106991,34103343,34087854,34068508,34066362,34066119,34058744,34053846,20301480,34033812,33994094,33985321,33977145,33972922,33964023,33963534,33940562,33940157,33933294,33926564,33926407,33923914,33922911,33919826,33917608,33916195,33909041,33898094,33889622,33869891,33860760,33851717,33849607,33811133,33808002,33799993,33775046,33772159,33768912,33762497,33755597,33750322,33748842,33742414,33740643,33731536,33728321,33715228,33713125,33706403,33694278,33693846,33678976,33672664,33671084,33667896,33660968,33659639,33658649,33655926,33649036,33646172,33644647,33642296,33622753,33618039,33610554,33605127,33604899,33602879,33596003,33569209,33558124,33547108,33539007,33530378,33529318,33522658,33513091,33497766,33478553,33476211,33459893,33458580,33458578,33454021,33449170,33441455,33435938,33410539,33407688,33397769,33397003,33396724,33389762,33384202,&retmode=xml"
@@ -160,9 +157,6 @@ def work():
             file.write("Publication_type : " + str(publication_type_art) + "\n")
             file.write("Abstract : " + str(abstract_art) + "\n")
             file.close()
-
-
-# work()
 
 
 def solution_by_corentin():
@@ -351,7 +345,7 @@ def final_():
                     a = 0
 
 
-final_()
+# final_()
 
 
 def url_generator():
@@ -406,9 +400,6 @@ def test_():
         print(abstract_)
 
 
-# test_()
-
-
 def new_request():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y')
@@ -427,5 +418,3 @@ def new_request():
     id_all = rsearch.json()['esearchresult']['idlist']
     print(len(id_all))
 
-
-# new_request()
