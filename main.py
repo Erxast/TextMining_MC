@@ -141,26 +141,22 @@ def work():
 
 def solution_by_corentin():
     Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+    # id_list = ['1310898', '11294660', '15668982', '25476234', '10902626', '20920668', '24726473', '23261301', '15466643', '9536092', '8900232', '17592081', '15455396', '11774073', '20039086', '23543484', '1970420', '7910982', '26385635', '32937143', '29379881', '24268661', '19299310', '16701995', '15322983', '10590411', '18852439', '18313022', '10841809', '9382102', '16216943', '9326939', '16407510', '8789442', '12705874', '12196656', '9537420', '8789455', '21665002', '28017374', '18304497', '10330430', '15542288', '12531876', '9585610', '11528383', '14567970', '12571597', '15178757']
     # id_list = ['32991557', '32991555', '32900739']
-    # id_list = ['34129875', '34120822', '34117073', '34112090']
-    # id_list = ['34129875', '34120822', '34117073', '34112090', '34106991', '34103343', '34087854', '34068508', '34066362', '34066119', '34058744', '34053846', '20301480', '34033812', '33994094', '33985321', '33977145', '33972922', '33964023', '33963534', '33940562', '33940157', '33933294', '33926564', '33926407', '33923914', '33922911', '33919826', '33917608', '33916195', '33909041', '33898094', '33889622', '33869891', '33860760', '33851717', '33849607', '33811133', '33808002', '33799993', '33775046', '33772159', '33768912', '33762497', '33755597', '33750322', '33748842', '33742414', '33740643', '33731536']
-    # id_list = ['33031641', '33030289', '33009919', '33000450', '32994313', '32994279', '32991557', '32991555', '32987629', '32978031', '32939402', '32936536', '32925083', '32921128', '32919980', '32910616', '32902138', '32900739', '32887649', '32865794', '32862205', '32849172', '32847583', '32844998', '32833721', '32827036', '32826616', '32826339', '32823742', '32820518', '32819427', '32818658', '32818283', '32817686', '32815147', '32812332', '32809353', '32809972', '32808237', '32805447', '32799913', '32797717', '32796201', '32793522', '32793418', '32791556', '32788656', '32788638', '32778822', '32777938']
-    id_list = ['33382107', '33376055', '33354762', '33351248', '33343299', '33341951', '33337382', '33333461', '33331696', '33325393', '33309881', '33307294', '33304817', '33303358', '33294969', '33288130', '33277420', '33277141', '33272829', '33265937', '33256785', '33255644', '33250842', '33246213', '33244741', '33235377', '33200426', '33193651', '33190635', '33184643', '33176865', '33166523', '33164942', '33164824', '33137814', '33136893', '33131661', '33129849', '33127292', '33124102', '33120694', '33113016', '33112424', '33103395', '33097808', '33076971', '33075681', '33066566', '33064836', '33037480']
+    id_list = ['31217819', '15121789', '19122038', '26945885']
     handle = Entrez.efetch(db="pubmed", id=id_list, retmode="xml", rettype="abstract")
     records = Entrez.read(handle)
     for i in range(len(id_list)):
-        # print(i)
-        # print("Article ID: ", id_list[i])
-        # pprint(records["PubmedArticle"][i]["MedlineCitation"]["Article"])
-        try:
-            abstract_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
-        except:
-            print(id_list[i])
-        # title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
-        # publication_type_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+        print("Article ID: ", id_list[i])
+        # try:
+            # abstract_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+        # except:
+            # print(id_list[i])
+        title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+        publication_type_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
         # pprint(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"])
-        # print(title_)
-        # print(publication_type_)
+        print(title_)
+        print(publication_type_)
         # print(abstract_)
 
 
@@ -332,7 +328,7 @@ def url_generator():
     url_str = ""
     # url_list = ['33277141', '31060720', '297409383', '27519468', '21073836', '12689691', '11801394', '10665483', '10553983', '8446135']
     # url_list = ['33909041', '33731536', '27519468', '22172415', '21073836', '12689691', '11801394', '10665483', '10553983', '8446135']
-    url_list = ['33246213', '33244741', '33235377', '33200426', '33193651']
+    url_list = ['18463901', '25113787', '8361506', '14985381']
     for elmt in url_list:
         url_str = url_str + elmt + ","
     url_ = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id="+url_str+"&retmode=xml"
@@ -402,7 +398,7 @@ def new_request():
 def ft_peewee_():
 
     #DataBase_C
-    db = SqliteDatabase('article.db')
+    db = SqliteDatabase('article_pubmed.db')
 
     class Article(Model):
         id = CharField()
@@ -487,7 +483,7 @@ def api_pubmed_database():
     str_id_100 = str()
 
     # Database_C
-    db = SqliteDatabase('article.db')
+    db = SqliteDatabase('article_pubmed.db')
 
     class Article(Model):
         id = CharField()
@@ -607,7 +603,7 @@ def api_pubmed_database():
 
 
 def database_search():
-    db = SqliteDatabase('article.db')
+    db = SqliteDatabase('article_pubmed.db')
 
     class Article(Model):
         id = CharField()
@@ -629,5 +625,182 @@ def database_search():
     db.close()
 
 
-database_search()
+# database_search()
+
+
+def list_id_mgt():
+    fichier = open("List_id_MGT.txt", 'r')
+    list_mgt = []
+    id_ = ""
+    for i in fichier.read():
+        if i == " ":
+            list_mgt.append(id_)
+            id_ = ""
+        else:
+            id_ = id_ + i
+    list_mgt.append(id_)
+    list_mgt_final = []
+    for i in list_mgt:
+        if i not in list_mgt_final:
+            list_mgt_final.append(i)
+    # Database_C
+    db = SqliteDatabase('article_mgt.db')
+
+    class Article(Model):
+        id = CharField()
+        title = CharField()
+        date = CharField()
+        type = CharField()
+        abstract = CharField()
+
+        class Meta:
+            database = db
+
+    db.create_tables([Article])
+
+    list_id_100 = []
+    str_id_100 = str()
+    for elmt in tqdm(iterable=list_mgt_final, desc='creation_'):
+        if len(list_id_100) == 100:
+            Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+            handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
+            records = Entrez.read(handle)
+            ok = 0
+            while ok == 0:
+                c = 0
+                for i in range(len(list_id_100)):
+                    # print(i)
+                    # print("Article ID: ", id_list[i])
+                    if records["PubmedArticle"][i]["MedlineCitation"]["PMID"] != list_id_100[i]:
+                        list_id_100.remove(list_id_100[i])
+                        break
+                    else:
+                        c += 1
+                if c == len(list_id_100):
+                    ok = 1
+            for i in range(len(list_id_100)):
+                try:
+                    abstract_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+                except:
+                    abstract_ = "None"
+
+                title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+                publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"]
+                if len(publication_type_list) != 1:
+                    z = 0
+                    for y in range(len(publication_type_list)):
+                        if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"][
+                                       y]) == "Journal Article":
+                            publication_type_ = "Journal Article"
+                            z = 1
+                    if z == 0:
+                        publication_type_ = "Other"
+                else:
+                    publication_type_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+                try:
+                    date_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"][
+                            "Year"])
+                except:
+                    try:
+                        date_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+                    except:
+                        complete_date_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+                                "PubDate"]["MedlineDate"])
+                        date_ = ''
+                        c = 0
+                        for lettre in complete_date_:
+                            if c == 4:
+                                break
+                            date_ = date_ + lettre
+                            c += 1
+                # Add_to_db
+                article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_,
+                                         abstract=abstract_)
+            list_id_100.clear()
+            list_id_100.append(elmt)
+            str_id_100 = str(elmt)
+
+        else:
+            list_id_100.append(elmt)
+            str_id_100 = str_id_100 + str(elmt)
+
+    # Treatment_last_A
+    for i in range(len(list_id_100)):
+        Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+        handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
+        records = Entrez.read(handle)
+        ok = 0
+        while ok == 0:
+            c = 0
+            for i in range(len(list_id_100)):
+                # print(i)
+                # print("Article ID: ", id_list[i])
+                if records["PubmedArticle"][i]["MedlineCitation"]["PMID"] != list_id_100[i]:
+                     list_id_100.remove(list_id_100[i])
+                     break
+                else:
+                    c += 1
+            if c == len(list_id_100):
+                ok = 1
+    for i in range(len(list_id_100)):
+        Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+        handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
+        records = Entrez.read(handle)
+        try:
+            abstract_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+        except:
+            abstract_ = "None"
+            # print(list_id_50[i])
+        title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+        publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"]
+        if len(publication_type_list) != 1:
+            z = 0
+            for y in range(len(publication_type_list)):
+                if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"][
+                               y]) == "Journal Article":
+                    publication_type_ = "Journal Article"
+                    z = 1
+            if z == 0:
+                publication_type_ = "Other"
+        else:
+            publication_type_ = ''.join(
+                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+        try:
+            date_ = ''.join(
+                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"]["Year"])
+        except:
+            try:
+                date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+            except:
+                complete_date_ = ''.join(
+                    records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"][
+                        "MedlineDate"])
+                date_ = ''
+                c = 0
+                for lettre in complete_date_:
+                    if c == 4:
+                        break
+                    date_ = date_ + lettre
+                    c += 1
+        # Add_to_db
+        article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_,
+                                 abstract=abstract_)
+        #Del_false_positive
+    for arti in Article.select():
+        if arti.abstract == "None":
+            arti.delete_instance()
+        elif arti.type != "Journal Article":
+            arti.delete_instance()
+    db.close()
+
+
+# list_id_mgt()
+
+
+
 
