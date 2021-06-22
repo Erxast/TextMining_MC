@@ -4,6 +4,7 @@ import os
 from tqdm import tqdm
 from Bio import Entrez
 from peewee import *
+import random
 
 
 def api_pubmed():
@@ -11,7 +12,6 @@ def api_pubmed():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=congenital+myopathy&retmode=json&usehistory=y')
     # print(rob.status_code)
-    all_rob = rob.json()
     query_key = rob.json()['esearchresult']['querykey']
     web_env = rob.json()['esearchresult']['webenv']
     print('query_key=', query_key)
@@ -167,7 +167,6 @@ def e_summary():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=congenital+myopathy&retmode=json&usehistory=y')
     # print(rob.status_code)
-    all_rob = rob.json()
     query_key = rob.json()['esearchresult']['querykey']
     web_env = rob.json()['esearchresult']['webenv']
     # print('query_key=', query_key)
@@ -198,7 +197,6 @@ def final_():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y')
     # print(rob.status_code)
-    all_rob = rob.json()
     query_key = rob.json()['esearchresult']['querykey']
     web_env = rob.json()['esearchresult']['webenv']
     print('query_key=', query_key)
@@ -380,7 +378,6 @@ def new_request():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y')
     # print(rob.status_code)
-    all_rob = rob.json()
     query_key = rob.json()['esearchresult']['querykey']
     web_env = rob.json()['esearchresult']['webenv']
     print('query_key=', query_key)
@@ -467,7 +464,6 @@ def api_pubmed_database():
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y')
     # print(rob.status_code)
-    all_rob = rob.json()
     query_key = rob.json()['esearchresult']['querykey']
     web_env = rob.json()['esearchresult']['webenv']
     # print('query_key=', query_key)
@@ -603,6 +599,8 @@ def api_pubmed_database():
 
 
 def database_search():
+    # mgt = [['2020', 12], ['2019', 37], ['2018', 29], ['2017', 26], ['2016', 48], ['2015', 42], ['2014', 55], ['2013', 77], ['2012', 51], ['2011', 48], ['2010', 48], ['2009', 42], ['2008', 43], ['2007', 56], ['2006', 53], ['2005', 42], ['2004', 47], ['2003', 54], ['2002', 43], ['2001', 46], ['2000', 35], ['1999', 46], ['1998', 30], ['1997', 31], ['1996', 43], ['1995', 48], ['1994', 31], ['1993', 34], ['1992', 23], ['1991', 17], ['1990', 15], ['1989', 4], ['1988', 6], ['1987', 5], ['1986', 4], ['1984', 1], ['1983', 2], ['1982', 3], ['1981', 1], ['1977', 1], ['1973', 1]]
+    # pubmed = [['2021', 908], ['2020', 281], ['2019', 327], ['2018', 295], ['2017', 296], ['2016', 280], ['2015', 289], ['2014', 315], ['2013', 308], ['2012', 238], ['2011', 243], ['2010', 216], ['2009', 188], ['2008', 191], ['2007', 184], ['2006', 180], ['2005', 184], ['2004', 161], ['2003', 179], ['2002', 156], ['2001', 144], ['2000', 156], ['1999', 145], ['1998', 158], ['1997', 143], ['1996', 132], ['1995', 136], ['1994', 90], ['1993', 120], ['1992', 90], ['1991', 107], ['1990', 93], ['1989', 82], ['1988', 68], ['1987', 79], ['1986', 81], ['1985', 99], ['1984', 77], ['1983', 80], ['1982', 54], ['1981', 55], ['1980', 58], ['1979', 39], ['1978', 48], ['1977', 45], ['1976', 40], ['1975', 46], ['1974', 3], ['1973', 3], ['1971', 5], ['1963', 1], ['1962', 1], ['1952', 1]]
     db = SqliteDatabase('article_pubmed.db')
 
     class Article(Model):
@@ -621,14 +619,14 @@ def database_search():
     for arti in query:
         # print(arti.id)
         i += 1
-    print(i)
+    # print(i)
     db.close()
 
 
 # database_search()
 
 
-def list_id_mgt():
+def api_mgt_database():
     fichier = open("List_id_MGT.txt", 'r')
     list_mgt = []
     id_ = ""
@@ -799,8 +797,194 @@ def list_id_mgt():
     db.close()
 
 
-# list_id_mgt()
+# api_mgt_database()
 
 
+def negative_set():
 
+    #Afin d'éviter de relancer plusieurs fois le programme il faudrait faire la liste de toute les années presente dans les différentes bases de données.
+    #Partie 1 : Compteur/années
+    list_all = []
+    i = 0
+    c = 0
+    db = SqliteDatabase('article_mgt.db')
+
+    class Article(Model):
+        id = CharField()
+        title = CharField()
+        date = CharField()
+        type = CharField()
+        abstract = CharField()
+
+        class Meta:
+            database = db
+
+    db.create_tables([Article])
+    query = Article.select().order_by(Article.date.desc())
+    for arti in query:
+        date_i = arti.date
+        break
+    for arti in query:
+        date_i2 = arti.date
+        if date_i == date_i2:
+            date_i = date_i2
+            date_av = arti.date
+            i += 1
+        elif date_i != date_i2 and i == 1:
+            list_all.append([date_av, i])
+            date_i = date_i2
+            date_av = arti.date
+            if c == (len(query) - 1):
+                list_all.append([arti.date, i])
+        else:
+            date_i = date_i2
+            list_all.append([date_av, i])
+            date_av = arti.date
+            i = 1
+        c += 1
+    db.close()
+    # print(list_all) -> Liste du nombre d'article par année
+
+    db_s = SqliteDatabase('article_negative_set.db')
+
+    class Article_(Model):
+        id = CharField()
+        title = CharField()
+        date = CharField()
+        type = CharField()
+        abstract = CharField()
+
+        class Meta:
+            database = db_s
+
+    db_s.create_tables([Article_])
+    # Partie 2 : Selection de 1000 articles/années
+
+    for T in list_all:
+        #Le while permet de repeter la boucle 'for' tant qu'il n'y a pas 1000 articles dans la base de données.
+        compteur_article_annee = 0
+        OK = 'False'
+        while OK == 'False':
+            # Recherche des articles par années
+            rob = requests.get(
+                'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=' +str(T[0]) +'[Date%20-%20Publication]+journal+article[publication%20type]+&retmode=json&usehistory=y')
+            query_key = rob.json()['esearchresult']['querykey']
+            web_env = rob.json()['esearchresult']['webenv']
+            # Recupération d'une liste d'ID par années
+            urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
+                query_key) + "&WebEnv=" + str(web_env) + "&retmax=5000&usehistory=y&retmode=json"
+            rsearch = requests.get(urlsearch)
+            id_all = rsearch.json()['esearchresult']['idlist']
+            random_id_all = []
+            # Obtention d'une liste de 1000 articles choisi au hasard parmis les 5000 (déjà pris au hasard)
+            for F in range(1000):
+                random_id = random.choice(id_all)
+                random_id_all.append(random_id)
+                id_all.remove(random_id)
+            for elmt in tqdm(iterable=random_id_all, desc='creation_'):
+                # Permet de faire sortir de la boucle si on arrive à 1000 articles dans la base de donnée
+                if compteur_article_annee == 1000:
+                    break
+                Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+                handle = Entrez.efetch(db="pubmed", id=random_id_all, retmode="xml", rettype="abstract")
+                records = Entrez.read(handle)
+                # Permet de supprimer les éventuels <PubmedBookArticle>
+                data_ = records["PubmedArticle"]
+                if len(data_) != len(random_id_all):
+                    for i in range(len(random_id_all) - len(data_)):
+                        Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
+                        random_id_all.remove(Id_unwanted)
+                # Récup. des données à l'intérieur des articles :
+                for i in range(len(random_id_all)):
+                    #Récup. Abstract
+                    try:
+                        abstract_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+                    except:
+                        abstract_ = "None"
+                    #Récup. Title
+                    title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+                    #Récup. PublicationType
+                    publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"][
+                        "PublicationTypeList"]
+                    if len(publication_type_list) != 1:
+                        z = 0
+                        for y in range(len(publication_type_list)):
+                            if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"][
+                                           y]) == "Journal Article":
+                                publication_type_ = "Journal Article"
+                                z = 1
+                        if z == 0:
+                            publication_type_ = "Other"
+                    else:
+                        publication_type_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+                    #Récup. Date
+                    try:
+                        date_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+                                "PubDate"]["Year"])
+                    except:
+                        try:
+                            date_ = ''.join(
+                                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+                        except:
+                            complete_date_ = ''.join(
+                                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+                                    "PubDate"]["MedlineDate"])
+                            date_ = ''
+                            c = 0
+                            for lettre in complete_date_:
+                                if c == 4:
+                                    break
+                                date_ = date_ + lettre
+                                c += 1
+                    #Ajout à la base de données (le "if" permet d'éviter les faux positifs)
+                    if publication_type_ == 'Journal Article' and abstract_ !='None' and date_ == T[0]:
+                        article = Article_.create(id=random_id_all[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
+                        compteur_article_annee += 1
+                    if compteur_article_annee == 1000:
+                        OK = 'True'
+                        print(T[0])
+                        break
+    db_s.close()
+
+
+# negative_set()
+
+def pubtator_():
+
+    db = SqliteDatabase('article_mgt.db')
+
+    class Article(Model):
+        id = CharField()
+        title = CharField()
+        date = CharField()
+        type = CharField()
+        abstract = CharField()
+
+        class Meta:
+            database = db
+
+    db.create_tables([Article])
+    # On recup. l'ensemble des IDs de
+    query = Article.select()
+    liste_id = []
+    for arti in query:
+        liste_id.append(arti.id)
+    db.close()
+    print(liste_id)
+    z = 0
+    bstr_id = ''
+    for i in liste_id:
+        bstr_id = bstr_id + str(i) + ','
+        z += 1
+        if z == 10:
+            break
+    str_id = bstr_id[:-1]
+    url_pubtator = 'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/biocjson?pmids=' + str_id
+    rob = requests.get(url_pubtator)
+
+
+# pubtator_()
 
