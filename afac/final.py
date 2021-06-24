@@ -160,7 +160,7 @@ def api_mgt_database():
         if i not in list_mgt_final:
             list_mgt_final.append(i)
     # Database_C
-    db = SqliteDatabase('article_mgt.db')
+    db = SqliteDatabase('article_mgt1.db')
 
     class Article(Model):
         id = CharField()

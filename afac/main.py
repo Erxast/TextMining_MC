@@ -812,7 +812,7 @@ def negative_set():
     list_all = []
     i = 0
     c = 0
-    db = SqliteDatabase('article_mgt.db')
+    db = SqliteDatabase('article_mgt1.db')
 
     class Article(Model):
         id = CharField()
