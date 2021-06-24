@@ -1,10 +1,15 @@
+import sys
+
 import requests
+import spacy
 import xmltodict
 import os
 from tqdm import tqdm
 from Bio import Entrez
 from peewee import *
 import random
+from pprint import pprint
+import collections
 
 
 def api_pubmed():
@@ -642,7 +647,7 @@ def api_mgt_database():
         if i not in list_mgt_final:
             list_mgt_final.append(i)
     # Database_C
-    db = SqliteDatabase('article_mgt.db')
+    db = SqliteDatabase('article_mgt1.db')
 
     class Article(Model):
         id = CharField()
@@ -845,9 +850,9 @@ def negative_set():
     db.close()
     # print(list_all) -> Liste du nombre d'article par année
 
-    db_s = SqliteDatabase('article_negative_set.db')
+    db = SqliteDatabase('article_negative_set.db')
 
-    class Article_(Model):
+    class Article(Model):
         id = CharField()
         title = CharField()
         date = CharField()
@@ -855,9 +860,9 @@ def negative_set():
         abstract = CharField()
 
         class Meta:
-            database = db_s
+            database = db
 
-    db_s.create_tables([Article_])
+    db.create_tables([Article])
     # Partie 2 : Selection de 1000 articles/années
 
     for T in list_all:
@@ -941,20 +946,39 @@ def negative_set():
                                 c += 1
                     #Ajout à la base de données (le "if" permet d'éviter les faux positifs)
                     if publication_type_ == 'Journal Article' and abstract_ !='None' and date_ == T[0]:
-                        article = Article_.create(id=random_id_all[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
+                        article = Article.create(id=random_id_all[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
                         compteur_article_annee += 1
                     if compteur_article_annee == 1000:
                         OK = 'True'
                         print(T[0])
                         break
-    db_s.close()
+    db.close()
 
 
 # negative_set()
 
+
+def toto(annotation_i):
+    identifier_ = annotation_i.keys()
+    identifier = annotation_i['infon'][0]
+    bioconcept = annotation_i['infon'][1]
+    start_offset = annotation_i['location']['@offset']
+    length = annotation_i['location']['@length']
+    term = annotation_i['text']
+
+    pprint([identifier_,
+            identifier,
+            bioconcept,
+            start_offset,
+            length,
+            term,
+            ])
+
 def pubtator_():
 
-    db = SqliteDatabase('article_mgt.db')
+    x = 0
+
+    db = SqliteDatabase('article_mgt1.db')
 
     class Article(Model):
         id = CharField()
@@ -966,25 +990,146 @@ def pubtator_():
         class Meta:
             database = db
 
-    db.create_tables([Article])
-    # On recup. l'ensemble des IDs de
+    #Création de la sous classe "annotation"
+
+    class Annotation(Model):
+        pmid = ForeignKeyField(Article, backref='annotation')
+        mention = CharField()
+        bioconcept = CharField()
+        identifiers = CharField()
+        start_offset = CharField()
+        length = CharField()
+
+        class Meta:
+            database = db
+
+    db.create_tables([Article, Annotation])
+
+
+    #On recup. l'ensemble des IDs de la db de mgt
     query = Article.select()
     liste_id = []
     for arti in query:
         liste_id.append(arti.id)
-    db.close()
     print(liste_id)
-    z = 0
-    bstr_id = ''
-    for i in liste_id:
-        bstr_id = bstr_id + str(i) + ','
-        z += 1
-        if z == 10:
-            break
-    str_id = bstr_id[:-1]
-    url_pubtator = 'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/biocjson?pmids=' + str_id
-    rob = requests.get(url_pubtator)
+    print(db)
+    for i in tqdm(iterable=liste_id[:10], desc='verification_'):
+        url_pubtator = 'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/biocxml?pmids=' + i
+        # print(url_pubtator)
+        rob = requests.get(url_pubtator)
+        print(url_pubtator)
+        exit()
+        data_ = xmltodict.parse(rob.content)
+        document = data_["collection"]["document"]
+        tree = document['passage']
+        for annotation in tree:
+
+            #pprint(annotation)
+            print("================================================================================================")
+            #pprint(annotation['annotation'])
+
+            annotation_i = annotation['annotation']
+
+            # print("/////////////////////")
+            # pprint(annotation_i)
+            # print("$$$$$$$$$$$$$$$$$$$$$")
+#            identifier_ = annotation_i['infon'][0]['#text']
+            print(type(annotation_i), type(annotation_i) == list)
+            print(type(annotation_i), type(annotation_i) == dict)
+            print(type(annotation_i), type(annotation_i) == collections.OrderedDict)
+
+            if not len(annotation_i) == 4:
+                for a in annotation_i:
+                    toto(a)
+            else:
+                print(len(annotation_i))
+                toto(annotation_i)
+                pass
+                # for a in annotation_i:
+                #     print(type(a))
+                #     print("<<<<<<<<<<<<")
+                #     toto(a)
+                #     exit()
+
+            # for i, racine in enumerate(annotation_i):
+            #     pprint([i,
+            #             racine,
+            #             ])
+            #     print()
+
+                # identifier_ = racine['infon'][0]['#text']
+                # bioconcept_ = racine['infon'][1]['#text']
+                # start_offset_ = racine[2]['location'][0]['@offset']
+                # length_ = racine[2]['location'][1]['@length']
+                # term_ = racine[3]['text']
+                #
+                # pprint([i,
+                #         # identifier_,
+                #         # bioconcept_,
+                #         start_offset_,
+                #         length_,
+                #         term_,
+                #         ])
 
 
-# pubtator_()
+                # annotation = Annotation.create(pmid=i, mention=term_, bioconcept=bioconcept_,
+                #                                identifier=identifier_, start_offset=start_offset_,
+                #                                length=length_)
+                # annotation.save()
+
+            #exit()
+
+
+
+            # try:
+            #     annotation_i = annotation['annotation']
+            #     if len(annotation_i) == 4:
+            #         print(annotation_i)
+            #         exit()
+            #         # try:
+            #         #     for racine in annotation_i:
+            #         #         identifier_ = racine['infon'][0]['#text']
+            #         #         bioconcept_ = racine['infon'][1]['#text']
+            #         #         start_offset_ = racine['location']['@offset']
+            #         #         length_ = racine['location']['@length']
+            #         #         term_ = racine['text']
+            #         #         annotation = Annotation.create(pmid=i, mention=term_, bioconcept=bioconcept_, identifier=identifier_, start_offset=start_offset_, length=length_)
+            #         # except:
+            #         #     # print(i)
+            #         #     identifier_ = annotation_i['infon'][0]['#text']
+            #         #     # print(identifier_)
+            #         #     bioconcept_ = annotation_i['infon'][1]['#text']
+            #         #     # print(bioconcept_)
+            #         #     start_offset_ = annotation_i['location']['@offset']
+            #         #     # print(start_offset_)
+            #         #     length_ = annotation_i['location']['@length']
+            #         #     # print(length_)
+            #         #     term_ = annotation_i['text']
+            #         #     # print(term_)
+            #         #     annotation = Annotation.create(pmid=i, mention=term_, bioconcept=bioconcept_,
+            #         #                                    identifier=identifier_, start_offset=start_offset_,
+            #         #                                    length=length_)
+            #         #
+            #         # annotation.save()
+            #     else:
+            #         for racine in annotation_i:
+            #             identifier_ = racine['infon'][0]['#text']
+            #             bioconcept_ = racine['infon'][1]['#text']
+            #             start_offset_ = racine['location']['@offset']
+            #             length_ = racine['location']['@length']
+            #             term_ = racine['text']
+            #             annotation = Annotation.create(pmid=i, mention=term_, bioconcept=bioconcept_,
+            #                                            identifier=identifier_, start_offset=start_offset_,
+            #                                            length=length_)
+            #             annotation.save()
+            # except:
+            #     #Uniquement pour la forme
+            #     x += 1
+    print('OK')
+    #Permet de savoir environ combien d'article n'avait pas d'annotation, soit dans le titre soit dans l'abs.
+    # print(x)
+    db.close()
+
+
+pubtator_()
 
