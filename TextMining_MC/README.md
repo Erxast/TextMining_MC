@@ -1,3 +1,0 @@
-# TextMining_MC
-
-... 
