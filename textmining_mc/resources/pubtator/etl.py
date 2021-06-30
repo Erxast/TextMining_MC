@@ -76,7 +76,7 @@ class Pubtator(object):
                                                   )
     @staticmethod
     def process_article_data():
-        fichier = open('/Users/hugues.escoffier/PycharmProjects/TextMining_MC/data/list_id_mgt.txt', 'r')
+        fichier = open('/data/list_id_mgt.txt', 'r')
         list_mgt = []
         id_ = ""
         for i in fichier.read():
