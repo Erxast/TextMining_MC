@@ -5,8 +5,8 @@ from textmining_mc.resources.pubtator.model import Article
 
 class JointAPI(object):
 
-    def __init__(self, pmids_list=None):
-        self.pmids_list = pmids_list if pmids_list is not None else []
+    def __init__(self, pmids_list):
+        self.pmids_list = pmids_list
         self.records = dict()
         self.records_list = list() #Corresponds to a dictionary list
         self.efetch()
@@ -59,7 +59,6 @@ class JointAPI(object):
             if c == len(self.pmids_list):
                 ok = "Yes"
         print('remove')
-
 
     def article_xml_content(self):
         """
