@@ -1,0 +1,998 @@
+3958000	Species	9606	patients	SR4GN
+3958000	Disease	MESH:D012544	Scheuermann's kyphosis	TaggerOne
+3958000	Disease	MESH:D011183		MESH
+3958000	Disease	MESH:D007738		MESH
+23574000	Chemical	MESH:D008012	Astrazeneca	TaggerOne
+23574000	Species	9615	dogs	SR4GN
+23574000	Disease	MESH:D007153	antibody omalizumab	TaggerOne
+23574000	Disease	MESH:D003643	asthma death	TaggerOne
+23574000	Disease	MESH:D006985	hyperventilation	TaggerOne
+23574000	Chemical	MESH:D013806	theophyllines|theophylline	TaggerOne
+23574000	Disease	MESH:D008171	lung disease	TaggerOne
+23574000	Chemical	MESH:D016559	tacrolimus	TaggerOne
+23574000	Disease	MESH:D001987	bronchiectasis	TaggerOne
+23574000	Chemical	MESH:D016572	ciclosporin	TaggerOne
+23574000	Species	9606	patient|Patients|patients|Male|children|Patient|males	SR4GN
+23574000	Chemical	MESH:D012459	salicylate	TaggerOne
+23574000	Chemical	MESH:D011239	prednisolone	TaggerOne
+23574000	Chemical	MESH:C117794	H0721	TaggerOne
+23574000	Chemical	MESH:D000305	corticosteroid|OCS|corticosteroids	TaggerOne|MESH
+23574000	Chemical	MESH:C047766	bambuterol	TaggerOne
+23574000	Chemical	MESH:D008775	methylprednisolone	TaggerOne
+23574000	Chemical	MESH:D001379	azathioprine	TaggerOne
+23574000	Disease	MESH:D001249	asthma|Asthma|asthma within|Omalizumab for asthma|Omalizumab in Severe Asthma	TaggerOne|MESH
+23574000	Chemical	MESH:D015289	leukotriene	TaggerOne
+23574000	Disease	MESH:D055732	acute bronchopulmonary aspergillosis	TaggerOne
+23574000	Chemical	MESH:D013256	steroid|steroids	TaggerOne
+23574000	Disease	MESH:D004342	allergy|allergic|allergic asthma|allergic comorbidity|Omalizumab in Severe Allergic Asthma	TaggerOne
+23574000	Species	9685	cats	SR4GN
+23574000	Chemical	MESH:D008727	methotrexate	TaggerOne
+23574000	Disease	MESH:D012220	rhinitis	TaggerOne
+23574000	Chemical	MESH:D018927		MESH
+21109000	Chemical	MESH:C032259	SDS	TaggerOne
+21109000	Species	10090	mice	SR4GN|MESH
+21109000	Chemical	MESH:D013438	thiol|thiols	TaggerOne|MESH
+21109000	Chemical	MESH:D001896		MESH
+21109000	Chemical	MESH:C034657		MESH
+21109000	Chemical	MESH:D014966		MESH
+21109000	Chemical	MESH:D005456		MESH
+21109000	Chemical	MESH:C530427		MESH
+21109000	Chemical	MESH:D008301		MESH
+3921000	Chemical	MESH:D004206	digoxin-disopyramide	TaggerOne
+3921000	Disease	MESH:D013610	Foetal tachycardia|tachycardia	TaggerOne
+3921000	Species	9606	patient	SR4GN
+3921000	Chemical	MESH:D004077	digoxin	TaggerOne
+3921000	Disease	MESH:D004487	oedema	TaggerOne|MESH
+3921000	Disease	MESH:D006333	cardiac failure|congestive cardiac failure	TaggerOne
+3921000	Disease	MESH:D018880	atrial extrasystolic echos	TaggerOne
+3921000	Disease	MESH:D006831		MESH
+3921000	Disease	MESH:D013614		MESH
+3921000	Disease	MESH:D011248		MESH
+3921000	Disease	MESH:D005315		MESH
+11114000	Species	9031	chick	SR4GN|MESH
+11114000	Species	10141	guinea-pig	SR4GN|MESH
+11114000	Species	10116	rat	SR4GN|MESH
+11114000	Disease	MESH:D003286	contracture	TaggerOne
+11114000	Disease	MESH:D064420	toxicity	TaggerOne
+11114000	Disease	MESH:D057066	Melaleuca decreased the tension	TaggerOne
+11114000	Species	1639		MESH
+11114000	Chemical	MESH:D020947		MESH
+11114000	Chemical	MESH:D000891		MESH
+24406000	Species	216597	Salmonella	SR4GN
+24406000	Disease	MESH:D012478		MESH
+24406000	Chemical	MESH:D014867		MESH
+2669000	Disease	MESH:D003866	depression|depressive illness	TaggerOne|MESH
+2669000	Species	9606	Human|human	SR4GN
+21213000	Gene	729230	CCR2|Chemokine receptor 2	GNormPlus
+21213000	Gene	10663	G-protein coupled receptor|GPCR	GNormPlus
+21213000	Disease	MESH:D001327	autoimmune diseases	TaggerOne
+21213000	Chemical	MESH:D054390		MESH
+21213000	Chemical	MESH:D054852		MESH
+21677000	Disease	MESH:D015207	osteoarthritis of the hip	TaggerOne|MESH
+21677000	Disease	MESH:D020370	hip or knee osteoarthritis	TaggerOne|MESH
+21677000	Species	9606	patients	SR4GN
+21677000	Disease	MESH:D020178	work participation	TaggerOne
+17505000	Disease	MESH:D013921	thrombocytopenia	TaggerOne
+17505000	Chemical	MESH:C047246	Temozolomide|temozolomide	TaggerOne|MESH
+17505000	Disease	MESH:D002430	neuroendocrine cecal cancer	TaggerOne
+17505000	Gene	1113	chromogranin A	GNormPlus
+17505000	Species	9606	Patients|patients	SR4GN
+17505000	Disease	MESH:D018358	malignant neuroendocrine tumors|neuroendocrine tumors|neuroendocrine tumor	TaggerOne|MESH
+17505000	Disease	MESH:D002276	bronchial carcinoids	TaggerOne|MESH
+17505000	Disease	MESH:D009369	Tumors|tumor|tumors	TaggerOne
+17505000	Disease	MESH:D010235	paraganglioma	TaggerOne
+17505000	Disease	MESH:D064420	toxicity	TaggerOne
+17505000	Disease	MESH:D010190	pancreatic endocrine tumors	TaggerOne
+17505000	Gene	4255	O(6)-methylguanine DNA methyltransferase	GNormPlus
+17505000	Disease	MESH:D013964		MESH
+17505000	Species	255564		MESH
+17505000	Disease	MESH:D006402		MESH
+17505000	Chemical	MESH:D003606		MESH
+17505000	Disease	MESH:D001984		MESH
+20760000	Species	1773	TUBERCULOSIS	SR4GN
+28668000	Disease	MESH:D020521	stroke	TaggerOne
+28668000	Chemical	MESH:D007854	Pb(Mg,Nb)O3-PbTiO3	TaggerOne
+28668000	Chemical	MESH:D015032	ZnO	TaggerOne
+3575000	Disease	MESH:D008545	malignant melanoma	TaggerOne|MESH
+3575000	Disease	MESH:D012878		MESH
+11880000	Gene	1444	CSL	GNormPlus
+11880000	Chemical	MESH:D006838	hydrocarbon	TaggerOne
+11880000	Chemical	MESH:D014885		MESH
+11880000	Chemical	MESH:D013024		MESH
+11880000	Chemical	MESH:D010938		MESH
+11880000	Chemical	MESH:C038228		MESH
+11880000	Chemical	MESH:D014677		MESH
+9877000	Disease	MESH:D003920	diabetes	TaggerOne
+9877000	Species	9606	male	SR4GN
+9877000	Chemical	MESH:D005947	glucose	TaggerOne
+9877000	Disease	MESH:D005058	healthy male	TaggerOne
+9877000	Chemical	MESH:C072379	Repaglinide|repaglinide	TaggerOne|MESH
+9877000	Chemical	MESH:D010880		MESH
+9877000	Chemical	MESH:D002219		MESH
+9877000	Chemical	MESH:D007004		MESH
+9877000	Disease	MESH:D003922		MESH
+811000	Disease	MESH:D004935	Benign esophageal diseases	TaggerOne|MESH
+811000	Disease	MESH:D004653		MESH
+811000	Disease	MESH:D004940		MESH
+811000	Disease	MESH:D007889		MESH
+811000	Disease	MESH:D004936		MESH
+811000	Disease	MESH:D004938		MESH
+811000	Disease	MESH:D005764		MESH
+811000	Disease	MESH:D004939		MESH
+811000	Disease	MESH:D004931		MESH
+21942000	Disease	MESH:D016602	needlestick injuries	TaggerOne|MESH
+20337000	Disease	MESH:D004826	epiglottic deformity	TaggerOne
+20337000	Disease	MESH:D014786	visualization of the glottis	TaggerOne
+20337000	Disease	MESH:D006984	hypertrophy	TaggerOne|MESH
+20337000	Disease	MESH:C537690	epiglottis	TaggerOne
+20337000	Species	9606	patient|patients	SR4GN
+20337000	Disease	MESH:C536503	structural abnormalities	TaggerOne
+20337000	Disease	MESH:D009369	tumor	TaggerOne
+20337000	Disease	MESH:D010610		MESH
+20337000	Disease	MESH:D050177		MESH
+20337000	Disease	MESH:D011183		MESH
+20337000	Disease	MESH:D013117		MESH
+20337000	Disease	MESH:D000402		MESH
+9479000	Gene	6688	PU.1|Spi-1	GNormPlus
+9479000	Gene	968	macrosialin|Macrosialin	GNormPlus
+9479000	Gene	3725	c-Jun	GNormPlus
+9479000	Chemical	MESH:D015214		MESH
+9479000	Species	10090		MESH
+9479000	Chemical	MESH:D015703		MESH
+9479000	Chemical	MESH:D016178		MESH
+9479000	Chemical	MESH:D016173		MESH
+9479000	Chemical	MESH:C081026		MESH
+9479000	Gene	12514		gene2pubmed
+6814000	Chemical	MESH:C102006	citrate	TaggerOne
+6814000	Gene	1351	VIII	GNormPlus
+6814000	Species	9606	human	SR4GN
+6814000	Chemical	MESH:D012310		MESH
+6814000	Chemical	MESH:D000941		MESH
+6814000	Species	9986		MESH
+6814000	Chemical	MESH:D014841		MESH
+6814000	Chemical	MESH:D005169		MESH
+15882000	Disease	MESH:D015658	immunodeficiency virus infection	TaggerOne
+15882000	Disease	MESH:D002371	infected cats	TaggerOne
+15882000	Disease	MESH:D007239	FIV infection	TaggerOne
+15882000	Species	12081	virus	SR4GN
+15882000	Species	11673	FIV	SR4GN
+15882000	Disease	MESH:D013226	FIV infection status	TaggerOne
+15882000	Species	9685	cats	SR4GN|MESH
+15882000	Disease	MESH:D016181		MESH
+15882000	Chemical	MESH:D014765		MESH
+3220000	Disease	MESH:D003323	coronary thrombolysis	TaggerOne
+3220000	Disease	MESH:D009203	myocardial infarction	TaggerOne|MESH
+3220000	Gene	5328		MESH
+11648000	Species	9606	patients	SR4GN
+11648000	Disease	MESH:D003704		MESH
+11648000	Disease	MESH:D012559		MESH
+19963000	Disease	MESH:D012559	schizophrenic	TaggerOne|MESH
+19963000	Disease	MESH:D012734	ambiguous idioms	TaggerOne
+19963000	Species	9606	Participants|patients	SR4GN
+20579000	Disease	MESH:D059350	chronic pain	TaggerOne
+20579000	Disease	MESH:D010146	pain	TaggerOne
+20579000	Disease	MESH:D005221	muscle fatigue|fatigue	TaggerOne
+20579000	Disease	MESH:D059787	acute pain	TaggerOne
+20579000	Disease	MESH:D009140	musculoskeletal disorders	TaggerOne|MESH
+20579000	Disease	MESH:D009784		MESH
+20579000	Disease	MESH:D019547		MESH
+20579000	Disease	MESH:D020069		MESH
+6381000	Disease	MESH:D014456	ulcers|ulcer	TaggerOne
+6381000	Disease	MESH:D012002	rectal lesion	TaggerOne
+6381000	Species	9606	man|male|patients	SR4GN
+6381000	Disease	MESH:D006484	hemorrhoidal	TaggerOne|MESH
+6381000	Species	4932		MESH
+6381000	Chemical	MESH:D005395		MESH
+6381000	Chemical	MESH:D010663		MESH
+6381000	Chemical	MESH:C013563		MESH
+6381000	Chemical	MESH:D009821		MESH
+3679000	Disease	MESH:D061325	Anginal syndrome	TaggerOne
+3679000	Disease	MESH:D000787		MESH
+3679000	Disease	MESH:D013577		MESH
+3679000	Disease	MESH:D002637		MESH
+17438000	Species	8355	Xenopus	SR4GN|MESH
+17438000	Gene	432248	Xbra	GNormPlus|MESH
+17438000	Gene	378587	eFGF	GNormPlus
+17438000	Disease	MESH:D018236	embryonic	TaggerOne
+17438000	Gene	380196	CHD4	GNormPlus|MESH
+17438000	Gene	108701318	Sip1	GNormPlus|MESH
+17438000	Gene	386595		generifs_basic
+12635000	Disease	MESH:D008171	lung diseases	TaggerOne
+12635000	Species	9606	human	SR4GN
+24183000	Species	9606	patient	SR4GN
+24183000	Disease	MESH:D012120		MESH
+12094000	Species	9606	patients|child|children	SR4GN
+12094000	Disease	MESH:D063766	adolescent obesity|pediatric obesity	TaggerOne
+12094000	Disease	MESH:D009765		MESH
+7137000	Disease	MESH:D013617	automatic atrial tachycardia	TaggerOne
+7137000	Disease	MESH:D013610		MESH
+13456000	Chemical	MESH:D015572	Rovamycin	TaggerOne|MESH
+13456000	Disease	MESH:D014526	gonococcal urethritis	TaggerOne|MESH
+13456000	Chemical	MESH:D000904		MESH
+13456000	Chemical	MESH:D000900		MESH
+13456000	Chemical	MESH:D003879		MESH
+13456000	Disease	MESH:D006069		MESH
+21428000	Species	9606	patients	SR4GN
+21428000	Disease	MESH:D014947	trauma	TaggerOne
+21428000	Disease	MESH:D014946		MESH
+21428000	Disease	MESH:D003428		MESH
+21428000	Disease	MESH:D009104		MESH
+21428000	Chemical	MESH:D000900		MESH
+6222000	Disease	MESH:D011009	pneumoconiosis	TaggerOne|MESH
+6222000	Chemical	MESH:C091696	antimony oxide	TaggerOne
+6222000	Chemical	MESH:C027104	antimony pentoxide	TaggerOne|MESH
+6222000	Disease	MESH:D005355	fibrosis	TaggerOne
+6222000	Chemical	MESH:C037554	antimony trioxide	TaggerOne|MESH
+6222000	Disease	MESH:D012871	dermatosis	TaggerOne
+6222000	Chemical	MESH:D000965		MESH
+6222000	Disease	MESH:D009783		MESH
+3130000	Disease	MESH:D012131	respiratory failure|hypoxic respiratory failure|respiratory failure delays	TaggerOne|MESH
+3130000	Species	9606	patient|patients	SR4GN
+3130000	Disease	MESH:D011014	nontuberculous pneumonia	TaggerOne|MESH
+3130000	Disease	MESH:D006333	congestive heart failure	TaggerOne
+3130000	Disease	MESH:D000740	anemia	TaggerOne
+3130000	Disease	MESH:D018410	bacterial pneumonia	TaggerOne
+3130000	Disease	MESH:D034141	hypoalbuminemia	TaggerOne
+3130000	Disease	MESH:D014376	tuberculosis|Tuberculosis	TaggerOne
+3130000	Disease	MESH:D014397		MESH
+3130000	Species	1773		MESH
+9021000	Disease	MESH:D011605	psychotic disorder	TaggerOne
+9021000	Disease	MESH:D011618	psychotic|schizophreniform disorder	TaggerOne|MESH
+9021000	Disease	MESH:D009422	ATPD	TaggerOne
+9021000	Species	9606	patients	SR4GN
+9021000	Disease	MESH:D010554	PD|personality disorder|personality disorders	TaggerOne|MESH
+9021000	Disease	MESH:D000208		MESH
+6540000	Disease	MESH:C536123	Male pseudohermaphrodism	TaggerOne
+6540000	Disease	MESH:D003456	bilateral cryptorchidism	TaggerOne
+6540000	Species	9606	patient|male	SR4GN
+6540000	Chemical	MESH:D013739	testosterone	TaggerOne
+6540000	Disease	MESH:D018239	intra-abdominal seminoma|seminoma	TaggerOne
+6540000	Disease	MESH:D005184	fallopian tubes	TaggerOne
+6540000	Disease	MESH:D004407		MESH
+6540000	Disease	MESH:D013736		MESH
+6540000	Disease	MESH:D012734		MESH
+28677000	Disease	MESH:D011470	benign prostatic hyperplasia	TaggerOne
+28677000	Disease	MESH:D006417	hematuria	TaggerOne
+28677000	Disease	MESH:D001749	hematuria or bladder cancer|bladder cancer|bladder cancers|Awareness of bladder cancer|Bladder cancer	TaggerOne
+28677000	Species	9606	patients	SR4GN
+24319000	Disease	MESH:D000544	Alzheimer's disease	TaggerOne|MESH
+24319000	Chemical	MESH:D015415		MESH
+2014000	Species	5693	Trypanosoma cruzi|T. cruzi	SR4GN|MESH
+7250000	Disease	MESH:D050033	thyroid dysgenesis	TaggerOne
+7250000	Disease	MESH:D012409	Rubella antibody in neonatal hypothyroidism	TaggerOne
+7250000	Disease	MESH:D013959		MESH
+7250000	Species	11041		MESH
+7250000	Disease	MESH:D007037		MESH
+31134000	Chemical	MESH:D005227	fatty acids|Fatty acid|fatty acid	TaggerOne
+31134000	Disease	MESH:D015163	Microbial Metabolism	TaggerOne
+31134000	Chemical	MESH:C555186	7-Methoxy-2,3-dimethylchromone-4-one|7-methoxy-2,3-dimethylchromone-4-one|7-Methoxy-2,3-Dimethylchromone-4-One	TaggerOne
+31134000	Chemical	MESH:D008712	methicillin	TaggerOne
+31134000	Chemical	MESH:C057499	C12H12O3	TaggerOne
+31134000	Chemical	MESH:C038399	C-23 carboxylic acid|C-23	TaggerOne
+31134000	Chemical	MESH:D006859	H-8|H-17|H-12|1H-1H|H-6|H-11	TaggerOne
+31134000	Chemical	MESH:C006633	3H	TaggerOne
+31134000	Chemical	MESH:C055960	MH481284	TaggerOne
+31134000	Chemical	MESH:C005066	Borrelidin F|borrelidins|Borrelidins F-I|borrelidin|borrelidin F|Macrolide borrelidin|macrolide borrelidin	TaggerOne
+31134000	Species	2	Bacteria|bacteria|bacterial	SR4GN
+31134000	Chemical	MESH:C005159	S13	TaggerOne
+31134000	Disease	MESH:C537389	Type deltaC Type deltaC Type deltaC Type	TaggerOne
+31134000	Chemical	MESH:D017665	hydroxyl	TaggerOne
+31134000	Chemical	MESH:C415909	MeOH-H2O	TaggerOne
+31134000	Chemical	MESH:D000214	enoyl-acyl	TaggerOne
+31134000	Chemical	MESH:C101470	[alpha]25D	TaggerOne
+31134000	Species	1280	Staphylococcus aureus|S. aureus	SR4GN
+31134000	Species	1204342	B. subtilis	SR4GN
+31134000	Chemical	MESH:D002244	carbon|C-3|C-5|carbons C-2|tertiary carbons|carbons|carbonyl carbons|aromatic carbons C-7	TaggerOne
+31134000	Chemical	MESH:D012964	NaBr	TaggerOne
+31134000	CellLine	CVCL_Y482	C29H46NO7	TaggerOne
+31134000	Chemical	MESH:D009171	mycolic acid|Mycolic acid	TaggerOne
+31134000	Species	3847	soybean	SR4GN
+31134000	Chemical	MESH:D005231	unsaturated fatty acid|unsaturated fatty acids	TaggerOne
+31134000	Species	162425	Aspergillus nidulans	SR4GN
+31134000	Chemical	MESH:D004952	ester|methyl ester	TaggerOne
+31134000	Chemical	MESH:D002867	chromones|chromone	TaggerOne
+31134000	Chemical	MESH:C023666	pyridine	TaggerOne
+31134000	Chemical	MESH:C470596	methoxy	TaggerOne
+31134000	Species	746128	Aspergillus fumigatus	SR4GN
+31134000	Chemical	MESH:D017693	NaHCO	TaggerOne
+31134000	Species	1833	Rhodococcus erythropolis	SR4GN
+31134000	Species	1405	Bacillus mycoides|B. mycoides	SR4GN
+31134000	Chemical	MESH:C030123	hydroxy-coumarins	TaggerOne
+31134000	Disease	MESH:C565717	CH 75.8 CH 75.3 CH 18 49.7 CH 50.3 CH 49.4 CH	TaggerOne
+31134000	Species	32536	Cheetah	SR4GN
+31134000	Chemical	MESH:D034442	O-substituted 7-mercapto	TaggerOne
+31134000	Chemical	MESH:C108856	H-13	TaggerOne
+31134000	Chemical	MESH:C031356	5, MeOH|MeOH|0, MeOH	TaggerOne
+31134000	Species	1226757	S. rapamycinicus	SR4GN
+31134000	Disease	MESH:C566917	CH 129.0 CH 15 143.3 CH 143.0 CH 138.7 CH 139.9 CH	TaggerOne
+31134000	Chemical	MESH:D000432	methanol	TaggerOne
+31134000	Chemical	MESH:C524875	C-8	TaggerOne
+31134000	Chemical	MESH:D011189	KCl	TaggerOne
+31134000	Disease	MESH:C567193	CH3 15.3 CH3 15.1 CH3 15.8 CH3	TaggerOne
+31134000	Chemical	MESH:D015107	butanolides	TaggerOne
+31134000	Chemical	MESH:C020846	NO7	TaggerOne
+31134000	Disease	MESH:C565329	CH 26.5 CH 26.4 CH	TaggerOne
+31134000	Chemical	MESH:C414365	C28H44NO|C28H44NO7	TaggerOne
+31134000	Chemical	MESH:C065699	EtOAc	TaggerOne
+31134000	Mutation	rs773866720	G1322A	tmVar
+31134000	Species	5833	Plasmodium falciparum	SR4GN
+31134000	Chemical	MESH:D000596	harziaphilic acid	TaggerOne
+31134000	Chemical	MESH:C558391	Aminoacyl	TaggerOne
+31134000	Chemical	MESH:D002122	CaCl2	TaggerOne
+31134000	Chemical	MESH:C561561	N,N'-((1Z,3Z)-1,4-bis(4-methoxyphenyl)buta-1,3-diene-2,3-diyl)diformamide	TaggerOne
+31134000	Chemical	MESH:D010619	phenazines	TaggerOne
+31134000	CellLine	CVCL_L675	C29H47NO7	TaggerOne
+31134000	Species	9606	human|mammalian	SR4GN
+31134000	Chemical	MESH:C031105	methyl	TaggerOne
+31134000	Disease	MESH:C566459	CH 46.8 CH 46.2 CH	TaggerOne
+31134000	Chemical	MESH:D010100	oxygen	TaggerOne
+31134000	Chemical	MESH:D009570	nitrile	TaggerOne
+31134000	Disease	MESH:C563815	CH 70.8 CH 70.8 CH 4 36.5 CH 36.5 CH 36.0 CH	TaggerOne
+31134000	Chemical	MESH:D004151	cyclic dipeptides	TaggerOne
+31134000	Species	4751	fungal strain|fungal	SR4GN
+31134000	Chemical	MESH:D018942	macrolides|macrolide	TaggerOne
+31134000	Chemical	MESH:D014867	H2O	TaggerOne
+31134000	Chemical	MESH:C512684	CH3OH	TaggerOne
+31134000	Disease	MESH:D064420	cytotoxicity	TaggerOne
+31134000	Species	562	Escherichia coli|E. coli	SR4GN
+31134000	Chemical	MESH:D007783	lactones|lactone	TaggerOne
+31134000	Disease	MESH:C563728	CH 35.8 CH 35.4 CH 35.6 CH	TaggerOne
+31134000	Chemical	MESH:C007650	ethyl acetate	TaggerOne
+31134000	Species	1718	Corynebacterium glutamicum	SR4GN
+31134000	CellLine	CVCL_Z390	29.9 CH2 29.6 CH2 29.5 CH2	TaggerOne
+31134000	Chemical	MESH:D012965	NaCl	TaggerOne
+31134000	Species	1423	Bacillus subtilis	SR4GN
+31134000	Chemical	MESH:C453466	KY680425	TaggerOne
+31134000	Species	11085	lgt	SR4GN
+31134000	Chemical	MESH:C044388	H-9	TaggerOne
+31134000	Chemical	MESH:D004121	DMSO	TaggerOne
+31134000	Species	3483	Cannabis sativa	SR4GN
+31134000	Chemical	MESH:C513342	C12H13O3+|C12H13O3|13C|C-13	TaggerOne
+31134000	Chemical	MESH:D002939	ciprofloxacin|Ciprofloxacin	TaggerOne
+31134000	Species	287	P. aeruginosa	SR4GN
+31134000	Disease	MESH:D053632	CH 144.0 CH 143.4 CH 143.8 CH 14 126.4 CH 126.5 CH	TaggerOne
+31134000	Chemical	MESH:C530366	enoyl	TaggerOne
+31134000	Chemical	MESH:D015636	MgCl2 6H2O	TaggerOne
+31134000	Species	1928	Streptomyces rochei|S. rochei	SR4GN
+31134000	Chemical	MESH:D009584	nitrogen|N	TaggerOne
+31134000	Chemical	MESH:C105945	C-23 carboxyl	TaggerOne
+31134000	Chemical	MESH:C538889	N-formyl alkaloids	TaggerOne
+31134000	Species	4932	yeast	SR4GN
+31134000	Chemical	MESH:C409488	polyesters	TaggerOne
+31134000	Species	46012	R. similis	SR4GN
+31134000	Chemical	MESH:C097380	C-10	TaggerOne
+8395000	Chemical	MESH:D001127	arginine	TaggerOne
+8395000	Gene	7391	USF	GNormPlus
+8395000	Gene	4654	MyoD-R|MyoD	GNormPlus
+8395000	Gene	4609	myc|Myc|c-Myc	GNormPlus
+8395000	Gene	7030	TFE3	GNormPlus
+8395000	Chemical	MESH:D009838		MESH
+8395000	Gene	4149		MESH
+26913000	Gene	7262;23034	IPL and SMG	GNormPlus
+26913000	Disease	MESH:D001254	Astrocytoma	TaggerOne
+26913000	Disease	MESH:D011782	quadriplegia	TaggerOne
+26913000	Disease	MESH:D014399	Spinal tuberculosis	TaggerOne
+26913000	Disease	MESH:D016512	Ankle voluntary movement enhancement	TaggerOne
+26913000	Disease	MESH:D010146	pain	TaggerOne
+26913000	Disease	MESH:D013119	Spinal Cord Injury|spinal cord injuries|traumatic spinal cord injury|spinal cord injury|Spinal cord injury disrupts	TaggerOne
+26913000	Disease	MESH:D010291	post-stroke hemiparesis	TaggerOne
+26913000	Disease	MESH:D017887	longitudinal	TaggerOne
+26913000	Disease	MESH:D008607	mental illness	TaggerOne
+26913000	Disease	MESH:D014947	injury|trauma|Trauma	TaggerOne
+26913000	Disease	MESH:D009442	Neurilemmoma	TaggerOne
+26913000	Disease	MESH:D064386	movement impairment of the right ankle	TaggerOne
+26913000	Disease	MESH:C538175	spinal injury association impairment scale	TaggerOne
+26913000	Disease	MESH:D009461	neurologic deficits	TaggerOne
+26913000	Gene	7262	IPL	GNormPlus
+26913000	Chemical	MESH:C076868	Di Rienzo	TaggerOne
+26913000	Disease	MESH:D014786	visual MI	TaggerOne
+26913000	Chemical	MESH:C521609	N C	TaggerOne
+26913000	Disease	MESH:D006470	Spinal hemorrhage	TaggerOne
+26913000	Disease	MESH:D010300	Parkinson's syndrome	TaggerOne
+26913000	Disease	MESH:C537060	asia-spinalinjury	TaggerOne
+26913000	Chemical	MESH:D015019	Y C	TaggerOne
+26913000	Gene	7204	Trio	GNormPlus
+26913000	Disease	MESH:D003072	cognitive disorder	TaggerOne
+26913000	Disease	MESH:D006259	parietal cortex damage	TaggerOne
+26913000	Disease	MESH:D012509	Meningeal sarcoma	TaggerOne
+26913000	Disease	MESH:D013118	Spinal Injury Association Impairment	TaggerOne
+26913000	Disease	MESH:D007238	ischemic infarct	TaggerOne
+26913000	Chemical	MESH:C035221	NC	TaggerOne
+26913000	Species	9606	participants|people|Patients|male|person|patients|participant	SR4GN
+26913000	Disease	MESH:D001480	cortex damage	TaggerOne
+26913000	Disease	MESH:D020914	Structural damage	TaggerOne
+26913000	Gene	23034	SMG	GNormPlus
+26913000	Disease	MESH:D006618	hip joint movements	TaggerOne
+26913000	Disease	MESH:D020521	stroke|subcortical stroke	TaggerOne
+26913000	Gene	6606	SMA	GNormPlus
+26913000	Disease	MESH:D020244	right middle frontal gyrus	TaggerOne
+26913000	Disease	MESH:C566973	MI tasks	TaggerOne
+26913000	Chemical	MESH:C045252	PPC	TaggerOne
+26913000	Disease	MESH:D013124	spinal injury	TaggerOne
+26913000	Disease	MESH:D001927	brain diseases	TaggerOne
+25817000	Species	9940	Sheep	SR4GN|MESH
+25817000	Disease	MESH:D065008	Tityus fasciolatus scorpion venom	TaggerOne|MESH
+25817000	Species	10090	mice	SR4GN|MESH
+25817000	Chemical	MESH:C032259	SDS	TaggerOne
+25817000	Species	6887	Tityus serrulatus|Brazilian scorpion|T. serrulatus	SR4GN
+25817000	Chemical	MESH:D012604		MESH
+25817000	Chemical	MESH:D000997		MESH
+15328000	Species	10090	mouse	SR4GN|MESH
+13566000	Disease	MESH:D013921	thrombopenia	TaggerOne|MESH
+13566000	Disease	MESH:D011696		MESH
+13566000	Disease	MESH:D011693		MESH
+13332000	Disease	MESH:C531762	Alkaptonuric arthritis	TaggerOne
+13332000	Disease	MESH:D001168		MESH
+13332000	Disease	MESH:D000474		MESH
+7470000	Species	9796	horses	SR4GN|MESH
+7470000	Disease	MESH:D008545	melanoma	TaggerOne|MESH
+7470000	Disease	MESH:D006734		MESH
+7470000	Disease	MESH:D012878		MESH
+25937000	Species	9606	infants	SR4GN
+25937000	Disease	MESH:D011015		MESH
+7784000	Chemical	MESH:D014812	vitamin K	TaggerOne|MESH
+7784000	Chemical	MESH:D001623	betamethasone	TaggerOne
+7784000	Disease	MESH:D020300	intracranial hemorrhage	TaggerOne
+7784000	Disease	MESH:D016640	gestation	TaggerOne
+7784000	Species	9606	Women|patients|newborns	SR4GN
+7784000	Chemical	MESH:D010634	phenobarbital	TaggerOne|MESH
+7784000	Disease	MESH:D002543		MESH
+7784000	Disease	MESH:D007235		MESH
+15356000	Chemical	MESH:C016077	prenyl	TaggerOne
+15356000	Chemical	MESH:D011809	quinone|quinones	TaggerOne
+15356000	Chemical	MESH:D006418	heme	TaggerOne
+15356000	Chemical	MESH:C120556	SSO0583	TaggerOne
+15356000	Chemical	MESH:D010710	(S)-3-O-geranylgeranylglyceryl phosphate|(S)-2,3-Di-O-geranylgeranylglyceryl phosphate|(S)-2,3-di-O-geranylgeranylglyceryl phosphate	TaggerOne
+15356000	Species	2287	Sulfolobus solfataricus|S. solfataricus	SR4GN|MESH
+15356000	Species	562	Escherichia coli|bacteria	SR4GN
+15356000	Chemical	MESH:D002734	chlorophylls	TaggerOne
+15356000	Chemical	MESH:C002963	geranylgeranyl|geranylgeranyl diphosphate	TaggerOne
+15356000	Chemical	MESH:D014810	vitamin E	TaggerOne
+15356000	Gene	1455409		gene2pubmed
+19756000	Disease	MESH:D001259	lack of myelosuppression	TaggerOne
+19756000	Chemical	MESH:C030852	vinorelbine	TaggerOne
+19756000	Species	2	bacterial	SR4GN
+19756000	Chemical	MESH:C067311	docetaxel	TaggerOne
+19756000	Chemical	MESH:D015662	trimethoprim-sulfamethoxazole	TaggerOne
+19756000	Disease	MESH:D004927	E coli bacteraemia	TaggerOne
+19756000	Disease	MESH:D009378	multiple tumour	TaggerOne
+19756000	Disease	MESH:D001943	breast cancer	TaggerOne
+19756000	Disease	MESH:D009503	neutropenia|increases FN|neutropenic|febrile neutropenia|FN|Febrile neutropenia	TaggerOne|MESH
+19756000	Disease	MESH:D009383	haematological malignancy|haematological malignancies	TaggerOne
+19756000	Disease	MESH:D008223	lymphoma|lymphomas	TaggerOne
+19756000	Chemical	MESH:D004317	doxorubicin	TaggerOne
+19756000	Disease	MESH:D005767	gastrointestinal flora	TaggerOne
+19756000	Disease	MESH:D002289	non-small cell lung cancer	TaggerOne
+19756000	Gene	1649	CHOP	GNormPlus
+19756000	Chemical	MESH:D024841	Fluoroquinolone|fluoroquinolone|Fluoroquinolones|fluoroquinolones	TaggerOne
+19756000	Disease	MESH:D055752	small-cell lung cancer|small-cell lung cancers	TaggerOne
+19756000	Disease	MESH:D007239	infections|infection	TaggerOne
+19756000	Disease	MESH:D009369	Cancer|number of tumours|neutropenic cancer|lymphomas or solid tumours|solid tumours or lymphoma|solid tumours|cancer|myelosuppressive cancer|cancers|solid tumour|malignancies and solid tumours|tumour	TaggerOne
+19756000	Disease	MESH:C565813	neutropenic afebrile oncology	TaggerOne
+19756000	Disease	MESH:D008175	lung cancer	TaggerOne
+19756000	Disease	MESH:D007938	leukaemia	TaggerOne
+19756000	Disease	MESH:D018250	solid cell tumours	TaggerOne
+19756000	Disease	MESH:D008228	non-Hodgkin's lymphoma	TaggerOne
+19756000	Chemical	MESH:D005047	etoposide	TaggerOne
+19756000	Species	9606	patient|patients	SR4GN
+19756000	Disease	MESH:C531821	bacteraemia	TaggerOne
+19756000	Chemical	MESH:D015363	quinolones|quinolone	TaggerOne
+19756000	Disease	MESH:D064420	toxicity	TaggerOne
+19756000	Species	562	Escherichia coli|bacteria	SR4GN
+19756000	Disease	MESH:D006689	Hodgkin lymphoma	TaggerOne
+19756000	Chemical	MESH:D064704	Levofloxacin|levofloxacin	TaggerOne
+19756000	Disease	MESH:D001424	bacterial infection	TaggerOne
+19756000	Chemical	MESH:D002939	ciprofloxacin	TaggerOne
+19756000	Species	287	Pseudomonas aeruginosa	SR4GN
+19756000	Disease	MESH:D005334	fever	TaggerOne|MESH
+19756000	Gene	1440	granulocyte-colony stimulating factor|G-CSF	GNormPlus
+19756000	Disease	MESH:D054218	acute leukaemia	TaggerOne
+19756000	Chemical	MESH:D000900		MESH
+7444000	Disease	MESH:D009369	tumor	TaggerOne
+7444000	Chemical	MESH:C492712	125I	TaggerOne
+7444000	Disease	MESH:D009381		MESH
+7444000	Species	10116		MESH
+7444000	Disease	MESH:D008325		MESH
+24932000	Species	1335626	mers	SR4GN
+24932000	Chemical	MESH:C105415	SRR073127	TaggerOne
+24932000	Species	9598	chimpanzee|Chimpanzee	SR4GN
+24932000	Species	2	bacterial	SR4GN
+24932000	Species	9600	orangutan|Orangutan	SR4GN
+24932000	Chemical	MESH:C073821	RACA	TaggerOne
+24932000	Species	185542	mate	SR4GN
+24932000	Chemical	MESH:C024930	MaSuRCA	TaggerOne
+24932000	Species	59689	Arabidopsis lyrata	SR4GN
+24932000	Gene	268	mis	GNormPlus
+24932000	Chemical	MESH:C571149	N505	TaggerOne
+24932000	Chemical	MESH:C504026	MPMB	TaggerOne
+24932000	Chemical	MESH:C078371	GMAP	TaggerOne
+24932000	Species	9606	Human|human|mammalian	SR4GN
+24932000	Gene	100310785	All1	GNormPlus
+24932000	Disease	MESH:D010855	NGS|Illumina NGS library	TaggerOne
+24932000	Species	3702	Arabidopsis strain|Arabidopsis thaliana	SR4GN|MESH
+24932000	Species	9541	Macaque|macaque	SR4GN
+24932000	Chemical	MESH:D009584	N	TaggerOne
+24932000	Species	9593	gorilla|Gorilla	SR4GN
+24932000	Disease	MESH:C562385	handle error	TaggerOne
+102000	Chemical	MESH:D007651	6-keto	TaggerOne
+102000	Chemical	MESH:C078129	6-keto-prostaglandin F1alpha	TaggerOne
+102000	Species	9940	sheep	SR4GN|MESH
+102000	Chemical	MESH:D015237	PGF2alpha	TaggerOne
+102000	Chemical	MESH:D011453	prostaglandins	TaggerOne|MESH
+102000	Chemical	MESH:D015232	PGE2	TaggerOne
+102000	Species	9544	rhesus monkeys	SR4GN|MESH
+102000	Species	9606	humans	SR4GN
+102000	Chemical	MESH:D015121	6-keto-PGF1alpha	TaggerOne
+102000	Chemical	MESH:D011460		MESH
+102000	Chemical	MESH:D011464		MESH
+102000	Species	9986		MESH
+26437000	Disease	MESH:D008796	betweenness centrality	TaggerOne
+26437000	Disease	MESH:D003424	Detroit region	TaggerOne
+26437000	Gene	326625	(c   O b	GNormPlus
+26437000	Chemical	MESH:C025165	RATP	TaggerOne
+26437000	Chemical	MESH:D016572	5(a)-5(c)	TaggerOne
+26437000	Species	9606	Human|people|human|man	SR4GN
+26437000	Chemical	MESH:D013481	O b	TaggerOne
+26437000	Chemical	MESH:C085978	5(d)-5(f)	TaggerOne
+26437000	Disease	MESH:C563636	hypertextual Web search engine	TaggerOne
+26437000	Species	347962	b) gamma	SR4GN
+26437000	Disease	MESH:D003141	infectious diseases	TaggerOne
+26437000	Chemical	MESH:C062234	London	TaggerOne
+9620000	Disease	MESH:D050197	atherosclerotic	TaggerOne
+9620000	Disease	MESH:D013035	spasm	TaggerOne
+9620000	Disease	MESH:D014854	branch of the anterior inferior cerebellar artery	TaggerOne
+9620000	Species	9606	patient|patients	SR4GN
+9620000	Disease	MESH:D019569	HFS|Pediatric hemifacial spasm|Hemifacial spasm	TaggerOne|MESH
+9620000	Disease	MESH:D009408		MESH
+24278000	Chemical	MESH:C027727	H0	TaggerOne
+24278000	Gene	22944	Kin	GNormPlus
+24278000	Species	2	Bacterial|bacterial	SR4GN
+24278000	Chemical	MESH:D002244	Knibbe C	TaggerOne
+24278000	Chemical	MESH:C107812	978-0-262-31050-5-ch030	TaggerOne
+24278000	Disease	MESH:D007239	infections	TaggerOne
+24278000	Species	44689	Dictyostelium discoideum	SR4GN
+24278000	Disease	MESH:D012640	fitness loss|fitness calculation details|fitness decrease|fitness calculation	TaggerOne
+24278000	Species	9796	horse	SR4GN
+24278000	Disease	MESH:D008659	metabolic fitness	TaggerOne
+24278000	Species	9606	humans	SR4GN
+24278000	Disease	MESH:C566610	axis back	TaggerOne
+24278000	Species	562	bacteria	SR4GN
+24278000	Chemical	MESH:C486817	I+II	TaggerOne
+24278000	Species	287	P. aeruginosa|Pseudomonas aeruginosa	SR4GN
+24278000	Disease	MESH:D005600	fragile	TaggerOne
+24278000	Chemical	MESH:D009584	N	TaggerOne
+19669000	Species	9606	patients	SR4GN
+19669000	Gene	10242	beta2	GNormPlus
+19669000	Disease	MESH:D001249	asthma	TaggerOne|MESH
+19669000	Chemical	MESH:D018927		MESH
+9191000	Disease	MESH:D002277	Spindle cell carcinoma|SpCC	TaggerOne|MESH
+9191000	Disease	MESH:D002294	squamous cell carcinoma|squamous component	TaggerOne
+9191000	Gene	6521	AE1	GNormPlus
+9191000	Disease	MESH:D002292	sarcomatoid component|sarcomatoid carcinoma	TaggerOne
+9191000	Disease	MESH:D009369	tumors	TaggerOne
+9191000	Gene	6508	AE3	GNormPlus
+9191000	Species	9606	men|woman|patients	SR4GN
+9191000	Gene	57534	MIB-1	GNormPlus
+9191000	Chemical	MESH:D015415		MESH
+9191000	Disease	MESH:D000782		MESH
+9191000	Disease	MESH:D007822		MESH
+21589000	Chemical	MESH:D007455	I	TaggerOne
+21589000	Chemical	MESH:C038399	C23	TaggerOne
+21589000	Chemical	MESH:D006859	H8B|O hydrogen|O-Hâ‹¯O hydrogen|H17B|Hydrogen	TaggerOne
+21589000	Chemical	MESH:D012406	nitro	TaggerOne
+21589000	CellLine	CVCL_3694	HB5662	TaggerOne
+21589000	Chemical	MESH:C543495	C-Hâ‹¯O	TaggerOne
+21589000	Chemical	MESH:D017665	hydroxyl|hydroxyl-O	TaggerOne
+21589000	Chemical	MESH:D006108	graphite	TaggerOne
+21589000	Chemical	MESH:D002244	carbon|Carbon|C	TaggerOne
+21589000	Disease	MESH:D018455	goodness of fit S	TaggerOne
+21589000	Chemical	MESH:C548957	carbonyl O|carbonyl|carbonyl-O	TaggerOne
+21589000	Chemical	MESH:C000592581	APEX2|APEX	TaggerOne
+21589000	Chemical	MESH:D019307	H7B	TaggerOne
+21589000	Disease	MESH:D000848	H atoms	TaggerOne
+21589000	Chemical	MESH:C004774	dimedone	TaggerOne
+21589000	Chemical	MESH:C028215	cyclohexenone	TaggerOne
+21589000	Chemical	MESH:C032159	acetonitrile	TaggerOne
+21589000	Chemical	MESH:D008982	Mo Kalpha	TaggerOne
+21589000	Chemical	MESH:D001554	benzene	TaggerOne
+21589000	Disease	OMIM:211750	C(CH(3))(2) atoms	TaggerOne
+21589000	Chemical	MESH:D012825	Monoclinic	TaggerOne
+21589000	Chemical	MESH:D053138	cyclohexene	TaggerOne
+21589000	Chemical	MESH:C031105	methyl	TaggerOne
+21589000	Chemical	MESH:D014966	Xanthenes|Xanthene|xanthenes	TaggerOne
+21589000	Chemical	MESH:D010100	H1o   O4|H1o O4|H3o O2|H3o   O2	TaggerOne
+21589000	Chemical	MESH:D013481	O1|O5|O2|O4|O3|O6	TaggerOne
+21589000	Chemical	MESH:C512684	C(CH3)2	TaggerOne
+21589000	Species	30531	c axis	SR4GN
+21589000	Chemical	MESH:D014867	H O	TaggerOne
+21589000	Chemical	MESH:C039620	3-nitrobenaldehyde	TaggerOne
+21589000	Gene	9156	hex-1	GNormPlus
+21589000	Chemical	MESH:D006880	hydroxy	TaggerOne
+21589000	Chemical	MESH:C006025	C23H27NO6|C23H27NO|C(23)H(27)NO|C23H27NO6 F	TaggerOne
+21589000	Chemical	MESH:C513342	C13|(13) O5	TaggerOne
+26160000	Disease	MESH:D017544	Abdominal aortic aneurysm	TaggerOne|MESH
+26160000	Disease	MESH:D001019		MESH
+26160000	Disease	MESH:D010243		MESH
+26160000	Disease	MESH:D008113		MESH
+26160000	Disease	MESH:D006528		MESH
+7238000	Disease	MESH:D013001	Briquet's syndrome|somatization disorder	TaggerOne|MESH
+7238000	Disease	MESH:D003866	primary depression	TaggerOne|MESH
+7238000	Disease	MESH:D007046		MESH
+28663000	Disease	MESH:D010300	PD|Parkinson's disease	TaggerOne
+28663000	Species	9606	human|patients|males	SR4GN
+28663000	Gene	367	androgen receptor	GNormPlus
+28663000	Gene	7503	XIST|X-inactive specific transcript	GNormPlus
+28663000	Disease	MESH:D019636	degenerative disorder of the nervous system	TaggerOne
+19448000	Gene	281209	cellular glutathione peroxidase|GPx1	GNormPlus
+19448000	Gene	281209;281210	glutathione peroxidase 1 and 3	GNormPlus
+19448000	Species	9913	bovine|Bovine	SR4GN
+19448000	Chemical	MESH:D012645	SeMet|Selenomethionine|selenomethionine	TaggerOne|CTD|MESH
+19448000	Gene	281210	GPx3	GNormPlus
+19448000	Chemical	MESH:D005978	glutathione	TaggerOne
+19448000	Chemical	MESH:D012643	selenium|Se	TaggerOne
+19448000	Gene	2878		CTD
+19448000	Gene	2876		CTD
+24527000	Chemical	MESH:D000535	Al	TaggerOne
+24527000	Chemical	MESH:C090732	H6P6O18|6C7H9ClN(+)Â·P6O18 (6-)Â·2H2O	TaggerOne
+24527000	Chemical	MESH:D008094	Li6P6O18	TaggerOne
+24527000	Chemical	MESH:C085526	H2C 112	TaggerOne
+24527000	Chemical	MESH:D002713	Cl3|Cl1|Cl2	TaggerOne
+24527000	Chemical	MESH:D006859	N-Hâ‹¯O hydrogen|hydrogen|O hydrogen|H-methyl|O-Hâ‹¯O hydrogen|Hydrogen|H-phenyl	TaggerOne
+24527000	Chemical	MESH:C556393	4-chloro-2-methylaniline	TaggerOne
+24527000	Chemical	MESH:C053029	E68	TaggerOne
+24527000	Chemical	MESH:C543495	H3C|H1C   O4iii|H2C	TaggerOne
+24527000	Gene	3073	hexa|Hexa	GNormPlus
+24527000	Chemical	MESH:D006108	Graphite	TaggerOne
+24527000	Disease	MESH:D018455	goodness of fit S	TaggerOne
+24527000	Chemical	MESH:C068086	P6O186	TaggerOne
+24527000	Chemical	MESH:D000431	ethanol	TaggerOne
+24527000	Disease	MESH:D000848	H atoms	TaggerOne
+24527000	Chemical	MESH:C514145	o233	TaggerOne
+24527000	Chemical	MESH:C408583	6C7H9ClN	TaggerOne
+24527000	Chemical	MESH:C045084	H1C O4ii	TaggerOne
+24527000	Chemical	MESH:D008982	Mo Kalpha	TaggerOne
+24527000	Chemical	MESH:D000596	cyclohexaphosphoric acid	TaggerOne
+24527000	Chemical	MESH:C046505	E66	TaggerOne
+24527000	Disease	MESH:D020267	H phenyl atoms	TaggerOne
+24527000	Chemical	MESH:C456584	[P6O18](6-)|P6O18|Cs6P6O18|[P6O18]6	TaggerOne
+24527000	Chemical	MESH:C410157	Hexakis(3-chloro-2-methylanilinium) cyclohexaphosphate dihydrate	TaggerOne
+24527000	Chemical	MESH:C031105	methyl	TaggerOne
+24527000	Chemical	MESH:D013481	C   O|O(L):P|O2|O   O|O4	TaggerOne
+24527000	Chemical	MESH:D010100	o2038-o2039|o105-o107|oxygen	TaggerOne
+24527000	Chemical	MESH:D014867	6- 2H2O|H3B O4|H3B   O4|H   O(N)|H2A O5|H2B O2|2H2O Z|H2B   O2|H3A   O|H2A   O5|H3C   O2|6H2O|H3C O2	TaggerOne
+24527000	Chemical	MESH:C415942	H3C 107	TaggerOne
+24527000	Chemical	MESH:C089163	H3C 104	TaggerOne
+24527000	Chemical	MESH:C027451	3-chloro-2-methylammonium	TaggerOne
+24527000	Chemical	MESH:C071775	3-chloro-2-methylaniline	TaggerOne
+24527000	Chemical	MESH:D000641	NH3	TaggerOne
+25482000	Species	9606	patient|patients	SR4GN
+2034000	Disease	MESH:D014456	ulcer	TaggerOne
+2034000	Disease	MESH:C563509	submucosal carcinoma	TaggerOne
+2034000	Species	9606	Patients|patients	SR4GN
+2034000	Disease	MESH:C565008	mucosa carcinoma	TaggerOne
+2034000	Disease	MESH:D013274	gastric cancer|AGC|stomach cancer|EGC	TaggerOne|MESH
+2034000	Disease	MESH:D011230		MESH
+2034000	Disease	MESH:D011183		MESH
+2034000	Disease	MESH:D008207		MESH
+1143000	Chemical	MESH:D001058	apomorphine	TaggerOne|MESH
+1143000	Chemical	MESH:C000597738	N-propylnoraporphine	TaggerOne
+1143000	Species	10116	rats	SR4GN|MESH
+1143000	Chemical	MESH:D007980	levodopa	TaggerOne|MESH
+1143000	Chemical	MESH:D001285		MESH
+1143000	Chemical	MESH:D001060		MESH
+1143000	Chemical	MESH:D006892		MESH
+1143000	Chemical	MESH:D002230		MESH
+1143000	Disease	MESH:D001930		MESH
+3927000	Chemical	MESH:D005227	fatty acids	TaggerOne
+3927000	Chemical	MESH:D002245	CO2	TaggerOne
+3927000	Chemical	MESH:D014640	vancomycin	TaggerOne
+3927000	Disease	MESH:D007239	infections	TaggerOne
+3927000	Chemical	MESH:D002241	carbohydrate|Carbohydrate	TaggerOne
+3927000	Disease	MESH:D006069	gonorrhea	TaggerOne|MESH
+3927000	Species	485	N. gonorrhoeae|Neisseria gonorrhoeae	SR4GN|MESH
+3927000	Disease	MESH:C565377	isolation of Neisseria	TaggerOne
+3927000	Species	9606	women|men	SR4GN
+3927000	Species	3641	chocolate	SR4GN
+3927000	Chemical	MESH:D008747	MTM	TaggerOne
+320000	Chemical	MESH:D000431	alcohol	TaggerOne
+320000	Chemical	MESH:C043442	[14C]carboxymethylated	TaggerOne
+320000	Species	4932	yeast	SR4GN|MESH
+9853000	Chemical	MESH:D020887	selenite	TaggerOne
+9853000	Species	10116	Wistar rats	SR4GN|MESH
+9853000	Species	9606	Male	SR4GN
+9853000	Chemical	MESH:C517785	SeMet|seleno-L-methionine	TaggerOne
+9853000	Chemical	MESH:D012643	selenium|Se	TaggerOne|MESH
+9853000	Chemical	MESH:D018038		MESH
+9853000	Chemical	MESH:D012645		MESH
+2494000	Chemical	MESH:D001127	arginine	TaggerOne
+2494000	Chemical	MESH:D000577	amides	TaggerOne
+2494000	Chemical	MESH:D009566	nitrate	TaggerOne|MESH
+2494000	Chemical	MESH:D000588	nitrosating amines|amines	TaggerOne
+2494000	Chemical	MESH:D009573	nitrite	TaggerOne|MESH
+2494000	Chemical	MESH:D008770	N-nitroso	TaggerOne
+2494000	Chemical	MESH:D001205	ascorbate|ascorbic acid	TaggerOne|MESH
+2494000	Chemical	MESH:D013481	N2O4|N2O3	TaggerOne
+2494000	Chemical	MESH:D014508	ureas	TaggerOne
+2494000	Chemical	MESH:D009584	nitrogen	TaggerOne
+2494000	Chemical	MESH:D009602	nitrosamine	TaggerOne
+2494000	Chemical	MESH:D008070		MESH
+2494000	Chemical	MESH:D007371		MESH
+2494000	Chemical	MESH:D009603		MESH
+8777000	Chemical	MESH:D006695	Holmium|holmium	TaggerOne
+8777000	Disease	MESH:D010020	aseptic bone necrosis	TaggerOne
+8777000	Disease	MESH:D005271		MESH
+3657000	Disease	MESH:D002769	cholelithiasis	TaggerOne|MESH
+28914000	Disease	MESH:D012164	retinal disease	TaggerOne
+28914000	Disease	MESH:D003643	death	TaggerOne
+28914000	Disease	MESH:D009216	myopia	TaggerOne
+28914000	Disease	MESH:D012170	retinal vein occlusion	TaggerOne
+28914000	Disease	MESH:D001281	atrial fibrillation	TaggerOne
+28914000	Disease	MESH:D003930	diabetic retinopathy	TaggerOne
+28914000	Chemical	MESH:D013455	S5121	TaggerOne
+28914000	Disease	MESH:D018630	proliferative vitreoretinopathy	TaggerOne
+28914000	Disease	MESH:D009877	postoperative hypotony or endophthalmitis	TaggerOne
+28914000	Disease	MESH:C537366	Oxford Record	TaggerOne
+28914000	Disease	MESH:C535922	ophthalmic disease	TaggerOne
+28914000	Chemical	MESH:D012828	Silicone	TaggerOne
+28914000	Species	9606	male|newborns|persons|participants|people|patient|patients|participant|males	SR4GN
+28914000	Chemical	MESH:D012825	Si	TaggerOne
+28914000	Disease	MESH:D012167	retinal tear	TaggerOne
+28914000	Disease	MESH:D007906	dislocation of intraocular lens	TaggerOne
+28914000	Species	12211	PPV	SR4GN
+28914000	Disease	MESH:D012163	retinal detachment	TaggerOne
+22395000	Chemical	MESH:C052444	PLATO	TaggerOne
+22395000	Disease	MESH:D020521		MESH
+22395000	Chemical	MESH:D000241		MESH
+22395000	Disease	MESH:D058729		MESH
+22395000	Chemical	MESH:C503700		MESH
+22395000	Disease	MESH:D054058		MESH
+22395000	Chemical	MESH:D058921		MESH
+9217000	Species	6239	embryo	SR4GN
+9217000	Disease	MESH:D020964	SE embryos	TaggerOne
+9217000	Gene	378613	Siamois	GNormPlus|gene2pubmed|MESH
+9217000	Species	8355	Xenopus	SR4GN|MESH
+9217000	Chemical	MESH:D015415		MESH
+9217000	Gene	36240		gene2pubmed
+9217000	Species	7227		MESH
+9217000	Gene	1499		MESH
+15133000	Disease	MESH:D003371	cough	TaggerOne
+25581000	Disease	MESH:C535434	MAT	TaggerOne
+25581000	Disease	MESH:D058495	Histone gene deficiencies	TaggerOne
+25581000	Chemical	MESH:D005559	formamide	TaggerOne
+25581000	Chemical	MESH:D011188	K56	TaggerOne
+25581000	Chemical	MESH:D006859	H4|H2B|H3-H4	TaggerOne
+25581000	Chemical	MESH:C006633	H3	TaggerOne
+25581000	Species	2	bacterial	SR4GN
+25581000	Gene	853976	sir1|Sir1|SIR1	GNormPlus
+25581000	Disease	MESH:C564972	HML|silencers of HML	TaggerOne
+25581000	Chemical	MESH:D038961	1-O-acetyl-ADP-ribose	TaggerOne
+25581000	Gene	854190	HST3|hst3|Hst3	GNormPlus
+25581000	Chemical	MESH:C011632	acetyl	TaggerOne
+25581000	Chemical	MESH:D006921	Hygromycin B	TaggerOne
+25581000	Chemical	MESH:D010636	phenol	TaggerOne
+25581000	Chemical	MESH:C059320	heterochromatin	TaggerOne
+25581000	Species	185542	mate	SR4GN
+25581000	Chemical	MESH:C080883	ZEN	TaggerOne
+25581000	Chemical	MESH:C002934	alpha1-alpha2	TaggerOne
+25581000	Chemical	MESH:C007293	DAPI|4',6-diamidino-2-phenylindole	TaggerOne
+25581000	Gene	573997	Histone|histone	GNormPlus
+25581000	Gene	100000930	histone H3	GNormPlus
+25581000	Chemical	MESH:D005947	glucose	TaggerOne
+25581000	Chemical	MESH:D009536	NAM|nicotinamide	TaggerOne
+25581000	Disease	MESH:D017180	VT	TaggerOne
+25581000	Gene	851163	Sir3|SIR3|sir3|Sir3p	GNormPlus
+25581000	Chemical	MESH:C010643	Trolox	TaggerOne
+25581000	Gene	853327	ASF1	GNormPlus
+25581000	Gene	852385	Proliferating cell nuclear antigen	GNormPlus
+25581000	Chemical	MESH:D009243	NAD(+)|NAD	TaggerOne
+25581000	Chemical	MESH:D019840	isopropanol	TaggerOne
+25581000	Gene	852848	MIG1	GNormPlus
+25581000	Gene	855701	histone H4	GNormPlus
+25581000	Chemical	MESH:D002725	phenol-chloroform	TaggerOne
+25581000	Disease	MESH:D021501	silencers flank	TaggerOne
+25581000	Gene	404629	Dan	GNormPlus
+25581000	Chemical	MESH:C001242	5-FOA|5-fluoroorotic acid	TaggerOne
+25581000	Species	9606	donor|humans|mammalian	SR4GN
+25581000	Gene	564379	CYC1	GNormPlus
+25581000	Chemical	MESH:C578860	glutamine	TaggerOne
+25581000	Chemical	MESH:C574990	JRY9633	TaggerOne
+25581000	Chemical	MESH:D010100	glucose-oxygen	TaggerOne
+25581000	Gene	108181627	histone H4	GNormPlus
+25581000	Chemical	MESH:C509690	Trp	TaggerOne
+25581000	Chemical	MESH:D019347	potassium acetate	TaggerOne
+25581000	Species	562	bacteria	SR4GN
+25581000	Chemical	MESH:C089163	KAP104	TaggerOne
+25581000	Gene	386940	ACT1	GNormPlus
+25581000	Disease	MESH:D016388	silencing loss	TaggerOne
+25581000	Species	10678	bacteriophage P1	SR4GN
+25581000	Chemical	MESH:D014025	Ti	TaggerOne
+25581000	Gene	2777477	Cre|cre	GNormPlus
+25581000	Gene	387303	alpha1 and alpha2|alpha1 and cre	GNormPlus
+25581000	Chemical	MESH:C114808	Lysine|lysine	TaggerOne
+25581000	Species	4932	Saccharomyces cerevisiae|Saccharomyces|yeast|Yeast|S. cerevisiae	SR4GN|MESH
+25581000	Gene	404621	lox	GNormPlus
+8676000	Disease	MESH:D058495	HSPs	TaggerOne
+8676000	Species	10090	murine	SR4GN|MESH
+8676000	Gene	15511	HSP70	GNormPlus
+8676000	Disease	MESH:D005354	fibrosarcoma	TaggerOne
+8676000	Gene	15507	HSP27	GNormPlus
+8676000	Disease	MESH:D005334	hyperthermia	TaggerOne
+8676000	Disease	MESH:D009374		MESH
+26293000	Species	9606	patients	SR4GN
+26293000	Chemical	MESH:C525224	PFS	TaggerOne
+26293000	Disease	MESH:D008224	follicular lymphoma	TaggerOne|MESH
+26293000	Disease	MESH:D018450		MESH
+26293000	Chemical	MESH:D000970		MESH
+15564000	Species	9606	patient	SR4GN
+15564000	Disease	MESH:D003141	infectious diseases	TaggerOne
+19503000	Chemical	MESH:D001127	arginine	TaggerOne
+19503000	Disease	MESH:D000860	hypoxia	TaggerOne
+19503000	Species	10090	neonates	SR4GN
+19503000	Species	10116	Sprague-Dawley rats|rats|rat	SR4GN|MESH
+19503000	Species	9606	newborn|Newborn	SR4GN
+19503000	Chemical	MESH:C578860	glutamine	TaggerOne
+19503000	Chemical	MESH:D013481	Superoxide|superoxide	TaggerOne
+19503000	Chemical	MESH:D005978	glutathione	TaggerOne
+19503000	Chemical	MESH:D008315	Malondialdehyde|malondialdehyde	TaggerOne|MESH
+19503000	Disease	MESH:D020345	necrotizing enterocolitis	TaggerOne|MESH
+19503000	Chemical	MESH:D000975		MESH
+21916000	Disease	MESH:D003643	deaths	TaggerOne
+21916000	Species	9606	people|patient|patients	SR4GN
+21916000	Disease	MESH:D048949	obstetrical	TaggerOne
+27853000	Species	9606	patient	SR4GN
+27853000	Chemical	MESH:D000305		MESH
+27853000	Disease	MESH:D003881		MESH
+9335000	Chemical	MESH:D012701	5-hydroxytryptamine	TaggerOne|MESH
+9335000	Chemical	MESH:D001285	atropine	TaggerOne
+9335000	Species	10141	guinea pig|guinea-pig	SR4GN|MESH
+9335000	Chemical	MESH:C059582	neurotensin6-11	TaggerOne
+9335000	Gene	100735454	VIP	GNormPlus
+9335000	Chemical	MESH:D002712	chloride	TaggerOne|MESH
+9335000	Chemical	MESH:D018727		MESH
+9335000	Chemical	MESH:D014660		MESH
+22358000	Disease	MESH:D009369	malignancies	TaggerOne
+22358000	Disease	MESH:D014514	ureteral calculi	TaggerOne
+22358000	Species	9606	patients	SR4GN
+22358000	Disease	MESH:D006417	hematuria	TaggerOne|MESH
+22358000	Species	255564		MESH
+22358000	Chemical	MESH:D003287		MESH
+22358000	Chemical	MESH:C038192		MESH
+22358000	Chemical	MESH:D007472		MESH
+27992000	Disease	MESH:D004827	epilepsy|epileptic seizures	TaggerOne
+27992000	Disease	MESH:D012640	seizure|seizures	TaggerOne
+27992000	Disease	MESH:D009369	tumor	TaggerOne
+27992000	Species	9606	patients|children	SR4GN
+27992000	Disease	MESH:D018303	ganglioglioma	TaggerOne
+27992000	Disease	MESH:D018302	dysembryoplastic neuroepithelial tumors	TaggerOne
+27992000	Disease	MESH:D001932	brain tumors|brain tumor	TaggerOne
+16523000	Disease	MESH:D007676	end-stage renal disease	TaggerOne|MESH
+16523000	Gene	5972	renin	GNormPlus
+16523000	Disease	MESH:D051436	chronic kidney disease	TaggerOne
+16523000	Disease	MESH:D003928	diabetic nephropathy	TaggerOne
+16523000	Disease	MESH:D007674	kidney damage|renal damage	TaggerOne
+16523000	Species	9606	patients	SR4GN
+16523000	Disease	MESH:D006973	Hypertension|hypertensive injury|hypertension	TaggerOne|MESH
+16523000	Disease	MESH:D004198		MESH
+16523000	Chemical	MESH:D000959		MESH
+22884000	Chemical	MESH:D005947	glucose	TaggerOne
+22884000	Gene	7124	tumor necrosis factor a|TNF-a	GNormPlus
+22884000	Chemical	MESH:C004998	ferrocene	TaggerOne|MESH
+22884000	Gene	54363	glucose oxidase|GOx	GNormPlus
+22884000	Chemical	MESH:C032949	Fc|ferrocene carboxylic acid	TaggerOne
+22884000	Chemical	MESH:D006046		MESH
+22884000	Chemical	MESH:D014409		MESH
+22884000	Chemical	MESH:D010455		MESH
+22884000	Chemical	MESH:D005296		MESH
+13577000	Disease	MESH:D011038	Poikiloderma atrophicans vasculare	TaggerOne
+13577000	Disease	MESH:D010267		MESH
+13577000	Disease	MESH:D012871		MESH
+691000	Chemical	MESH:D004952	esters	TaggerOne|MESH
+691000	Chemical	MESH:C037908	alpha-pivaloyloxyethyl	TaggerOne
+691000	Chemical	MESH:C002934	alpha-succinimidoethyl	TaggerOne
+691000	Chemical	MESH:D008750	methyldopa	TaggerOne|MESH
+691000	Chemical	MESH:D000596	amino esters	TaggerOne
+691000	Species	9606	man	SR4GN
+691000	Chemical	MESH:D009584	N	TaggerOne
+691000	Disease	MESH:D006973		MESH
+691000	Chemical	MESH:D000959		MESH
+691000	Species	10116		MESH
+5607000	Disease	MESH:D007035	hypothermia	TaggerOne
+5607000	Chemical	MESH:D007773		MESH
+5607000	Chemical	MESH:D001639		MESH
+5607000	Chemical	MESH:D002245		MESH
+5607000	Chemical	MESH:D011773		MESH
+25157000	Chemical	MESH:D002241	sugar	TaggerOne
+25157000	Disease	MESH:D012640	fitness equipment|muscular fitness	TaggerOne
+25157000	Species	9606	Participants|boys	SR4GN
+25157000	Disease	MESH:D009765	obesity	TaggerOne|MESH
+25157000	Disease	MESH:D001835		MESH
+26659000	Disease	MESH:D003643	death	TaggerOne
+26659000	Disease	MESH:D007676	late-stage disease	TaggerOne
+26659000	Disease	MESH:D010051	ovarian cancers|ovarian cancer|Ovarian Cancer|Ovarian cancer	TaggerOne|MESH
+26659000	Disease	MESH:D009369	malignancy|cancer|cancers|tumors	TaggerOne
+26659000	Species	9606	women|human	SR4GN
+26659000	Gene	94025	CA125	GNormPlus
+26659000	Chemical	MESH:D014408		MESH
+22048000	Disease	MESH:D003643	death	TaggerOne
+22048000	Chemical	MESH:C067311	docetaxel	TaggerOne|MESH
+22048000	Chemical	MESH:C552428	cabazitaxel	TaggerOne|MESH
+22048000	Disease	MESH:D011471	Advanced prostate cancer|metastatic prostate cancer|Prostate cancer|prostate cancer	TaggerOne|MESH
+22048000	Chemical	MESH:C540278	MDV3100	TaggerOne
+22048000	Disease	MESH:D009369	cancer|tumor	TaggerOne
+22048000	Chemical	MESH:C532412	cabazitaxel (XRP6258)-prednisone	TaggerOne
+22048000	Species	9606	men|patients	SR4GN
+22048000	Disease	MESH:D064420	cytotoxicity	TaggerOne
+22048000	Chemical	MESH:D008942	mitoxantrone-prednisone	TaggerOne
+22048000	Chemical	MESH:C089742	abiraterone acetate	TaggerOne
+22048000	Disease	MESH:D064129	CRPC	TaggerOne
+22048000	Chemical	MESH:D000728	androgen	TaggerOne
+22048000	Chemical	MESH:D011239		MESH
+22048000	Chemical	MESH:D000737		MESH
+22048000	Chemical	MESH:D000736		MESH
+22048000	Chemical	MESH:D043823		MESH
+22048000	Chemical	MESH:C089740		MESH
+22048000	Chemical	MESH:D019496		MESH
+22048000	Disease	MESH:D009362		MESH
+22048000	Chemical	MESH:D000970		MESH
+20635000	Chemical	MESH:D003562	cytidine|Cytidine	TaggerOne
+20635000	Mutation	c.356C>A	C356A	tmVar
+20635000	Gene	10930	APOBEC-2	GNormPlus
+20635000	Chemical	MESH:C543552	5'-TTC	TaggerOne
+20635000	Chemical	MESH:C054282	N244	TaggerOne
+20635000	Chemical	MESH:D005996	Dynamite	TaggerOne
+20635000	Gene	146	alpha1|alpha1, beta1	GNormPlus
+20635000	Chemical	MESH:C056920	A3F	TaggerOne
+20635000	Gene	10141	AC1	GNormPlus
+20635000	Chemical	MESH:D019743	C-X-E-X23-28-P-C-X2-C zinc	TaggerOne
+20635000	Chemical	MESH:D006859	hydrogen|Hydrogen	TaggerOne
+20635000	Gene	978	cytidine deaminase|CDA|Cytidine Deaminase	GNormPlus|MESH
+20635000	Chemical	MESH:C560183	BHF	TaggerOne
+20635000	Gene	10678	beta1 and beta|beta1|beta1, beta3, beta4 and beta5|beta1 and L235	GNormPlus
+20635000	Species	2	bacterial	SR4GN
+20635000	Chemical	MESH:C056052	Q237	TaggerOne
+20635000	Chemical	MESH:C094686	Glu	TaggerOne
+20635000	Chemical	MESH:D002244	C	TaggerOne
+20635000	Disease	MESH:D006432	HH	TaggerOne
+20635000	Mutation	c.3A>C	A3C	tmVar
+20635000	Gene	23545	A2 and A3	GNormPlus
+20635000	CellLine	CVCL_0063	293T	TaggerOne
+20635000	Chemical	MESH:D000667	ampicillin	TaggerOne
+20635000	Chemical	MESH:D011094	PEI|polyethylenimine	TaggerOne
+20635000	Chemical	MESH:C056056	L235	TaggerOne
+20635000	Chemical	MESH:C073961	E217-N244	TaggerOne
+20635000	Disease	MESH:D007239	retroviral infection	TaggerOne
+20635000	Species	12081	Virus|virus	SR4GN
+20635000	Gene	27350	APOBEC3C	GNormPlus
+20635000	Species	11709	HIV-2	SR4GN
+20635000	Gene	155459	Vif|vif	GNormPlus
+20635000	Chemical	MESH:C026591	Lys	TaggerOne
+20635000	Chemical	MESH:D012293	rifampicin	TaggerOne
+20635000	Chemical	MESH:C514145	V233	TaggerOne
+20635000	Species	11646	lentivirus	SR4GN
+20635000	Gene	2720	beta-Galactosidase|beta-galactosidase	GNormPlus
+20635000	Chemical	MESH:C076685	Arg	TaggerOne
+20635000	Gene	200316	APOBEC3F	GNormPlus
+20635000	Gene	113	AC7	GNormPlus
+20635000	Mutation	c.AC>C	AC7 of the C	tmVar
+20635000	Gene	23545;28883	A2 and A3	GNormPlus
+20635000	Gene	10383	beta2	GNormPlus
+20635000	Species	9606	Human|human	SR4GN
+20635000	Gene	60489	APOBEC3G|Apobec3G|A3G	GNormPlus|MESH
+20635000	Chemical	MESH:C016900	H228	TaggerOne
+20635000	Chemical	MESH:D007544	IPTG	TaggerOne
+20635000	Gene	10242	beta2	GNormPlus
+20635000	Species	562	E. coli	SR4GN
+20635000	Mutation	p.L234K	L234K	tmVar
+20635000	Species	31931	retroviral|retroviruses	SR4GN
+20635000	Chemical	MESH:D003841	deoxycytidine	TaggerOne
+20635000	Chemical	MESH:D014529	uridine	TaggerOne
+20635000	Chemical	MESH:D012965	NaCl	TaggerOne
+20635000	Gene	338	apolipoprotein B	GNormPlus
+20635000	Mutation	c.321C>A	C321A	tmVar
+20635000	Disease	MESH:D015658	Vif-deficient HIV-1|HIV-1 infection|immunodeficiency virus type 1 infection	TaggerOne
+20635000	Species	10239	viruses	SR4GN
+20635000	Chemical	MESH:D024502	R041069	TaggerOne
+20635000	Chemical	MESH:C032259	SDS|SDS-polyacrylamide	TaggerOne
+20635000	Gene	1123	CHn	GNormPlus
+20635000	Mutation	rs779184767	C243A	tmVar
+20635000	Gene	155030	Gag	GNormPlus
