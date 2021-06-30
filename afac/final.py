@@ -8,7 +8,7 @@ from textmining_mc.resources.pubtator.model import Article
 
 
 def api_pubmed_database():
-
+###############################################################################################################################################
     # Request_for_QK_&_WE
     rob = requests.get(
         'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y')
@@ -21,37 +21,24 @@ def api_pubmed_database():
     urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
         query_key) + "&WebEnv=" + str(web_env) + "&retmax=10000&usehistory=y&retmode=json"
     rsearch = requests.get(urlsearch)
-
     # Declaration_V
     id_all = rsearch.json()['esearchresult']['idlist']
+###############################################################################################################################################
     list_id_100 = []
-    str_id_100 = str()
-
-    # Database_C
-    db = SqliteDatabase('article_pubmed.db')
-
-    class Article(Model):
-        id = CharField()
-        title = CharField()
-        date = CharField()
-        type = CharField()
-        abstract = CharField()
-
-        class Meta:
-            database = db
-    db.create_tables([Article])
-
+#####################################################################################################################
     for elmt in tqdm(iterable=id_all, desc='creation_'):
         if len(list_id_100) == 100:
             Entrez.email = "hugues.escoffier@etu.unsitra.fr"
             handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
             records = Entrez.read(handle)
             print(records)
+##################################################################################################################################
             data_ = records["PubmedArticle"]
             if len(data_) != len(list_id_100):
                 for i in range(len(list_id_100) - len(data_)):
                     Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
                     list_id_100.remove(Id_unwanted)
+##################################################################################################################################
             for i in range(len(list_id_100)):
                 try:
                     abstract_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
@@ -85,19 +72,19 @@ def api_pubmed_database():
                             c += 1
                 #Add_to_db
                 article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
+###############################################################################################################################################
             list_id_100.clear()
             list_id_100.append(elmt)
-            str_id_100 = str(elmt)
 
         else:
             list_id_100.append(elmt)
-            str_id_100 = str_id_100 + str(elmt)
 
     #Treatment_last_A
     for i in range(len(list_id_100)):
         Entrez.email = "hugues.escoffier@etu.unsitra.fr"
         handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
         records = Entrez.read(handle)
+########################################################################################################
         data_ = records["PubmedArticle"]
         if len(data_) != len(list_id_100):
             for i in range(len(list_id_100) - len(data_)):

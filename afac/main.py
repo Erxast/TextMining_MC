@@ -866,12 +866,13 @@ def negative_set():
 
     db.create_tables([Article])
     # Partie 2 : Selection de 1000 articles/années
-
+################################################################################################################################################################################################################
     for T in list_all:
         #Le while permet de repeter la boucle 'for' tant qu'il n'y a pas 1000 articles dans la base de données.
         compteur_article_annee = 0
         OK = 'False'
         while OK == 'False':
+##########################################################################################################################################################################################################################################
             # Recherche des articles par années
             rob = requests.get(
                 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=' +str(T[0]) +'[Date%20-%20Publication]+journal+article[publication%20type]+&retmode=json&usehistory=y')

@@ -11,6 +11,7 @@ class JointAPI(object):
         self.records_list = list() #Corresponds to a dictionary list
         self.efetch()
         self.removal_not_available()
+        self.removal_pubmedbookarticle()
         self.article_xml_content()
 
     def efetch(self):
@@ -25,9 +26,8 @@ class JointAPI(object):
         records = Entrez.read(handle)
         self.records = records
         self.records_list.append(records)
-        print('efetch')
 
-    def removal_pubmedbookarticle(self, pmids_list):
+    def removal_pubmedbookarticle(self):
         """
         Deletes 'PubmedBookArticles' in the query
 
@@ -35,11 +35,11 @@ class JointAPI(object):
         :return: list_id_100: Without pmids of PubmedBookArticles
         """
         data = self.records["PubmedArticle"]
-        if len(data) != len(pmids_list):
-            for i in range(len(pmids_list) - len(data)):
+        if len(data) != len(self.pmids_list):
+            for i in range(len(self.pmids_list) - len(data)):
                 id_unwanted = ''.join(self.records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
-                pmids_list.remove(id_unwanted)
-        return pmids_list
+                self.pmids_list.remove(id_unwanted)
+        return self.pmids_list
 
     def removal_not_available(self):
         """
@@ -58,7 +58,6 @@ class JointAPI(object):
                     c += 1
             if c == len(self.pmids_list):
                 ok = "Yes"
-        print('remove')
 
     def article_xml_content(self):
         """
@@ -113,4 +112,3 @@ class JointAPI(object):
                         date = date + lettre
                         c += 1
             Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
-        print('xml')

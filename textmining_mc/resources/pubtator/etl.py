@@ -26,7 +26,7 @@ class Pubtator(object):
     def __init__(self):
         # self.api_url = 'https://www.ncbi.nlm.nih.gov/research/pubtator-api/publications/export/biocxml?pmids='
         self.dbh_proxy = None
-        self.database = os.path.join('article_mgt1.db')
+        self.database = os.path.join('article_mgt.db')
         self.db_type = 'sqlite'
         self.check_or_create_db()
         self.pmids_list = []
@@ -74,9 +74,10 @@ class Pubtator(object):
                                                   name=self.database,
                                                   db_type=self.db_type,
                                                   )
+
     @staticmethod
-    def process_article_data():
-        fichier = open('/data/list_id_mgt.txt', 'r')
+    def process_article_data_mgt():
+        fichier = open('/Users/hugues.escoffier/PycharmProjects/TextMining_MC/data/list_id_mgt.txt', 'r')
         list_mgt = []
         id_ = ""
         for i in fichier.read():
@@ -91,19 +92,12 @@ class Pubtator(object):
             if i not in list_mgt_final:
                 list_mgt_final.append(i)
         list_id_100 = []
-        for elmt in tqdm(iterable=list_mgt_final, desc='part_1'):
+        for elmt in tqdm(iterable=list_mgt_final, desc='creation'):
+            list_id_100.append(elmt)
             if len(list_id_100) == 100:
-                JointAPI(list_id_100).efetch()
-                JointAPI(list_id_100).removal_not_available()
-                JointAPI(list_id_100).article_xml_content()
+                JointAPI(list_id_100)
                 list_id_100.clear()
-                list_id_100.append(elmt)
-            else:
-                list_id_100.append(elmt)
-        for i in tqdm(iterable=range(len(list_id_100)), desc='part_2'):
-            JointAPI(list_id_100).efetch()
-            JointAPI(list_id_100).removal_not_available()
-            JointAPI(list_id_100).article_xml_content()
+        JointAPI(list_id_100)
 
     @staticmethod
     def removal_false_positive():
@@ -185,7 +179,7 @@ class Pubtator(object):
     def run(self):
         # TODO: Method populate Article
         self.check_or_create_db()
-        self.process_article_data()
+        self.process_article_data_mgt()
         self.removal_false_positive()
         # self.process_article_annotations()
         # self.afac()
