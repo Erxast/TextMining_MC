@@ -1146,7 +1146,7 @@ def sheesh():
 # sheesh()
 
 
-db = SqliteDatabase('all_pubtator.db')
+db = SqliteDatabase('gene_pubtator')
 
 
 class Annotation(Model):
@@ -1163,31 +1163,34 @@ def db_pubtator():
     all_l = []
     connection = sqlite3.connect('cache.db', timeout=10)
     db.create_tables([Annotation])
-    with open("gene2pubtatorcentral.txt", 'r') as fin:
+    with open("/Users/hugues.escoffier/Documents/Stage/gene2pubtatorcentral.txt", 'r') as fin:
         for line in tqdm(iterable=fin, desc='reading'):
             cols = line.strip('\n').split('\t')
             a = (cols[0], cols[1], cols[2], cols[3])
             all_l.append(a)
-            # if len(all_l) == 998:
-            #     Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
-            #                                           Annotation.mention]).execute()
-            #     all_l.clear()
-    # Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
-    #                                       Annotation.mention]).execute()
+            if len(all_l) == 990:
+                Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
+                                                      Annotation.mention]).execute()
+                all_l.clear()
+    c = 0
+    for i in range(0, 1000):
+        c += 1
+    Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
+                                          Annotation.mention]).execute()
     db.close()
 
 
-# db_pubtator()
+db_pubtator()
 
-
-def scispacy_test():
-    nlp = spacy.load("en_core_web_sm")
-    for anno in Article:
-        abstract = anno.ab
-    Abstract =
-    docSci = nlp(Abstract)
-    for ent in docSci.ents:
-        print(ent.text, ent.label_)
-
-scispacy_test()
-
+#
+# def scispacy_test():
+#     nlp = spacy.load("en_core_web_sm")
+#     for anno in Article:
+#         abstract = anno.ab
+#     Abstract =
+#     docSci = nlp(Abstract)
+#     for ent in docSci.ents:
+#         print(ent.text, ent.label_)
+#
+# scispacy_test()
+#

@@ -4,7 +4,7 @@ from textmining_mc import database_proxy, logger
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
 
 DEBUG = True
-db_name = 'article_mgt1.db'
+db_name = 'article_mgt.db'
 
 
 class BaseModel(Model):
@@ -34,20 +34,16 @@ class Annotation(BaseModel):
         pass
 
 
-class AllAnnotation(BaseModel):
-    id = CharField()
-    bioconcept = CharField()
-    mention = CharField()
-    identifier = CharField()
-
-    def insert_init_db(self):
-        pass
+class Scispacy(BaseModel):
+    pmid = ForeignKeyField(Article, backref='scispacy')
+    word = CharField()
+    type = CharField()
 
 
 def get_models_list():
     return [Article,
             Annotation,
-            ]
+            Scispacy]
 
 
 def connect_db(name=db_name, db_type='sqlite',):
