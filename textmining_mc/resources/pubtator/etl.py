@@ -52,18 +52,18 @@ class Pubtator(DatabaseModel):
                 list_id_100.clear()
         JointAPI(list_id_100)
 
-    def get_article_pmids(self):
-        """
-        Retrieve all article pmids
-
-        Returns:
-            list: list of pmids
-        """
-        query = Article.select()
-        liste_id = list()
-        for arti in query:
-            liste_id.append(arti.id)
-        self.pmids_list = liste_id
+    # def get_article_pmids(self):
+    #     """
+    #     Retrieve all article pmids
+    #
+    #     Returns:
+    #         list: list of pmids
+    #     """
+    #     query = Article.select()
+    #     liste_id = list()
+    #     for arti in query:
+    #         liste_id.append(arti.id)
+    #     self.pmids_list = liste_id
 
     def run(self):
         # TODO: Method populate Article
@@ -74,7 +74,7 @@ class Pubtator(DatabaseModel):
 
 
 if __name__ == '__main__':
-    print('Start')
+    print('start')
     p = Pubtator('article_mgt')
     p.run()
-    print('END')
+    print('end')

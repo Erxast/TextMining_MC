@@ -39,6 +39,18 @@ class Scispacy(BaseModel):
     word = CharField()
     type = CharField()
 
+    def insert_init_db(self):
+        pass
+
+
+class Gene(BaseModel):
+    id = CharField()
+    name = CharField()
+    uniprot = CharField()
+
+    def insert_init_db(self):
+        pass
+
 
 def get_models_list():
     return [Article,

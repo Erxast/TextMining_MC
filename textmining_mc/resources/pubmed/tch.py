@@ -44,8 +44,8 @@ class Pubmed(DatabaseModel):
 
 
 if __name__ == '__main__':
-    print('Start')
+    print('start')
     p = Pubmed('article_pubmed')
     p.run()
-    print('END')
+    print('end')
 

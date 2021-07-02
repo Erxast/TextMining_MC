@@ -1182,15 +1182,3 @@ def db_pubtator():
 
 db_pubtator()
 
-#
-# def scispacy_test():
-#     nlp = spacy.load("en_core_web_sm")
-#     for anno in Article:
-#         abstract = anno.ab
-#     Abstract =
-#     docSci = nlp(Abstract)
-#     for ent in docSci.ents:
-#         print(ent.text, ent.label_)
-#
-# scispacy_test()
-#

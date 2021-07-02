@@ -1,6 +1,7 @@
 from Bio import Entrez
 
-from textmining_mc.resources.pubtator.model import Article
+from textmining_mc.resources.pubtator.model import Article, Gene
+from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 
 class JointAPI(object):
@@ -112,3 +113,30 @@ class JointAPI(object):
                         date = date + lettre
                         c += 1
             Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
+
+
+class PmidsGene(DatabaseModel):
+
+    def __init__(self, data_name):
+        super().__init__(data_name)
+
+    @staticmethod
+    def get_list_gene_identifier():
+        list_gene_identifier = []
+        query = Gene.select()
+        for gene in query:
+            list_gene_identifier.append(gene.id)
+        print(list_gene_identifier)
+
+    def run(self):
+        self.get_list_gene_identifier()
+
+
+if __name__ == '__main__':
+    print('start')
+    g = PmidsGene('Pmids_gene')
+    g.run()
+    print('end')
+
+
+
