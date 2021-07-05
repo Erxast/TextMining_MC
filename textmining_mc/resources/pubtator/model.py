@@ -1,6 +1,5 @@
 from peewee import Model, CharField, ForeignKeyField
 
-from afac.final import db
 from textmining_mc import database_proxy, logger
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
 

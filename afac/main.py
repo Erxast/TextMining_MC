@@ -1259,9 +1259,9 @@ def annotation_article_mc():
     for article in query:
         article_pmids = str(article.id)
         for annot in Annotation_Pubtator.select().where(Annotation_Pubtator.id == article_pmids):
-            mention = Annotation_Pubtator.mention
-            bioconcept = Annotation_Pubtator.bioconcept
-            identifier = Annotation_Pubtator.identifier
+            mention = annot.mention
+            bioconcept = annot.bioconcept
+            identifier = annot.identifier
             tuple_annot = (article_pmids, mention, bioconcept, identifier)
             list_annotation.append(tuple_annot)
         Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept, Annotation.identifier]).execute()
