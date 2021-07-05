@@ -1,5 +1,6 @@
 from peewee import Model, CharField, ForeignKeyField
 
+from afac.final import db
 from textmining_mc import database_proxy, logger
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
 
@@ -28,7 +29,7 @@ class Annotation(BaseModel):
     pmid = ForeignKeyField(Article, backref='annotation')
     mention = CharField()
     bioconcept = CharField()
-    identifiers = CharField()
+    identifier = CharField()
 
     def insert_init_db(self):
         pass
@@ -38,15 +39,6 @@ class Scispacy(BaseModel):
     pmid = ForeignKeyField(Article, backref='scispacy')
     word = CharField()
     type = CharField()
-
-    def insert_init_db(self):
-        pass
-
-
-class Gene(BaseModel):
-    id = CharField()
-    name = CharField()
-    uniprot = CharField()
 
     def insert_init_db(self):
         pass

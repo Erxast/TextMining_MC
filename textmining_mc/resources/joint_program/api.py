@@ -1,6 +1,7 @@
 from Bio import Entrez
+from peewee import *
 
-from textmining_mc.resources.pubtator.model import Article, Gene
+from textmining_mc.resources.pubtator.model import Article
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 
@@ -120,16 +121,18 @@ class PmidsGene(DatabaseModel):
     def __init__(self, data_name):
         super().__init__(data_name)
 
-    @staticmethod
-    def get_list_gene_identifier():
-        list_gene_identifier = []
-        query = Gene.select()
-        for gene in query:
-            list_gene_identifier.append(gene.id)
-        print(list_gene_identifier)
+    # @staticmethod
+    # def get_list_gene_identifier():
+    #     db = SqliteDatabase('geneID')
+    #     list_gene_identifier = []
+    #     query = Gene.select()
+    #     for gene in query:
+    #         list_gene_identifier.append(gene.id)
+    #     print(list_gene_identifier)
 
     def run(self):
-        self.get_list_gene_identifier()
+        # self.get_list_gene_identifier()
+        pass
 
 
 if __name__ == '__main__':

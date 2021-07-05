@@ -1146,39 +1146,124 @@ def sheesh():
 # sheesh()
 
 
-db = SqliteDatabase('gene_pubtator')
-
-
 class Annotation(Model):
     id = CharField()
     bioconcept = CharField()
     mention = CharField()
     identifier = CharField()
 
+
+# def db_pubtator():
+#     all_l = []
+#     connection = sqlite3.connect('cache.db', timeout=10)
+#     db.create_tables([Annotation])
+#     with open("/Users/hugues.escoffier/Documents/Stage/gene2pubtatorcentral.txt", 'r') as fin:
+#         for line in tqdm(iterable=fin, desc='reading'):
+#             cols = line.strip('\n').split('\t')
+#             a = (cols[0], cols[1], cols[2], cols[3])
+#             all_l.append(a)
+#             if len(all_l) == 990:
+#                 Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
+#                                                       Annotation.mention]).execute()
+#                 all_l.clear()
+#     c = 0
+#     for i in range(0, 1000):
+#         c += 1
+#     Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
+#                                           Annotation.mention]).execute()
+#     db.close()
+#
+#
+# db_pubtator()
+
+
+db = SqliteDatabase('geneID')
+
+
+class Gene(Model):
+    id = CharField()
+    name = CharField()
+    uniprot = CharField()
+
+    class Meta:
+        database = db
+
+        ######## + db annotation pour gene_pubtator ######
+
+db = SqliteDatabase('pmids_gene')
+
+
+class Pmids(Model):
+    id = CharField()
+    gene_id = CharField()
+    gene_name = CharField()
+
     class Meta:
         database = db
 
 
-def db_pubtator():
-    all_l = []
-    connection = sqlite3.connect('cache.db', timeout=10)
-    db.create_tables([Annotation])
-    with open("/Users/hugues.escoffier/Documents/Stage/gene2pubtatorcentral.txt", 'r') as fin:
-        for line in tqdm(iterable=fin, desc='reading'):
-            cols = line.strip('\n').split('\t')
-            a = (cols[0], cols[1], cols[2], cols[3])
-            all_l.append(a)
-            if len(all_l) == 990:
-                Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
-                                                      Annotation.mention]).execute()
-                all_l.clear()
-    c = 0
-    for i in range(0, 1000):
-        c += 1
-    Annotation.insert_many(all_l, fields=[Annotation.id, Annotation.bioconcept, Annotation.identifier,
-                                          Annotation.mention]).execute()
-    db.close()
+def get_list_gene_identifier():
+# Créer un db contenant l'ensemble des pmids d'articles sur le sujet d'un gène impliqué dans un type de MC
+    list_gene_identifier = []
+    list_elmt = []
+    query = Gene.select()
+    for gene in query:
+        list_gene_identifier.append(gene.id)
+    # print(list_gene_identifier)
+#################################################################################
+    for gene_ide in tqdm(iterable=list_gene_identifier, desc='_'):
+        gene_bis = str(gene_ide)
+        query_bis = Annotation.select().where(Annotation.identifier == gene_bis)
+        for elmt in query_bis:
+            pmids = Annotation.id
+            gene_id = elmt
+            gene_name = Annotation.mention
+            tuple_list_id_gene = (pmids, gene_id, gene_name)
+            list_elmt.append(tuple_list_id_gene)
+        Annotation.insert_many(list_elmt, fields=[Pmids.id, Pmids.gene_id, Pmids.gene_name]).execute()
+        list_elmt.clear()
+
+class Annotation_Pubtator(Model):
+    id = CharField()
+    bioconcept = CharField()
+    mention = CharField()
+    identifier = CharField()
 
 
-db_pubtator()
+class Article(Model):
+    id = CharField()
+    title = CharField()
+    date = CharField()
+    type = CharField()
+    abstract = CharField()
+
+    def insert_init_db(self):
+        pass
+
+
+#Sous classe Annotation
+class Annotation(Model):
+    pmid = ForeignKeyField(Article, backref='annotation')
+    mention = CharField()
+    bioconcept = CharField()
+    identifier = CharField()
+
+    def insert_init_db(self):
+        pass
+# get_list_gene_identifier()
+
+
+def annotation_article_mc():
+    list_annotation = []
+    query = Article.select()
+    for article in query:
+        article_pmids = str(article.id)
+        for annot in Annotation_Pubtator.select().where(Annotation_Pubtator.id == article_pmids):
+            mention = Annotation_Pubtator.mention
+            bioconcept = Annotation_Pubtator.bioconcept
+            identifier = Annotation_Pubtator.identifier
+            tuple_annot = (article_pmids, mention, bioconcept, identifier)
+            list_annotation.append(tuple_annot)
+        Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept, Annotation.identifier]).execute()
+        list_annotation.clear()
 
