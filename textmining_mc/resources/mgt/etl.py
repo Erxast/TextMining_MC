@@ -13,24 +13,26 @@ from spacy import displacy
 import requests
 import xmltodict
 
-from textmining_mc import logger, database_proxy
+from textmining_mc import logger, database_proxy, configs
 from textmining_mc.resources.joint_program.api import JointAPI
-from textmining_mc.resources.pubtator.model import create_tables, connect_db, get_models_list, Article, \
+from textmining_mc.resources.model import create_tables, connect_db, get_models_list, Article, \
     Scispacy
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
+from textmining_mc.resources.utils.transfrom_mtd import removal_false_positive, get_scispacy_annotation
 
 
 class Pubtator(DatabaseModel):
 
     def __init__(self, data_name):
-        super().__init__(data_name)
+        self.root_data_path = configs['paths']['data']['root']
+        database_path = os.path.join(self.root_data_path, data_name)
+        super().__init__(database_path)
         # self.__connect_db()
 
-    @staticmethod
-    def process_article_data_mgt():
-        fichier = open('/Users/hugues.escoffier/PycharmProjects/TextMining_MC/data/list_id_mgt.txt', 'r')
+    def process_article_data_mgt(self):
+        fichier = open(os.path.join(self.root_data_path, 'list_id_mgt.txt'), 'r')
         list_mgt = []
         id_ = ""
         for i in fichier.read():
@@ -69,8 +71,8 @@ class Pubtator(DatabaseModel):
         # TODO: Method populate Article
         super().check_or_create_db()
         self.process_article_data_mgt()
-        super().removal_false_positive()
-        super().get_scispacy_annotation()
+        removal_false_positive()
+        get_scispacy_annotation()
 
 
 if __name__ == '__main__':

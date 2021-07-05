@@ -6,13 +6,15 @@ import requests
 
 from textmining_mc import logger, database_proxy
 from textmining_mc.resources.joint_program.api import JointAPI
-from textmining_mc.resources.pubtator.model import get_models_list, Article
+from textmining_mc.resources.model import get_models_list, Article
+from textmining_mc.resources.model import Article as PubArticle
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
-from textmining_mc.resources.utils.superbasemodel import DatabaseModel
+
+from textmining_mc.resources.utils.transfrom_mtd import removal_false_positive, get_scispacy_annotation
 
 
-class Pubmed(DatabaseModel):
+class Pubmed(PM):
 
     def __init__(self, data_name):
         super().__init__(data_name)
@@ -35,12 +37,27 @@ class Pubmed(DatabaseModel):
                 list_id_100.clear()
         JointAPI(list_id_100)
 
+    def get_pubtator_annotation(self):
+        list_annotation = []
+        query = Article.select()
+        for article in query:
+            article_pmids = str(article.id)
+            for annot in Annotation_Pubtator.select().where(Annotation_Pubtator.id == article_pmids):
+                mention = annot.mention
+                bioconcept = annot.bioconcept
+                identifier = annot.identifier
+                tuple_annot = (article_pmids, mention, bioconcept, identifier)
+                list_annotation.append(tuple_annot)
+            Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
+                                                            Annotation.identifier]).execute()
+            list_annotation.clear()
+
     def run(self):
         # TODO: Method populate Article
         super().check_or_create_db()
         self.process_article_data_pubmed()
-        super().removal_false_positive()
-        super().get_scispacy_annotation()
+        removal_false_positive()
+        get_scispacy_annotation()
 
 
 if __name__ == '__main__':

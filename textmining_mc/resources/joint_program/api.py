@@ -1,7 +1,7 @@
 from Bio import Entrez
 from peewee import *
 
-from textmining_mc.resources.pubtator.model import Article
+from textmining_mc.resources.mgt.model import Article
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 

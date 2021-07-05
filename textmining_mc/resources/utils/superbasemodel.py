@@ -4,7 +4,7 @@ import spacy
 
 from tqdm import tqdm
 from textmining_mc import logger, database_proxy
-from textmining_mc.resources.pubtator.model import get_models_list, Article, Scispacy
+from textmining_mc.resources.model import get_models_list
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 
@@ -12,7 +12,7 @@ from textmining_mc.resources.utils.database import connect_proxy_db, create_prox
 class DatabaseModel(object):
     def __init__(self, data_name):
         self.dbh_proxy = None
-        self.database = os.path.join(data_name)
+        self.database = data_name
         self.db_type = 'sqlite'
         self.check_or_create_db()
         self.pmids_list = []
@@ -60,38 +60,3 @@ class DatabaseModel(object):
                                                   name=self.database,
                                                   db_type=self.db_type,
                                                   )
-    @staticmethod
-    def removal_false_positive():
-        """
-        Deletes articles without abstracts
-
-        :return:
-        db
-        """
-        for arti in Article.select():
-            if arti.abstract == "None":
-                arti.delete_instance()
-            elif arti.type != "Journal Article":
-                arti.delete_instance()
-
-    @staticmethod
-    def get_scispacy_annotation():
-        """
-        Add the informations available via the pkg Scispacy
-
-        :return:
-        """
-        nlp = spacy.load("en_core_web_sm")
-        scispacy_annotation = []
-        for elmt in tqdm(iterable=Article.select(), desc='scispacy'):
-            id = elmt.id
-            title = elmt.title
-            sci_title = nlp(title)
-            for i in sci_title.ents:
-                scispacy_annotation.append((id, i.text, i.label_))
-            abstract = elmt.abstract
-            sci_abstract = nlp(abstract)
-            for i in sci_abstract.ents:
-                scispacy_annotation.append((id, i.text, i.label_))
-            Scispacy.insert_many(scispacy_annotation, fields=[Scispacy.pmid, Scispacy.word, Scispacy.type]).execute()
-            scispacy_annotation.clear()

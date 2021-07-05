@@ -5,5 +5,5 @@ biopython==1.77
 peewee==3.14.4
 spacy==3.0.6
 scispacy==0.4.0
-en_core_sci_sm==3.0.0
 pandas==1.2.5
+PyYAML==5.4.1

@@ -1,4 +1,6 @@
-from textmining_mc.resources.pubtator.etl import Pubtator
+from textmining_mc.resources.mgt.etl import Pubtator
 
-p2 = Pubtator()
+print('Main')
+p2 = Pubtator('article_mgt')
 p2.run()
+
