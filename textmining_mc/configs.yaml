@@ -1,0 +1,10 @@
+project: 'TextMining_MC'
+version: '0.1.0'
+project_path:
+paths:
+    project: ''
+    data:
+        root: 'data'
+
+resources:
+    pubtator: ''
