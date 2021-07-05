@@ -604,7 +604,7 @@ def api_pubmed_database():
 
 
 def database_search():
-    # mgt = [['2020', 12], ['2019', 37], ['2018', 29], ['2017', 26], ['2016', 48], ['2015', 42], ['2014', 55], ['2013', 77], ['2012', 51], ['2011', 48], ['2010', 48], ['2009', 42], ['2008', 43], ['2007', 56], ['2006', 53], ['2005', 42], ['2004', 47], ['2003', 54], ['2002', 43], ['2001', 46], ['2000', 35], ['1999', 46], ['1998', 30], ['1997', 31], ['1996', 43], ['1995', 48], ['1994', 31], ['1993', 34], ['1992', 23], ['1991', 17], ['1990', 15], ['1989', 4], ['1988', 6], ['1987', 5], ['1986', 4], ['1984', 1], ['1983', 2], ['1982', 3], ['1981', 1], ['1977', 1], ['1973', 1]]
+    # article = [['2020', 12], ['2019', 37], ['2018', 29], ['2017', 26], ['2016', 48], ['2015', 42], ['2014', 55], ['2013', 77], ['2012', 51], ['2011', 48], ['2010', 48], ['2009', 42], ['2008', 43], ['2007', 56], ['2006', 53], ['2005', 42], ['2004', 47], ['2003', 54], ['2002', 43], ['2001', 46], ['2000', 35], ['1999', 46], ['1998', 30], ['1997', 31], ['1996', 43], ['1995', 48], ['1994', 31], ['1993', 34], ['1992', 23], ['1991', 17], ['1990', 15], ['1989', 4], ['1988', 6], ['1987', 5], ['1986', 4], ['1984', 1], ['1983', 2], ['1982', 3], ['1981', 1], ['1977', 1], ['1973', 1]]
     # pubmed = [['2021', 908], ['2020', 281], ['2019', 327], ['2018', 295], ['2017', 296], ['2016', 280], ['2015', 289], ['2014', 315], ['2013', 308], ['2012', 238], ['2011', 243], ['2010', 216], ['2009', 188], ['2008', 191], ['2007', 184], ['2006', 180], ['2005', 184], ['2004', 161], ['2003', 179], ['2002', 156], ['2001', 144], ['2000', 156], ['1999', 145], ['1998', 158], ['1997', 143], ['1996', 132], ['1995', 136], ['1994', 90], ['1993', 120], ['1992', 90], ['1991', 107], ['1990', 93], ['1989', 82], ['1988', 68], ['1987', 79], ['1986', 81], ['1985', 99], ['1984', 77], ['1983', 80], ['1982', 54], ['1981', 55], ['1980', 58], ['1979', 39], ['1978', 48], ['1977', 45], ['1976', 40], ['1975', 46], ['1974', 3], ['1973', 3], ['1971', 5], ['1963', 1], ['1962', 1], ['1952', 1]]
     db = SqliteDatabase('article_pubmed.db')
 
@@ -1009,7 +1009,7 @@ def pubtator_():
     db.create_tables([Article, Annotation])
 
 
-    #On recup. l'ensemble des IDs de la db de mgt
+    #On recup. l'ensemble des IDs de la db de article
     query = Article.select()
     liste_id = []
     for arti in query:
@@ -1209,7 +1209,6 @@ def get_list_gene_identifier():
     query = Gene.select()
     for gene in query:
         list_gene_identifier.append(gene.id)
-    # print(list_gene_identifier)
 #################################################################################
     for gene_ide in tqdm(iterable=list_gene_identifier, desc='_'):
         gene_bis = str(gene_ide)
@@ -1223,7 +1222,8 @@ def get_list_gene_identifier():
         Annotation.insert_many(list_elmt, fields=[Pmids.id, Pmids.gene_id, Pmids.gene_name]).execute()
         list_elmt.clear()
 
-class Annotation_Pubtator(Model):
+
+class AnnotationPubtator(Model):
     id = CharField()
     bioconcept = CharField()
     mention = CharField()
@@ -1258,7 +1258,7 @@ def annotation_article_mc():
     query = Article.select()
     for article in query:
         article_pmids = str(article.id)
-        for annot in Annotation_Pubtator.select().where(Annotation_Pubtator.id == article_pmids):
+        for annot in AnnotationPubtator.select().where(AnnotationPubtator.id == article_pmids):
             mention = annot.mention
             bioconcept = annot.bioconcept
             identifier = annot.identifier
@@ -1267,3 +1267,17 @@ def annotation_article_mc():
         Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept, Annotation.identifier]).execute()
         list_annotation.clear()
 
+        # def get_pubtator_annotation(self):
+        #     list_annotation = []
+        #     query = Article.select()
+        #     for article in query:
+        #         article_pmids = str(article.id)
+        #         for annot in Annotation_Pubtator.select().where(Annotation_Pubtator.id == article_pmids):
+        #             mention = annot.mention
+        #             bioconcept = annot.bioconcept
+        #             identifier = annot.identifier
+        #             tuple_annot = (article_pmids, mention, bioconcept, identifier)
+        #             list_annotation.append(tuple_annot)
+        #         Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
+        #                                                         Annotation.identifier]).execute()
+        #         list_annotation.clear()

@@ -4,7 +4,7 @@ from tqdm import tqdm
 from Bio import Entrez
 from peewee import *
 
-from textmining_mc.resources.mgt.model import Article
+from textmining_mc.resources.article.model import Article
 
 
 def api_pubmed_database():
@@ -329,7 +329,6 @@ class Annotation(Model):
 
     class Meta:
         database = db
-
 
 
 def db_pubtator():
