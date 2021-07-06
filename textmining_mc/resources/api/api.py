@@ -5,7 +5,7 @@ from textmining_mc.resources.model import Article
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 
-class JointAPI(object):
+class API(object):
 
     def __init__(self, pmids_list, source):
         self.pmids_list = pmids_list
@@ -115,6 +115,7 @@ class JointAPI(object):
                         date = date + lettre
                         c += 1
             Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract, source=self.source)
+
 
 
 
