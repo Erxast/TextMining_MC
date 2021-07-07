@@ -72,18 +72,27 @@ def get_pubtator_annotation():
 
     :return:
     """
+    count = 0
     list_article_id = []
     list_annotation = []
     query = Article.select()
     for article in query:
-        list_article_id.append(article.id)
-    for art_id in tqdm(iterable=list_article_id, desc='annotation'):
-        for annot in AllAnnotation.select().where(AllAnnotation.id == str(art_id)):
-            mention = annot.mention
-            bioconcept = annot.bioconcept
-            identifier = annot.identifier
-            tuple_annot = (str(art_id), mention, bioconcept, identifier)
-            list_annotation.append(tuple_annot)
-        Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
-                                                        Annotation.identifier]).execute()
-        list_annotation.clear()
+        list_article_id.append(str(article.id))
+    # for art_id in tqdm(iterable=list_article_id, desc='annotation'):
+    print('ok')
+    for annot in AllAnnotation.select().where(AllAnnotation.id.in_(list_article_id)):
+        pmid = annot.id
+        mention = annot.mention
+        bioconcept = annot.bioconcept
+        identifier = annot.identifier
+        tuple_annot = (pmid, mention, bioconcept, identifier)
+        list_annotation.append(tuple_annot)
+        count += 1
+        if count == 10000:
+            print('insert')
+            Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
+                                                    Annotation.identifier]).execute()
+            list_annotation.clear()
+            count = 0
+    Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
+                                                    Annotation.identifier]).execute()

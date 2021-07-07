@@ -101,11 +101,53 @@ db_f.create_tables([FArticle,
                     FAnnotation,
                     FScispacy])
 
+
+"""
+NArticle/NAnnotation/NScispacy correspond a la db contenant le negative set
+"""
+
+db_n = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'article_negative'))
+
+
+class NArticle(Model):
+    id = CharField()
+    title = CharField()
+    date = CharField()
+    type = CharField()
+    abstract = CharField()
+    source = CharField()
+
+    class Meta:
+        database = db_n
+
+
+class NAnnotation(Model):
+    pmid = ForeignKeyField(FArticle, backref='annotation')
+    mention = CharField()
+    bioconcept = CharField()
+    identifier = CharField()
+
+    class Meta:
+        database = db_n
+
+
+class NScispacy(Model):
+    pmid = ForeignKeyField(FArticle, backref='scispacy')
+    word = CharField()
+    type = CharField()
+
+    class Meta:
+        database = db_n
+
+
+db_n.create_tables([NArticle,
+                    NAnnotation,
+                    NScispacy])
 """
 AllAnnotation est la db qui contient l'ensemble des annotations pubtator sur les gènes 
 """
 
-db = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'gene_pubtator'))
+db = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'all_annotation'))
 
 
 class AllAnnotation(Model):
