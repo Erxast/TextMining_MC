@@ -1,6 +1,8 @@
+import os
+
 from peewee import Model, CharField, ForeignKeyField, SqliteDatabase
 
-from textmining_mc import database_proxy, logger
+from textmining_mc import database_proxy, logger, configs
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
 
 DEBUG = True
@@ -61,7 +63,7 @@ def get_models_list():
 FArticle/FAnnotation/FScispacy sont la db contenant les articles sur les gènes impliquées dans les MC 
 """
 
-db_f = SqliteDatabase('/Users/hugues.escoffier/PycharmProjects/data/TextMining_MC_data/article_joint')
+db_f = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'article_joint'))
 
 
 class FArticle(Model):
@@ -103,7 +105,7 @@ db_f.create_tables([FArticle,
 AllAnnotation est la db qui contient l'ensemble des annotations pubtator sur les gènes 
 """
 
-db = SqliteDatabase('/Users/hugues.escoffier/PycharmProjects/data/TextMining_MC_data/gene_pubtator')
+db = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'gene_pubtator'))
 
 
 class AllAnnotation(Model):
@@ -120,7 +122,7 @@ class AllAnnotation(Model):
 Gene contient les 45 gènes impliquées dans les MC 
 """
 
-db_s = SqliteDatabase('/Users/hugues.escoffier/PycharmProjects/data/TextMining_MC_data/geneID')
+db_s = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'geneID'))
 
 
 class Gene(Model):
@@ -136,7 +138,7 @@ class Gene(Model):
 PmidsGene contient l'ensemble des pmids des articles qui traitent d'un gène impliqué dans les MC 
 """
 
-db_t = SqliteDatabase('/Users/hugues.escoffier/PycharmProjects/data/TextMining_MC_data/pmids_gene')
+db_t = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'pmids_gene'))
 
 
 class PmidsGene(Model):

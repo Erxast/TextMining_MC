@@ -5,6 +5,7 @@ paths:
     project: ''
     data:
         root: 'data'
+        pubmed : 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/'
 
 resources:
     pubtator: ''
