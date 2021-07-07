@@ -21,7 +21,7 @@ from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 from textmining_mc.resources.utils.transform_mtd import removal_false_positive, get_scispacy_annotation, \
-    get_pubtator_annotation
+    get_pubtator_annotation, spacy_frequency
 
 
 class AllArticle(DatabaseModel):
@@ -138,7 +138,8 @@ class AllArticle(DatabaseModel):
         # self.process_article_data_pubmed()
         # removal_false_positive()
         # get_pubtator_annotation()
-        self.intersection()
+        # self.intersection()
+        spacy_frequency()
 
 
 if __name__ == '__main__':

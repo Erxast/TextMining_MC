@@ -2,6 +2,7 @@ import spacy
 from peewee import SqliteDatabase
 from tqdm import tqdm
 import sqlite3
+from collections import Counter
 
 from textmining_mc.resources.model import Article, Scispacy, Gene, AllAnnotation, PmidsGene, Annotation
 
@@ -96,3 +97,25 @@ def get_pubtator_annotation():
             count = 0
     Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
                                                     Annotation.identifier]).execute()
+
+
+def spacy_frequency():
+    nlp = spacy.load("en_core_web_sm")
+    list_word = []
+    count = 0
+    for article in Article.select():
+        count += 1
+        doc_title = nlp(article.title)
+        doc_abstract = nlp(article.abstract)
+        for token in doc_title:
+            if not token.is_stop and not token.is_punct:
+                list_word.append(token.text)
+        for token in doc_abstract:
+            if not token.is_stop and not token.is_punct:
+                list_word.append(token.text)
+        if count == 100:
+            break
+    word_freq = Counter(list_word)
+    print(word_freq)
+    most_common = word_freq.most_common(10)
+    print(most_common)
