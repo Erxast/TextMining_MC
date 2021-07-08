@@ -6,11 +6,11 @@ from tqdm import tqdm
 from textmining_mc.resources.model import Article, NArticle, AllAnnotation, NAnnotation
 from textmining_mc.resources.utils import database
 
-
 """ 
 Problème avec la connection au proxy de la banque Article. 
 
 """
+
 
 class NegativeSet(object):
     def __init__(self):
@@ -131,7 +131,9 @@ class NegativeSet(object):
                             list_article_per_y.append(tuple_article)
                             compteur_article_annee += 1
                         if compteur_article_annee == 1000:
-                            NArticle.insert_many(list_article_per_y, fields=[NArticle.id, NArticle.title, NArticle.date, NArticle.type, NArticle.abstract, NArticle.source])
+                            NArticle.insert_many(list_article_per_y,
+                                                 fields=[NArticle.id, NArticle.title, NArticle.date, NArticle.type,
+                                                         NArticle.abstract, NArticle.source])
                             list_article_per_y.clear()
                             OK = 'True'
                             break
@@ -162,12 +164,12 @@ class NegativeSet(object):
             if count == 10000:
                 print('insert')
                 NAnnotation.insert_many(list_annotation,
-                                       fields=[NAnnotation.pmid, NAnnotation.mention, NAnnotation.bioconcept,
-                                               NAnnotation.identifier]).execute()
+                                        fields=[NAnnotation.pmid, NAnnotation.mention, NAnnotation.bioconcept,
+                                                NAnnotation.identifier]).execute()
                 list_annotation.clear()
                 count = 0
         NAnnotation.insert_many(list_annotation, fields=[NAnnotation.pmid, NAnnotation.mention, NAnnotation.bioconcept,
-                                                        NAnnotation.identifier]).execute()
+                                                         NAnnotation.identifier]).execute()
 
     def run(self):
         self.count_years()
@@ -179,5 +181,3 @@ if __name__ == '__main__':
     print('start')
     NegativeSet().run()
     print('end')
-
-

@@ -23,7 +23,7 @@ def removal_false_positive():
 
 def get_scispacy_annotation():
     """
-    Add the informations available via the pkg Scispacy
+    Add the informations available via the pkg Scispacy for all_article db
 
     :return:
     """
@@ -69,7 +69,7 @@ def get_list_gene_identifier():
 
 def get_pubtator_annotation():
     """
-    Annotate all articles via Pubtator annotations
+    Annotate all articles via Pubtator annotations for all_annotation db
 
     :return:
     """
@@ -100,11 +100,14 @@ def get_pubtator_annotation():
 
 
 def spacy_frequency():
+    """
+
+    Returns:
+
+    """
     nlp = spacy.load("en_core_web_sm")
     list_word = []
-    count = 0
     for article in Article.select():
-        count += 1
         doc_title = nlp(article.title)
         doc_abstract = nlp(article.abstract)
         for token in doc_title:
@@ -113,9 +116,5 @@ def spacy_frequency():
         for token in doc_abstract:
             if not token.is_stop and not token.is_punct:
                 list_word.append(token.text)
-        if count == 100:
-            break
     word_freq = Counter(list_word)
     print(word_freq)
-    most_common = word_freq.most_common(10)
-    print(most_common)

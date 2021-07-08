@@ -16,6 +16,7 @@ class BaseModel(Model):
     class Meta:
         database = database_proxy  # Use proxy for our DB.
 
+
 """
 Article/Annotation/Scispacy sont la db utilisée pour traiter l'ensemble des articles
 """
@@ -33,7 +34,7 @@ class Article(BaseModel):
         pass
 
 
-#Sous classe Annotation
+# Sous classe Annotation
 class Annotation(BaseModel):
     pmid = ForeignKeyField(Article, backref='annotation')
     mention = CharField()
@@ -173,7 +174,7 @@ class Gene(Model):
     uniprot = CharField()
 
     class Meta:
-         database = db_s
+        database = db_s
 
 
 """
