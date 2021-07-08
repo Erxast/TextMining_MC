@@ -4,6 +4,7 @@ from tqdm import tqdm
 from Bio import Entrez
 from peewee import *
 
+from textmining_mc.resources.model import Article
 
 
 def api_pubmed_database():

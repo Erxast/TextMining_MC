@@ -1214,7 +1214,7 @@ def db_pubtator():
     db.close()
 
 
-db_pubtator()
+#db_pubtator()
 #
 #
 # db = SqliteDatabase('geneID')
@@ -1329,3 +1329,8 @@ db_pubtator()
 #
 #
 # #afac()
+
+def afac():
+    print('test')
+
+afac()

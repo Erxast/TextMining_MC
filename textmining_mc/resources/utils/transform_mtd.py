@@ -104,6 +104,7 @@ def spacy_frequency():
 
     Returns:
 
+    pprint(dict_word)
     """
     nlp = spacy.load("en_core_web_sm")
     list_word = []
@@ -117,4 +118,4 @@ def spacy_frequency():
             if not token.is_stop and not token.is_punct:
                 list_word.append(token.text)
     word_freq = Counter(list_word)
-    print(word_freq)
+

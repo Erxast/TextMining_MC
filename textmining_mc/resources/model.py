@@ -4,6 +4,7 @@ from peewee import Model, CharField, ForeignKeyField, SqliteDatabase
 
 from textmining_mc import database_proxy, logger, configs
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
+from textmining_mc import configs
 
 DEBUG = True
 
@@ -20,6 +21,8 @@ class BaseModel(Model):
 """
 Article/Annotation/Scispacy sont la db utilisée pour traiter l'ensemble des articles
 """
+
+db_all = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'article'))
 
 
 class Article(BaseModel):
