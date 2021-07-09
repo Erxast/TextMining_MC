@@ -1,9 +1,13 @@
+import os
+
+import pandas
 import spacy
 from peewee import SqliteDatabase
 from tqdm import tqdm
 import sqlite3
 from collections import Counter
 
+from textmining_mc import configs
 from textmining_mc.resources.model import Article, Scispacy, Gene, AllAnnotation, PmidsGene, Annotation
 
 
@@ -99,23 +103,11 @@ def get_pubtator_annotation():
                                                     Annotation.identifier]).execute()
 
 
-def spacy_frequency():
-    """
+def spacy_ps_ns():
+    df_ns = pandas.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ns_csv'))
+    df_ps = pandas.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ps_csv'))
+    for word, count in df_ps.items():
+        print(count)
 
-    Returns:
 
-    pprint(dict_word)
-    """
-    nlp = spacy.load("en_core_web_sm")
-    list_word = []
-    for article in Article.select():
-        doc_title = nlp(article.title)
-        doc_abstract = nlp(article.abstract)
-        for token in doc_title:
-            if not token.is_stop and not token.is_punct:
-                list_word.append(token.text)
-        for token in doc_abstract:
-            if not token.is_stop and not token.is_punct:
-                list_word.append(token.text)
-    word_freq = Counter(list_word)
-
+spacy_ps_ns()

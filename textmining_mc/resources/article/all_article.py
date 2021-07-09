@@ -1,5 +1,6 @@
 import json
 import os
+from collections import Counter
 from pprint import pprint
 import random
 
@@ -7,7 +8,9 @@ import scispacy
 import spacy
 from Bio import Entrez
 from spacy import displacy
-import pandas
+import pandas as pd
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
 
 from peewee import SqliteDatabase
 from tqdm import tqdm
@@ -26,7 +29,7 @@ from textmining_mc.resources.utils.database import connect_proxy_db, create_prox
 from textmining_mc.resources.model import PmidsGene, Article, FArticle, Annotation, FAnnotation
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 from textmining_mc.resources.utils.transform_mtd import removal_false_positive, get_scispacy_annotation, \
-    get_pubtator_annotation, spacy_frequency
+    get_pubtator_annotation
 
 
 class AllArticle(DatabaseModel):
@@ -257,6 +260,40 @@ class AllArticle(DatabaseModel):
                             break
         print('selection_article_end')
 
+    def ps_spacy_frequency(self):
+        """
+
+        Returns:
+
+        pprint(dict_word)
+        """
+        nlp = spacy.load("en_core_web_sm")
+        list_word = []
+        for article in Article.select():
+            doc_title = nlp(article.title)
+            doc_abstract = nlp(article.abstract)
+            for token in doc_title:
+                if not token.is_stop and not token.is_punct and not token.like_num:
+                    list_word.append(token.lemma_)
+            for token in doc_abstract:
+                if not token.is_stop and not token.is_punct and not token.like_num:
+                    list_word.append(token.lemma_)
+        word_freq = Counter(list_word)
+        dataframe_word = pd.DataFrame.from_dict(word_freq, orient='index').reset_index()
+        self.dataframe_word = dataframe_word.rename(columns={'index': 'word', 0: 'counts'})
+        self.dataframe_word.to_csv(path_or_buf=os.path.join(configs['paths']['data']['root'], 'df_ps_csv'), index=False)
+
+    def ps_wordcloud(self):
+        d = {}
+        for a, x in self.dataframe_word.values:
+            d[a] = x
+        wordcloud = WordCloud(background_color='white')
+        wordcloud.generate_from_frequencies(frequencies=d)
+        plt.figure()
+        plt.imshow(wordcloud, interpolation="bilinear")
+        plt.axis("off")
+        plt.show()
+
     def run(self):
         # # TODO: Method populate Article
         super().check_or_create_db()
@@ -265,7 +302,8 @@ class AllArticle(DatabaseModel):
         # removal_false_positive()
         # get_pubtator_annotation()
         # self.intersection()
-        # spacy_frequency()
+        self.ps_spacy_frequency()
+        # self.ps_wordcloud()
         # self.negative_set()
 
 
