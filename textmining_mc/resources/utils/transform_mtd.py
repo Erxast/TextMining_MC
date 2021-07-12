@@ -1,11 +1,14 @@
 import os
 
-import pandas
+import pandas as pd
 import spacy
+from matplotlib import pyplot as plt
 from peewee import SqliteDatabase
 from tqdm import tqdm
 import sqlite3
 from collections import Counter
+
+from wordcloud import WordCloud
 
 from textmining_mc import configs
 from textmining_mc.resources.model import Article, Scispacy, Gene, AllAnnotation, PmidsGene, Annotation
@@ -104,10 +107,44 @@ def get_pubtator_annotation():
 
 
 def spacy_ps_ns():
-    df_ns = pandas.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ns_csv'))
-    df_ps = pandas.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ps_csv'))
-    for word, count in df_ps.items():
-        print(count)
+    df_ns = pd.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ns_csv'))
+    df_ps = pd.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_ps_csv'))
+    list_ps = []
+    list_ns = []
+    list_joint = []
+    dict_joint = {}
+    for word, count in df_ps.values:
+        list_ps.append(word)
+    for word, count in df_ns.values:
+        list_ns.append(word)
+    for ite in tqdm(iterable=list_ps, desc='common'):
+        if ite not in list_ns:
+            list_joint.append(ite)
+    for ite in tqdm(iterable=list_joint, desc='add_to_df'):
+        for word, count in df_ps.values:
+            if word == ite:
+                dict_joint[word] = count
+                break
+    dataframe_joint = pd.DataFrame.from_dict(dict_joint, orient='index').reset_index()
+    dataframe_joint = dataframe_joint.rename(columns={'index': 'word', 0: 'counts'})
+    dataframe_joint.to_csv(path_or_buf=os.path.join(configs['paths']['data']['root'], 'df_joint_csv'), index=False)
 
 
-spacy_ps_ns()
+# spacy_ps_ns()
+
+
+def joint_wordcloud():
+    df = pd.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_joint_csv'))
+    d = {}
+    for a, x in df.values:
+        d[a] = x
+    wordcloud = WordCloud(background_color='white')
+    wordcloud.generate_from_frequencies(frequencies=d)
+    plt.figure()
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
+
+
+# joint_wordcloud()
+

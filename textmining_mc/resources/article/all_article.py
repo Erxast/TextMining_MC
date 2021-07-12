@@ -66,7 +66,7 @@ class AllArticle(DatabaseModel):
     @staticmethod
     def process_article_data_pubmed():
         rob = requests.get(os.path.join(configs['paths']['data']['pubmed'],
-                                        'esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]&retmode=json&usehistory=y'))
+                                        'esearch.fcgi/?db=pubmed&term=congenital+myopathy+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y'))
         query_key = rob.json()['esearchresult']['querykey']
         web_env = rob.json()['esearchresult']['webenv']
         urlsearch = os.path.join(configs['paths']['data']['pubmed'], 'esearch.fcgi?db=pubmed&query_key=' + str(
@@ -99,7 +99,6 @@ class AllArticle(DatabaseModel):
         for i in list_pmids_gene:
             if i in list_pmids_mc:
                 list_joint_pmids.append(i)
-        print(len(list_joint_pmids))
         print('start_article')
         for article in Article.select().where(Article.id.in_(list_joint_pmids)):
             count_article += 1
@@ -295,16 +294,16 @@ class AllArticle(DatabaseModel):
         plt.show()
 
     def run(self):
-        # # TODO: Method populate Article
+        # TODO: Method populate Article
         super().check_or_create_db()
-        # self.process_article_data_mgt()
-        # self.process_article_data_pubmed()
-        # removal_false_positive()
-        # get_pubtator_annotation()
-        # self.intersection()
-        self.ps_spacy_frequency()
+        self.process_article_data_mgt()
+        self.process_article_data_pubmed()
+        removal_false_positive()
+        get_pubtator_annotation()
+        self.intersection()
+        # self.ps_spacy_frequency()
         # self.ps_wordcloud()
-        # self.negative_set()
+        self.negative_set()
 
 
 if __name__ == '__main__':
