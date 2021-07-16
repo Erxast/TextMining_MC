@@ -88,6 +88,7 @@ def get_pubtator_annotation():
         list_article_id.append(str(article.id))
     # for art_id in tqdm(iterable=list_article_id, desc='annotation'):
     print('ok')
+    i = 0
     for annot in AllAnnotation.select().where(AllAnnotation.id.in_(list_article_id)):
         pmid = annot.id
         mention = annot.mention
@@ -134,7 +135,7 @@ def spacy_ps_ns():
 
 
 def joint_wordcloud():
-    df = pd.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_joint_csv'))
+    df = pd.read_csv(filepath_or_buffer=os.path.join(configs['paths']['data']['root'], 'df_joint_bis_csv'))
     d = {}
     for a, x in df.values:
         d[a] = x

@@ -92,8 +92,8 @@ class NegativeSet(object):
     def run(self):
         # self.count_years()
         # self.selection_article()
-        # self.annotation_article()
-        self.spacy_frequency_neg()
+        self.annotation_article()
+        # self.spacy_frequency_neg()
         # self.ns_wordcloud()
 
 

@@ -7,9 +7,10 @@ from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 class API(object):
 
-    def __init__(self, pmids_list, source):
+    def __init__(self, pmids_list, source, keyword):
         self.pmids_list = pmids_list
         self.source = source
+        self.keyword = keyword
         self.records = dict()
         self.records_list = list() #Corresponds to a dictionary list
         self.efetch()
@@ -114,7 +115,7 @@ class API(object):
                             break
                         date = date + lettre
                         c += 1
-            Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract, source=self.source)
+            Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract, source=self.source, keyword=self.keyword)
 
 
 

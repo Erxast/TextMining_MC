@@ -1,6 +1,6 @@
 import os
 
-from peewee import Model, CharField, ForeignKeyField, SqliteDatabase
+from peewee import Model, CharField, ForeignKeyField, IntegerField, SqliteDatabase
 
 from textmining_mc import database_proxy, logger, configs
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables, drop_proxy_db_tables
@@ -32,6 +32,7 @@ class Article(BaseModel):
     type = CharField()
     abstract = CharField()
     source = CharField()
+    keyword = CharField()
 
     def insert_init_db(self):
         pass
@@ -198,6 +199,24 @@ class PmidsGene(Model):
 
 db_t.create_tables([PmidsGene])
 
+"""
+KeywordAnnotation stock les identifiants des genes et des maladies ainsi que leurs nobmre d'occurence
+"""
+
+db_k = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'keyword'))
+
+
+class KeywordAnnotation(Model):
+    keyword = CharField()
+    bioconcept = CharField()
+    identifier = CharField()
+    count = IntegerField()
+
+    class Meta:
+        database = db_k
+
+
+db_k.create_tables([KeywordAnnotation])
 
 def connect_db(name=database_proxy, db_type='sqlite',):
     connect_proxy_db(proxy=database_proxy, name=name, db_type=db_type)

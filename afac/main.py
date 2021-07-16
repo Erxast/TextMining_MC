@@ -1457,3 +1457,203 @@ def afac():
     #                         OK = 'True'
     #                         break
     #     print('selection_article_end')
+
+def api_pubmed_database():
+    ###############################################################################################################################################
+    # Request_for_QK_&_WE
+    rob = requests.get(
+        'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=atrophy+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y')
+    # print(rob.status_code)
+    query_key = rob.json()['esearchresult']['querykey']
+    web_env = rob.json()['esearchresult']['webenv']
+    # print('query_key=', query_key)
+    # print('web_env=', web_env)
+    # Request_for_list_of_ID
+    urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
+        query_key) + "&WebEnv=" + str(web_env) + "&retmax=10000&usehistory=y&retmode=json"
+    print(urlsearch)
+    print('###########')
+    rsearch = requests.get(urlsearch)
+    print(rsearch)
+    print('###########')
+    # Declaration_V
+    id_all = rsearch.json()['esearchresult']['idlist']
+    print(id_all)
+    print('###########')
+    ###############################################################################################################################################
+    list_id_100 = []
+    #####################################################################################################################
+    # for elmt in tqdm(iterable=id_all, desc='creation_'):
+    #     if len(list_id_100) == 100:
+    #         Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+    #         handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
+    #         records = Entrez.read(handle)
+    #         print(records)
+    #         ##################################################################################################################################
+    #         data_ = records["PubmedArticle"]
+    #         if len(data_) != len(list_id_100):
+    #             for i in range(len(list_id_100) - len(data_)):
+    #                 Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
+    #                 list_id_100.remove(Id_unwanted)
+    #         ##################################################################################################################################
+    #         for i in range(len(list_id_100)):
+    #             try:
+    #                 abstract_ = ''.join(
+    #                     records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+    #             except:
+    #                 abstract_ = "None"
+    #             title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+    #             publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"][
+    #                 "PublicationTypeList"]
+    #             if len(publication_type_list) != 1:
+    #                 z = 0
+    #                 for y in range(len(publication_type_list)):
+    #                     if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"][
+    #                                    y]) == "Journal Article":
+    #                         publication_type_ = "Journal Article"
+    #                         z = 1
+    #                 if z == 0:
+    #                     publication_type_ = "Other"
+    #             else:
+    #                 publication_type_ = ''.join(
+    #                     records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+    #             try:
+    #                 date_ = ''.join(
+    #                     records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+    #                         "PubDate"]["Year"])
+    #             except:
+    #                 try:
+    #                     date_ = ''.join(
+    #                         records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+    #                 except:
+    #                     complete_date_ = ''.join(
+    #                         records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+    #                             "PubDate"]["MedlineDate"])
+    #                     date_ = ''
+    #                     c = 0
+    #                     for lettre in complete_date_:
+    #                         if c == 4:
+    #                             break
+    #                         date_ = date_ + lettre
+    #                         c += 1
+    #             # Add_to_db
+    #             article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_,
+    #                                      abstract=abstract_)
+    #         ###############################################################################################################################################
+    #         list_id_100.clear()
+    #         list_id_100.append(elmt)
+    #
+    #     else:
+    #         list_id_100.append(elmt)
+    #
+    # # Treatment_last_A
+    # for i in range(len(list_id_100)):
+    #     Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+    #     handle = Entrez.efetch(db="pubmed", id=list_id_100, retmode="xml", rettype="abstract")
+    #     records = Entrez.read(handle)
+    #     ########################################################################################################
+    #     data_ = records["PubmedArticle"]
+    #     if len(data_) != len(list_id_100):
+    #         for i in range(len(list_id_100) - len(data_)):
+    #             Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
+    #             list_id_100.remove(Id_unwanted)
+    #     try:
+    #         abstract_ = ''.join(
+    #             records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+    #     except:
+    #         abstract_ = "None"
+    #         # print(list_id_50[i])
+    #     title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+    #     publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"]
+    #     if len(publication_type_list) != 1:
+    #         z = 0
+    #         for y in range(len(publication_type_list)):
+    #             if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"][
+    #                            y]) == "Journal Article":
+    #                 publication_type_ = "Journal Article"
+    #                 z = 1
+    #         if z == 0:
+    #             publication_type_ = "Other"
+    #     else:
+    #         publication_type_ = ''.join(
+    #             records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+    #     try:
+    #         date_ = ''.join(
+    #             records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"][
+    #                 "Year"])
+    #     except:
+    #         try:
+    #             date_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+    #         except:
+    #             complete_date_ = ''.join(
+    #                 records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"]["PubDate"][
+    #                     "MedlineDate"])
+    #             date_ = ''
+    #             c = 0
+    #             for lettre in complete_date_:
+    #                 if c == 4:
+    #                     break
+    #                 date_ = date_ + lettre
+    #                 c += 1
+    #     # Add_to_db
+    #     article = Article.create(id=list_id_100[i], title=title_, date=date_, type=publication_type_,
+    #                              abstract=abstract_)
+    # #     #Del_false_positive
+    # for arti in Article.select():
+    #     if arti.abstract == "None":
+    #         arti.delete_instance()
+    #     elif arti.type != "Journal Article":
+    #         arti.delete_instance()
+    # db.close()
+
+# api_pubmed_database()
+
+
+def count_per_keyword():
+    fichier = open('Histological Terms.txt', 'r')
+    list_word = []
+    word = ""
+    for i in fichier.read():
+        if i == "\n":
+            list_word.append(word)
+            word = ""
+        elif i == " ":
+            word = word + '+'
+        else:
+            word = word + i
+    list_word.append(word)
+    fichier.close()
+    for elmt in list_word:
+        # Request_for_QK_&_WE
+        rob = requests.get('https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term='+ str(elmt) + '+congenital+myopathy+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y')
+        count = rob.json()['esearchresult']['count']
+        print(elmt, '= ', count)
+        if count == 0:
+            break
+        query_key = rob.json()['esearchresult']['querykey']
+        web_env = rob.json()['esearchresult']['webenv']
+        # Request_for_list_of_ID
+        urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(query_key) + "&WebEnv=" + str(web_env) + "&retmax=10000&usehistory=y&retmode=json"
+        # print(urlsearch)
+        rsearch = requests.get(urlsearch)
+        # print(rsearch)
+        # id_keyword = rsearch.json()['esearchresult']['idlist']
+        # list_pmids_100 = []
+        # for pmids in tqdm(iterable=id_keyword, desc=str(elmt)):
+        #     list_pmids_100.append(pmids)
+        #     if len(list_pmids_100) == 100:
+        #         # API(list_pmids_100, source, keyword)
+        #         list_pmids_100.clear()
+        #     # API(list_pmids_100, source, keyword)
+
+
+
+
+    # print('###########')
+    # # Declaration_V
+    # id_all = rsearch.json()['esearchresult']['idlist']
+    # print(id_all)
+    # print('###########')
+
+
+count_per_keyword()
