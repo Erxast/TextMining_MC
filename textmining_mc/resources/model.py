@@ -32,6 +32,8 @@ class HistopathKw(Model):
     category = CharField()
     histological_feature = CharField()
 
+    class Meta:
+        database = db_all
 
     def insert_init_db(self):
         pass
@@ -43,6 +45,9 @@ class KwSynonyms(Model):
     id_histopath_kw = ForeignKeyField(HistopathKw, backref='kw_synonyms')
     alias = CharField()
 
+    class Meta:
+        database = db_all
+
     def insert_init_db(self):
         pass
 
@@ -51,6 +56,9 @@ class KwSynonyms(Model):
 class ArticleKw(Model):
     id_article = CharField()
     id_histopath = ForeignKeyField(HistopathKw, backref='pmid_article')
+
+    class Meta:
+        database = db_all
 
     def insert_init_db(self):
         pass
@@ -65,6 +73,9 @@ class Article(Model):
     abstract = CharField()
     source = CharField()
 
+    class Meta:
+        database = db_all
+
     def insert_init_db(self):
         pass
 
@@ -76,6 +87,8 @@ class ArticleAnnotation(Model):
     bioconcept = CharField()
     identifier = CharField()
 
+    class Meta:
+        database = db_all
 
     def insert_init_db(self):
         pass
@@ -90,13 +103,18 @@ class ArticleAnnotation(Model):
 #         pass
 
 
-def get_models_list():
-    return [HistopathKw,
-            KwSynonyms,
-            ArticleKw,
-            Article,
-            ArticleAnnotation]
+# def get_models_list():
+#     return [HistopathKw,
+#             KwSynonyms,
+#             ArticleKw,
+#             Article,
+#             ArticleAnnotation]
 
+db_all.create_tables([HistopathKw,
+                      KwSynonyms,
+                      ArticleKw,
+                      Article,
+                      ArticleAnnotation])
 
 """
 FArticle/FAnnotation/FScispacy sont la db contenant les articles sur les gènes impliquées dans les MC 

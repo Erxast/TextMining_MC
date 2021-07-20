@@ -466,7 +466,7 @@ class AllArticle(DatabaseModel):
 
     def run(self):
         # TODO: Method populate Article
-        super().check_or_create_db()
+        # super().check_or_create_db()
         self.article_per_keyword()
         # # self.process_article_data_mgt()
         # # self.process_article_data_pubmed()
