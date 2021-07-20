@@ -19,49 +19,83 @@ class BaseModel(Model):
 
 
 """
-Article/Annotation/Scispacy sont la db utilisée pour traiter l'ensemble des articles
+
 """
 
-db_all = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'article'))
+db_all = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'project'))
 
 
-class Article(BaseModel):
-    id = CharField()
+# KW
+class HistopathKw(Model):
+    # id = CharField()
+    name = CharField()
+    category = CharField()
+    histological_feature = CharField()
+
+
+    def insert_init_db(self):
+        pass
+
+
+# Syno. KW
+class KwSynonyms(Model):
+    # id = CharField()
+    id_histopath_kw = ForeignKeyField(HistopathKw, backref='kw_synonyms')
+    alias = CharField()
+
+    def insert_init_db(self):
+        pass
+
+
+# Pmids article/KW
+class ArticleKw(Model):
+    id_article = CharField()
+    id_histopath = ForeignKeyField(HistopathKw, backref='pmid_article')
+
+    def insert_init_db(self):
+        pass
+
+
+# Article/inf
+class Article(Model):
+    id = ForeignKeyField(ArticleKw, backref='id_article')
     title = CharField()
     date = CharField()
     type = CharField()
     abstract = CharField()
     source = CharField()
-    keyword = CharField()
 
     def insert_init_db(self):
         pass
 
 
-# Sous classe Annotation
-class Annotation(BaseModel):
-    pmid = ForeignKeyField(Article, backref='annotation')
+# Pubtator annotation
+class ArticleAnnotation(Model):
+    id_article = ForeignKeyField(Article, backref='annotation')
     mention = CharField()
     bioconcept = CharField()
     identifier = CharField()
 
-    def insert_init_db(self):
-        pass
-
-
-class Scispacy(BaseModel):
-    pmid = ForeignKeyField(Article, backref='scispacy')
-    word = CharField()
-    type = CharField()
 
     def insert_init_db(self):
         pass
+
+
+# class Scispacy(BaseModel):
+#     pmid = ForeignKeyField(article, backref='scispacy')
+#     word = CharField()
+#     type = CharField()
+#
+#     def insert_init_db(self):
+#         pass
 
 
 def get_models_list():
-    return [Article,
-            Annotation,
-            Scispacy]
+    return [HistopathKw,
+            KwSynonyms,
+            ArticleKw,
+            Article,
+            ArticleAnnotation]
 
 
 """
@@ -105,7 +139,6 @@ class FScispacy(Model):
 db_f.create_tables([FArticle,
                     FAnnotation,
                     FScispacy])
-
 
 """
 NArticle/NAnnotation/NScispacy correspond a la db contenant le negative set
@@ -206,19 +239,20 @@ KeywordAnnotation stock les identifiants des genes et des maladies ainsi que leu
 db_k = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'keyword'))
 
 
-class KeywordAnnotation(Model):
+class Keyword(Model):
     keyword = CharField()
     bioconcept = CharField()
     identifier = CharField()
-    count = IntegerField()
+    mention = CharField()
 
     class Meta:
         database = db_k
 
 
-db_k.create_tables([KeywordAnnotation])
+db_k.create_tables([Keyword])
 
-def connect_db(name=database_proxy, db_type='sqlite',):
+
+def connect_db(name=database_proxy, db_type='sqlite', ):
     connect_proxy_db(proxy=database_proxy, name=name, db_type=db_type)
     logger.info('Connection to the {} database {}: OK'.format(db_type, name))
     return database_proxy

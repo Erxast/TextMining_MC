@@ -22,13 +22,13 @@ import xmltodict
 from textmining_mc import logger, database_proxy, configs
 from textmining_mc import configs
 from textmining_mc.resources.api.api import API
-from textmining_mc.resources.model import create_tables, connect_db, get_models_list, Article, \
-    Scispacy, PmidsGene, FArticle, Annotation, FAnnotation, NArticle
+from textmining_mc.resources.model import create_tables, connect_db, PmidsGene, FArticle, FAnnotation, \
+    NArticle, Keyword, ArticleAnnotation, Article, KwSynonyms, HistopathKw, ArticleKw
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
-from textmining_mc.resources.model import PmidsGene, Article, FArticle, Annotation, FAnnotation
+from textmining_mc.resources.model import PmidsGene, FArticle, FAnnotation
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
-from textmining_mc.resources.utils.transform_mtd import removal_false_positive, get_scispacy_annotation, \
+from textmining_mc.resources.utils.transform_mtd import removal_false_positive, \
     get_pubtator_annotation
 
 
@@ -42,16 +42,39 @@ class AllArticle(DatabaseModel):
 
     def article_per_keyword(self):
         fichier = open(os.path.join(self.root_data_path, 'Histological Terms.txt'), 'r')
-        list_word = []
-        word = ""
+        list_ligne = []
+        ligne = ""
         for i in fichier.read():
             if i == "\n":
-                list_word.append(word)
-                word = ""
+                list_ligne.append(ligne)
+                ligne = ""
             else:
-                word = word + i
-        list_word.append(word)
+                ligne = ligne + i
         fichier.close()
+        for ligne in list_ligne:
+            list_word = []
+            word = ''
+            for i in ligne:
+                if i == '\t':
+                    list_word.append(word)
+                    word = ''
+                    if len(list_word) == 1:
+                        HistopathKw.create(name=list_word[0], category='not defined',
+                                           histological_feature='not defined')
+
+                else:
+                    word = word + i
+            list_word.append(word)
+            count = 0
+            for elmt in list_word:
+                count += 1
+                if count != 1:
+                    KwSynonyms.create(id_histopath_kw=list_word[0], alias=elmt)
+        query = KwSynonyms.select()
+        list_word = []
+        for word in query:
+            list_word.append(word.alias)
+        print(len(list_word))
         for elmt in list_word:
             elmt_query = ''
             for i in elmt:
@@ -72,13 +95,8 @@ class AllArticle(DatabaseModel):
                     query_key) + "&WebEnv=" + str(web_env) + "&retmax=10000&usehistory=y&retmode=json"
                 rsearch = requests.get(urlsearch)
                 id_keyword = rsearch.json()['esearchresult']['idlist']
-                list_pmids_100 = []
-                for pmids in tqdm(iterable=id_keyword, desc=str(elmt)):
-                    list_pmids_100.append(pmids)
-                    if len(list_pmids_100) == 100:
-                        API(list_pmids_100, 'pubmed', str(elmt))
-                        list_pmids_100.clear()
-                API(list_pmids_100, 'pubmed', str(elmt))
+                for pmid in tqdm(iterable=id_keyword, desc=elmt):
+                    ArticleKw.create(id_article=pmid, id_histopath=elmt)
 
     def keyword_disease_gene(self):
         # list_pmids = []
@@ -101,25 +119,46 @@ class AllArticle(DatabaseModel):
         #         i += 1
         #         fichier.write('\n')
         keyword_gene_or_disease = []
-        for annotation in Annotation.select().where(Annotation.bioconcept == 'Gene'):
+        print('> gene_start')
+        for annotation in ArticleAnnotation.select().where(ArticleAnnotation.bioconcept == 'Gene'):
             identifier = annotation.identifier
+            mention = annotation.mention
             for article in Article.select().where(Article.id == annotation.pmid):
                 keyword = article.keyword
-                keyword_gene_or_disease.append((keyword, annotation.bioconcept, identifier))
-            break
-        for annotation in Annotation.select().where(Annotation.bioconcept == 'Disease'):
+                keyword_gene_or_disease.append((keyword, annotation.bioconcept, identifier, mention))
+                if len(keyword_gene_or_disease) == 990:
+                    print('insert')
+                    Keyword.insert_many(keyword_gene_or_disease,
+                                        fields=[Keyword.keyword, Keyword.bioconcept,
+                                                Keyword.identifier,
+                                                Keyword.mention]).execute()
+                    keyword_gene_or_disease.clear()
+        Keyword.insert_many(keyword_gene_or_disease,
+                            fields=[Keyword.keyword, Keyword.bioconcept,
+                                    Keyword.identifier,
+                                    Keyword.mention]).execute()
+        keyword_gene_or_disease.clear()
+        print('> gene_end')
+        print('> disease_start')
+        for annotation in ArticleAnnotation.select().where(ArticleAnnotation.bioconcept == 'Disease'):
             identifier = annotation.identifier
+            mention = annotation.mention
             for article in Article.select().where(Article.id == annotation.pmid):
                 keyword = article.keyword
-                keyword_gene_or_disease.append((keyword, annotation.bioconcept, identifier))
-            break
-        print(keyword_gene_or_disease)
-
-
-
-
-
-
+                keyword_gene_or_disease.append((keyword, annotation.bioconcept, identifier, mention))
+                if len(keyword_gene_or_disease) == 1000:
+                    print('insert')
+                    Keyword.insert_many(keyword_gene_or_disease,
+                                        fields=[Keyword.keyword, Keyword.bioconcept,
+                                                Keyword.identifier,
+                                                Keyword.mention]).execute()
+                    keyword_gene_or_disease.clear()
+        Keyword.insert_many(keyword_gene_or_disease,
+                            fields=[Keyword.keyword, Keyword.bioconcept,
+                                    Keyword.identifier,
+                                    Keyword.mention]).execute()
+        keyword_gene_or_disease.clear()
+        print('> disease_end')
 
     # def process_article_data_mgt(self):
     #     fichier = open(os.path.join(self.root_data_path, 'list_id_mgt.txt'), 'r')
@@ -427,14 +466,13 @@ class AllArticle(DatabaseModel):
 
     def run(self):
         # TODO: Method populate Article
-        # super().check_or_create_db()
-        # self.article_per_keyword()
+        super().check_or_create_db()
+        self.article_per_keyword()
         # # self.process_article_data_mgt()
         # # self.process_article_data_pubmed()
         # removal_false_positive()
         # get_pubtator_annotation()
-
-        self.keyword_disease_gene()
+        # self.keyword_disease_gene()
         # # self.intersection()
         # self.ps_spacy_frequency()
         # self.ps_wordcloud()
@@ -444,6 +482,6 @@ class AllArticle(DatabaseModel):
 
 if __name__ == '__main__':
     print('start')
-    p = AllArticle('article')
+    p = AllArticle('project')
     p.run()
     print('end')

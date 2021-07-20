@@ -11,7 +11,7 @@ from collections import Counter
 from wordcloud import WordCloud
 
 from textmining_mc import configs
-from textmining_mc.resources.model import Article, Scispacy, Gene, AllAnnotation, PmidsGene, Annotation
+from textmining_mc.resources.model import Article, Gene, AllAnnotation, PmidsGene, ArticleAnnotation
 
 
 def removal_false_positive():
@@ -28,26 +28,26 @@ def removal_false_positive():
             arti.delete_instance()
 
 
-def get_scispacy_annotation():
-    """
-    Add the informations available via the pkg Scispacy for all_article db
-
-    :return:
-    """
-    nlp = spacy.load("en_core_web_sm")
-    scispacy_annotation = []
-    for elmt in tqdm(iterable=Article.select(), desc='scispacy'):
-        id = elmt.id
-        title = elmt.title
-        sci_title = nlp(title)
-        for i in sci_title.ents:
-            scispacy_annotation.append((id, i.text, i.label_))
-        abstract = elmt.abstract
-        sci_abstract = nlp(abstract)
-        for i in sci_abstract.ents:
-            scispacy_annotation.append((id, i.text, i.label_))
-        Scispacy.insert_many(scispacy_annotation, fields=[Scispacy.pmid, Scispacy.word, Scispacy.type]).execute()
-        scispacy_annotation.clear()
+# def get_scispacy_annotation():
+#     """
+#     Add the informations available via the pkg Scispacy for all_article db
+#
+#     :return:
+#     """
+#     nlp = spacy.load("en_core_web_sm")
+#     scispacy_annotation = []
+#     for elmt in tqdm(iterable=Article.select(), desc='scispacy'):
+#         id = elmt.id
+#         title = elmt.title
+#         sci_title = nlp(title)
+#         for i in sci_title.ents:
+#             scispacy_annotation.append((id, i.text, i.label_))
+#         abstract = elmt.abstract
+#         sci_abstract = nlp(abstract)
+#         for i in sci_abstract.ents:
+#             scispacy_annotation.append((id, i.text, i.label_))
+#         Scispacy.insert_many(scispacy_annotation, fields=[Scispacy.pmid, Scispacy.word, Scispacy.type]).execute()
+#         scispacy_annotation.clear()
 
 
 def get_list_gene_identifier():
@@ -99,12 +99,12 @@ def get_pubtator_annotation():
         count += 1
         if count == 10000:
             print('insert')
-            Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
-                                                    Annotation.identifier]).execute()
+            ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
+                                                                   ArticleAnnotation.identifier]).execute()
             list_annotation.clear()
             count = 0
-    Annotation.insert_many(list_annotation, fields=[Annotation.pmid, Annotation.mention, Annotation.bioconcept,
-                                                    Annotation.identifier]).execute()
+    ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
+                                                           ArticleAnnotation.identifier]).execute()
 
 
 def spacy_ps_ns():
