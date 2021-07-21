@@ -1,10 +1,7 @@
 import os
 
-import spacy
-
-from tqdm import tqdm
 from textmining_mc import logger, database_proxy
-# from textmining_mc.resources.model import get_models_list
+from textmining_mc.resources.model import get_models_list
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 

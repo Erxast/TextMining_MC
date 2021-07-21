@@ -7,12 +7,10 @@ from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 class API(object):
 
-    def __init__(self, pmids_list, source, keyword):
+    def __init__(self, pmids_list, avaibility_check=None):
         self.pmids_list = pmids_list
-        self.source = source
-        self.keyword = keyword
+        self.avaibility_check = avaibility_check if avaibility_check is not None else 'no'
         self.records = dict()
-        self.records_list = list() #Corresponds to a dictionary list
         self.efetch()
         self.removal_not_available()
         self.removal_pubmedbookarticle()
@@ -29,7 +27,6 @@ class API(object):
         handle = Entrez.efetch(db="pubmed", id=self.pmids_list, retmode="xml", rettype="abstract")
         records = Entrez.read(handle)
         self.records = records
-        self.records_list.append(records)
 
     def removal_pubmedbookarticle(self):
         """
@@ -51,17 +48,18 @@ class API(object):
 
         :return: list_id_100: Without pmids of articles no longer available
         """
-        ok = 'No'
-        while ok == 'No':
-            c = 0
-            for i in range(len(self.pmids_list)):
-                if self.records["PubmedArticle"][i]["MedlineCitation"]["PMID"] != str(self.pmids_list[i]):
-                    self.pmids_list.remove(self.pmids_list[i])
-                    break
-                else:
-                    c += 1
-            if c == len(self.pmids_list):
-                ok = "Yes"
+        if self.avaibility_check == 'yes':
+            ok = 'No'
+            while ok == 'No':
+                c = 0
+                for i in range(len(self.pmids_list)):
+                    if self.records["PubmedArticle"][i]["MedlineCitation"]["PMID"] != str(self.pmids_list[i]):
+                        self.pmids_list.remove(self.pmids_list[i])
+                        break
+                    else:
+                        c += 1
+                if c == len(self.pmids_list):
+                    ok = "Yes"
 
     def article_xml_content(self):
         """
@@ -115,7 +113,8 @@ class API(object):
                             break
                         date = date + lettre
                         c += 1
-            Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract, source=self.source, keyword=self.keyword)
+            Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
+
 
 
 

@@ -27,7 +27,6 @@ db_all = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'project'
 
 # KW
 class HistopathKw(Model):
-    # id = CharField()
     name = CharField()
     category = CharField()
     histological_feature = CharField()
@@ -41,21 +40,8 @@ class HistopathKw(Model):
 
 # Syno. KW
 class KwSynonyms(Model):
-    # id = CharField()
-    id_histopath_kw = ForeignKeyField(HistopathKw, backref='kw_synonyms')
+    histopath_kw = ForeignKeyField(HistopathKw, backref='id_kw_synonyms')
     alias = CharField()
-
-    class Meta:
-        database = db_all
-
-    def insert_init_db(self):
-        pass
-
-
-# Pmids article/KW
-class ArticleKw(Model):
-    id_article = CharField()
-    id_histopath = ForeignKeyField(HistopathKw, backref='pmid_article')
 
     class Meta:
         database = db_all
@@ -66,12 +52,23 @@ class ArticleKw(Model):
 
 # Article/inf
 class Article(Model):
-    id = ForeignKeyField(ArticleKw, backref='id_article')
+    id = CharField()
     title = CharField()
     date = CharField()
     type = CharField()
     abstract = CharField()
-    source = CharField()
+
+    class Meta:
+        database = db_all
+
+    def insert_init_db(self):
+        pass
+
+
+# Pmids article/KW
+class ArticleKw(Model):
+    article = ForeignKeyField(Article, backref='pmid_article_kw')
+    histopath = ForeignKeyField(HistopathKw, backref='id_keyword')
 
     class Meta:
         database = db_all
@@ -82,7 +79,7 @@ class Article(Model):
 
 # Pubtator annotation
 class ArticleAnnotation(Model):
-    id_article = ForeignKeyField(Article, backref='annotation')
+    pub_pmid = ForeignKeyField(Article, backref='pmid_article_pub')
     mention = CharField()
     bioconcept = CharField()
     identifier = CharField()
@@ -94,27 +91,52 @@ class ArticleAnnotation(Model):
         pass
 
 
-# class Scispacy(BaseModel):
-#     pmid = ForeignKeyField(article, backref='scispacy')
-#     word = CharField()
-#     type = CharField()
-#
-#     def insert_init_db(self):
-#         pass
+class Scispacy(Model):
+    sci_pmid = ForeignKeyField(Article, backref='pmid_article_sci')
+    word = CharField()
+    type = CharField()
+
+    class Meta:
+        database = db_all
+
+    def insert_init_db(self):
+        pass
 
 
-# def get_models_list():
-#     return [HistopathKw,
-#             KwSynonyms,
-#             ArticleKw,
-#             Article,
-#             ArticleAnnotation]
+class Dataset(Model):
+    name = CharField()
+    database = CharField()
 
-db_all.create_tables([HistopathKw,
-                      KwSynonyms,
-                      ArticleKw,
-                      Article,
-                      ArticleAnnotation])
+    class Meta:
+        database = db_all
+
+    def insert_init_db(self):
+        pass
+
+
+class ArticleDataset(Model):
+    article = ForeignKeyField(Article, backref='pmid_article_data')
+    dataset = ForeignKeyField(Dataset, backref='id_dataset')
+
+    class Meta:
+        database = db_all
+
+    def insert_init_db(self):
+        pass
+
+
+def get_models_list():
+    return [HistopathKw,
+            KwSynonyms,
+            ArticleKw,
+            Article,
+            ArticleAnnotation,
+            Scispacy,
+            Dataset,
+            ArticleDataset]
+
+
+db_all.create_tables(get_models_list())
 
 """
 FArticle/FAnnotation/FScispacy sont la db contenant les articles sur les gènes impliquées dans les MC 
