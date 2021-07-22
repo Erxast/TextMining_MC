@@ -22,13 +22,13 @@ import xmltodict
 from textmining_mc import logger, database_proxy, configs
 from textmining_mc import configs
 from textmining_mc.resources.api.api import API
-from textmining_mc.resources.model import create_tables, connect_db, PmidsGene, FArticle, FAnnotation, \
-    NArticle, Keyword, ArticleAnnotation, Article, KwSynonyms, HistopathKw, ArticleKw, Dataset, ArticleDataset
+from textmining_mc.resources.model import create_tables, connect_db, PmidsGene, \
+    Keyword, ArticleAnnotation, Article, KwSynonyms, HistopathKw, ArticleKw, Dataset, ArticleDataset
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 from textmining_mc.resources.model import PmidsGene, FArticle, FAnnotation
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
-from textmining_mc.resources.utils.transform_mtd import removal_false_positive, \
+from textmining_mc.resources.utils.transform_mtd import \
     get_pubtator_annotation
 
 
@@ -98,16 +98,14 @@ class AllArticle(DatabaseModel):
                     KwSynonyms.create(histopath_kw=keyword, alias=w)
 
     def article_per_keyword(self):
-        # self.etl_aliases()
-
+        pmids_histopath_kw = list()
+        article_for_insert_many = list()
         list_word = []
         for word in KwSynonyms.select():
             list_word.append(word)
-
-        kw_pmids = list()
-        for elmt in tqdm(list_word):
+        for histopath_kw_db in tqdm(list_word):
             elmt_query = ''
-            for i in elmt.alias:
+            for i in histopath_kw_db.alias:
                 if i == ' ':
                     elmt_query += '+'
                 else:
@@ -118,14 +116,8 @@ class AllArticle(DatabaseModel):
                               'language]&retmode=json&usehistory=y '
             rob = requests.get(url_request)
             count = rob.json()['esearchresult']['count']
-
-            # the_query_78 = HistopathKw.select().join(KwSynonyms.histopath_kw == HistopathKw.id).where(
-            #     KwSynonyms.alias == str(elmt.alias))
-            # print(the_query_78, '\t', elmt, '\t', count)
-            # toto = KwSynonyms.select().where(KwSynonyms.alias == str(elmt.alias))
-            # titi = [t for t in toto]
-            # print(titi, '\t', elmt, '\t', count)
-
+            for kw in KwSynonyms.select().where(KwSynonyms.alias == str(histopath_kw_db.alias)):
+                keyword_id = kw.histopath_kw
             if count != '0':
                 query_key = rob.json()['esearchresult']['querykey']
                 web_env = rob.json()['esearchresult']['webenv']
@@ -133,17 +125,32 @@ class AllArticle(DatabaseModel):
                 urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
                     query_key) + "&WebEnv=" + str(web_env) + "&retmax=10000&usehistory=y&retmode=json"
                 rsearch = requests.get(urlsearch)
-                id_keyword = rsearch.json()['esearchresult']['idlist']
-                # print(id_keyword)
-                for pmid in id_keyword:
-                    kw_pmids.append((int(pmid), elmt.histopath_kw.id))
-                    # ArticleKw.create(id_article=pmid, id_histopath=elmt.histopath_kw)
-
-            # print(kp)
-        ArticleKw.insert_many(list(set(kw_pmids)), [ArticleKw.article, ArticleKw.histopath]).execute()
-        # ArticleKw.create(id_article=kp[0], id_histopath=kp[1])
-        # print(len(kw_pmids))
-        # print(len(set(kw_pmids)))
+                id_all = rsearch.json()['esearchresult']['idlist']
+                list_id_100 = []
+                for elmt in id_all:
+                    list_id_100.append(elmt)
+                    if len(list_id_100) == 100:
+                        API(list_id_100, article_for_insert_many, keyword_id, pmids_histopath_kw)
+                        list_id_100.clear()
+                API(list_id_100, article_for_insert_many, keyword_id, pmids_histopath_kw)
+        list_pmids_in_db = list()
+        article_for_insert_many_final = list()
+        for article in Article.select():
+            list_pmids_in_db.append(article.id)
+        for elmt in article_for_insert_many:
+            if elmt[0] not in list_pmids_in_db:
+                article_for_insert_many_final.append(elmt)
+        Article.insert_many(article_for_insert_many_final,
+                            [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+        list_1000 = list()
+        for elmt in list(set(pmids_histopath_kw)):
+            list_1000.append(elmt)
+            if len(list_1000) == 1000:
+                ArticleKw.insert_many(list(set(list_1000)),
+                                      [ArticleKw.article, ArticleKw.histopath]).execute()
+                list_1000.clear()
+        ArticleKw.insert_many(list(set(list_1000)),
+                              [ArticleKw.article, ArticleKw.histopath]).execute()
 
     # def keyword_disease_gene(self):
     #     # list_pmids = []
@@ -209,7 +216,8 @@ class AllArticle(DatabaseModel):
 
     @staticmethod
     def process_article_data_pubmed(elmt):
-        kw_pmids = list()
+        article_for_insert_many = list()
+        pmids_dataset = list()
         for data in Dataset.select().where(Dataset.name == elmt):
             dataset_id = data.id
         elmt_query = ''
@@ -219,25 +227,53 @@ class AllArticle(DatabaseModel):
             else:
                 elmt_query += i
         rob = requests.get(os.path.join(configs['paths']['data']['pubmed'],
-                                        'esearch.fcgi/?db=pubmed&term=' + elmt_query + '+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y'))
+                                        'esearch.fcgi/?db=pubmed&term=' + elmt_query + '+journal+article['
+                                                                                       'publication%20type]+english['
+                                                                                       'language]&retmode=json'
+                                                                                       '&usehistory=y'))
         query_key = rob.json()['esearchresult']['querykey']
         web_env = rob.json()['esearchresult']['webenv']
         urlsearch = os.path.join(configs['paths']['data']['pubmed'], 'esearch.fcgi?db=pubmed&query_key=' + str(
             query_key) + "&WebEnv=" + str(web_env) + "&retmax=1000000&usehistory=y&retmode=json")
         rsearch = requests.get(urlsearch)
         id_all = rsearch.json()['esearchresult']['idlist']
-        for pmid in id_all:
-            kw_pmids.append((pmid, dataset_id))
         list_id_100 = []
         for elmt in tqdm(iterable=id_all, desc=elmt):
             list_id_100.append(elmt)
             if len(list_id_100) == 100:
-                API(list_id_100)
+                API(list_id_100, article_for_insert_many, dataset_id, pmids_dataset)
                 list_id_100.clear()
-        API(list_id_100)
-        ArticleDataset.insert_many(list(set(kw_pmids)), [ArticleDataset.article, ArticleDataset.dataset]).execute()
+        API(list_id_100, article_for_insert_many, dataset_id, pmids_dataset)
+        list_pmids_in_db = list()
+        article_for_insert_many_final = list()
+        for article in Article.select():
+            list_pmids_in_db.append(article.id)
+        for elmt in article_for_insert_many:
+            if elmt[0] not in list_pmids_in_db:
+                article_for_insert_many_final.append(elmt)
+        list_1000 = list()
+        for elmt in article_for_insert_many_final:
+            list_1000.append(elmt)
+            if len(list_1000) == 1000:
+                Article.insert_many(list_1000,
+                                    [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+                list_1000.clear()
+        Article.insert_many(list_1000,
+                            [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+        list_1000_bis = list()
+        for elmt in list(set(pmids_dataset)):
+            list_1000_bis.append(elmt)
+            if len(list_1000_bis) == 1000:
+                ArticleDataset.insert_many(list(set(list_1000_bis)),
+                                           [ArticleDataset.article, ArticleDataset.dataset]).execute()
+                list_1000.clear()
+        ArticleDataset.insert_many(list(set(list_1000_bis)), [ArticleDataset.article, ArticleDataset.dataset]).execute()
 
     def process_article_data_mgt(self):
+        article_for_insert_many = list()
+        pmids_dataset = list()
+        for data in Dataset.select().where(Dataset.name == 'MGT'):
+            dataset_id = data.id
         fichier = open(os.path.join(self.root_data_path, 'id_article_mgt.txt'), 'r')
         list_mgt = []
         id_ = ""
@@ -256,11 +292,31 @@ class AllArticle(DatabaseModel):
         for elmt in tqdm(iterable=list_mgt_final, desc='mgt'):
             list_id_100.append(elmt)
             if len(list_id_100) == 100:
-                API(list_id_100, 'yes')
+                API(list_id_100, article_for_insert_many, dataset_id, pmids_dataset, 'yes')
                 list_id_100.clear()
-        API(list_id_100, 'yes')
+        API(list_id_100, article_for_insert_many, dataset_id, pmids_dataset, 'yes')
         fichier.close()
-    #
+        # Verification des doublons + insertions dans la base de données
+        list_pmids_in_db = list()
+        article_for_insert_many_final = list()
+        for article in Article.select():
+            list_pmids_in_db.append(article.id)
+        for elmt in article_for_insert_many:
+            if elmt[0] not in list_pmids_in_db:
+                article_for_insert_many_final.append(elmt)
+        Article.insert_many(article_for_insert_many_final,
+                            [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+        # Possibilité de faire de cette partie de code une fonction
+        list_1000 = list()
+        for elmt in list(set(pmids_dataset)):
+            list_1000.append(elmt)
+            if len(list_1000) == 1000:
+                ArticleDataset.insert_many(list(set(list_1000)),
+                                           [ArticleDataset.article, ArticleDataset.dataset]).execute()
+                list_1000.clear()
+        ArticleDataset.insert_many(list(set(list_1000)), [ArticleDataset.article, ArticleDataset.dataset]).execute()
+        print('mgt end')
+
     # @staticmethod
     # def intersection():
     #     count_article = 0
@@ -321,6 +377,10 @@ class AllArticle(DatabaseModel):
 
     @staticmethod
     def negative_set():
+        article_for_insert_many = list()
+        pmids_dataset = list()
+        for data in Dataset.select().where(Dataset.name == 'negative set'):
+            dataset_id = data.id
         i = 0
         c = 0
         list_all = []
@@ -347,99 +407,112 @@ class AllArticle(DatabaseModel):
                 i = 1
             c += 1
         print('count_years_end')
-        list_article_per_y = []
         for T in list_all:
-            # Le while permet de repeter la boucle 'for' tant qu'il n'y a pas 1000 articles dans la base de données.
-            compteur_article_annee = 0
-            OK = 'False'
-            while OK == 'False':
-                # Recherche des articles par années
-                rob = requests.get(
-                    'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=' + str(T[
-                                                                                                            0]) + '[Date%20-%20Publication]+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y')
-                query_key = rob.json()['esearchresult']['querykey']
-                web_env = rob.json()['esearchresult']['webenv']
-                # Recupération d'une liste d'ID par années
-                urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
-                    query_key) + "&WebEnv=" + str(web_env) + "&retmax=5000&usehistory=y&retmode=json"
-                rsearch = requests.get(urlsearch)
-                id_all = rsearch.json()['esearchresult']['idlist']
-                random_id_all = []
-                # Obtention d'une liste de 1000 articles choisi au hasard parmis les 5000 (déjà pris au hasard)
-                for F in range(1000):
-                    random_id = random.choice(id_all)
-                    random_id_all.append(random_id)
-                    id_all.remove(random_id)
-                for elmt in tqdm(iterable=random_id_all, desc='creation_'):
-                    # Permet de faire sortir de la boucle si on arrive à 1000 articles dans la base de donnée
-                    if compteur_article_annee == 1000:
-                        break
-                    Entrez.email = "hugues.escoffier@etu.unsitra.fr"
-                    handle = Entrez.efetch(db="pubmed", id=random_id_all, retmode="xml", rettype="abstract")
-                    records = Entrez.read(handle)
-                    # Permet de supprimer les éventuels <PubmedBookArticle>
-                    data_ = records["PubmedArticle"]
-                    if len(data_) != len(random_id_all):
-                        for i in range(len(random_id_all) - len(data_)):
-                            Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
-                            random_id_all.remove(Id_unwanted)
-                    # Récup. des données à l'intérieur des articles :
-                    for i in range(len(random_id_all)):
-                        # Récup. Abstract
-                        try:
-                            abstract_ = ''.join(
-                                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
-                        except:
-                            abstract_ = "None"
-                        # Récup. Title
-                        title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
-                        # Récup. PublicationType
-                        publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"][
-                            "PublicationTypeList"]
-                        if len(publication_type_list) != 1:
-                            z = 0
-                            for y in range(len(publication_type_list)):
-                                if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"][
-                                               "PublicationTypeList"][
-                                               y]) == "Journal Article":
-                                    publication_type_ = "Journal Article"
-                                    z = 1
-                            if z == 0:
-                                publication_type_ = "Other"
-                        else:
-                            publication_type_ = ''.join(
-                                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
-                        # Récup. Date
-                        try:
-                            date_ = ''.join(
-                                records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
-                                    "PubDate"]["Year"])
-                        except:
-                            try:
-                                date_ = ''.join(
-                                    records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
-                            except:
-                                complete_date_ = ''.join(
-                                    records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"][
-                                        "JournalIssue"][
-                                        "PubDate"]["MedlineDate"])
-                                date_ = ''
-                                c = 0
-                                for lettre in complete_date_:
-                                    if c == 4:
-                                        break
-                                    date_ = date_ + lettre
-                                    c += 1
-                        # Ajout à la base de données (le "if" permet d'éviter les faux positifs)
-                        if publication_type_ == 'Journal Article' and abstract_ != 'None' and date_ == T[0]:
-                            Article.create(id=random_id_all[i], title=title_, date=date_, type=publication_type_, abstract=abstract_)
-                            compteur_article_annee += 1
-                        if compteur_article_annee == 1000:
-                            OK = 'True'
-                            print(T[0])
-                            break
+            print(T[0])
+            rob = requests.get(
+                'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=' + str(T[
+                                                                                                        0]) + '[Date%20-%20Publication]+journal+article[publication%20type]+english[language]&retmode=json&usehistory=y')
+            query_key = rob.json()['esearchresult']['querykey']
+            web_env = rob.json()['esearchresult']['webenv']
+            # Recupération d'une liste d'ID par années
+            urlsearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&query_key=" + str(
+                query_key) + "&WebEnv=" + str(web_env) + "&retmax=50000&usehistory=y&retmode=json"
+            rsearch = requests.get(urlsearch)
+            id_all = rsearch.json()['esearchresult']['idlist']
+            random_id_all = []
+            # Obtention d'une liste de 1000 articles choisi au hasard parmis les 5000 (déjà pris au hasard)
+            for F in range(2000):
+                random_id = random.choice(id_all)
+                random_id_all.append(random_id)
+                id_all.remove(random_id)
+            Entrez.email = "hugues.escoffier@etu.unsitra.fr"
+            handle = Entrez.efetch(db="pubmed", id=random_id_all, retmode="xml", rettype="abstract")
+            records = Entrez.read(handle)
+            # Permet de supprimer les éventuels <PubmedBookArticle>
+            data_ = records["PubmedArticle"]
+            if len(data_) != len(random_id_all):
+                for i in range(len(random_id_all) - len(data_)):
+                    Id_unwanted = ''.join(records["PubmedBookArticle"][i]["BookDocument"]["PMID"])
+                    random_id_all.remove(Id_unwanted)
+            # Récup. des données à l'intérieur des articles :
+            for i in range(len(random_id_all)):
+                # Récup. Abstract
+                try:
+                    abstract_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Abstract"]["AbstractText"])
+                except:
+                    abstract_ = "None"
+                # Récup. Title
+                title_ = ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleTitle"])
+                # Récup. PublicationType
+                publication_type_list = records["PubmedArticle"][i]["MedlineCitation"]["Article"][
+                    "PublicationTypeList"]
+                if len(publication_type_list) != 1:
+                    z = 0
+                    for y in range(len(publication_type_list)):
+                        if ''.join(records["PubmedArticle"][i]["MedlineCitation"]["Article"][
+                                       "PublicationTypeList"][
+                                       y]) == "Journal Article":
+                            publication_type_ = "Journal Article"
+                            z = 1
+                    if z == 0:
+                        publication_type_ = "Other"
+                else:
+                    publication_type_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["PublicationTypeList"])
+                # Récup. Date
+                try:
+                    date_ = ''.join(
+                        records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"]["JournalIssue"][
+                            "PubDate"]["Year"])
+                except:
+                    try:
+                        date_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["ArticleDate"][0]["Year"])
+                    except:
+                        complete_date_ = ''.join(
+                            records["PubmedArticle"][i]["MedlineCitation"]["Article"]["Journal"][
+                                "JournalIssue"][
+                                "PubDate"]["MedlineDate"])
+                        date_ = ''
+                        c = 0
+                        for lettre in complete_date_:
+                            if c == 4:
+                                break
+                            date_ = date_ + lettre
+                            c += 1
+                # Ajout à la base de données (le "if" permet d'éviter les faux positifs)
+                if publication_type_ == 'Journal Article' and abstract_ != 'None' and date_ == T[0]:
+                    article_for_insert_many.append((random_id_all[i], title_, date_, publication_type_, abstract_))
+                    pmids_dataset.append((random_id_all[i], dataset_id))
         print('selection_article_end')
-    #
+        # Verification des doublons + insertions dans la base de données
+        list_pmids_in_db = list()
+        article_for_insert_many_final = list()
+        for article in Article.select():
+            list_pmids_in_db.append(article.id)
+        for elmt in article_for_insert_many:
+            if elmt[0] not in list_pmids_in_db:
+                article_for_insert_many_final.append(elmt)
+        list_1000 = list()
+        for elmt in article_for_insert_many_final:
+            list_1000.append(elmt)
+            if len(list_1000) == 1000:
+                Article.insert_many(list_1000,
+                                    [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+                list_1000.clear()
+        Article.insert_many(list_1000,
+                            [Article.id, Article.title, Article.date, Article.type, Article.abstract]).execute()
+        list_1000_bis = list()
+        for elmt in list(set(pmids_dataset)):
+            list_1000_bis.append(elmt)
+            if len(list_1000_bis) == 1000:
+                ArticleDataset.insert_many(list(set(list_1000_bis)),
+                                           [ArticleDataset.article, ArticleDataset.dataset]).execute()
+                list_1000.clear()
+        ArticleDataset.insert_many(list(set(list_1000_bis)), [ArticleDataset.article, ArticleDataset.dataset]).execute()
+        print('end negative set')
+
     # @staticmethod
     # def ps_spacy_frequency():
     #     """
@@ -528,15 +601,13 @@ class AllArticle(DatabaseModel):
         # TODO: Method populate Article
         super().check_or_create_db()
         self.creation_dataset()
-        # self.article_per_kw_()
-        # self.etl_aliases()
-        # self.article_per_keyword()
-        # self.process_article_data_mgt()
+        self.etl_aliases()
+        self.article_per_keyword()
+        self.process_article_data_mgt()
         self.process_article_data_pubmed('congenital myopathy')
         # self.process_article_data_pubmed('myopathy')
-        # self.negative_set()
-        removal_false_positive()
-        # get_pubtator_annotation()
+        self.negative_set()
+        get_pubtator_annotation()
         # self.keyword_disease_gene()
         # # self.intersection()
         # self.ps_spacy_frequency()

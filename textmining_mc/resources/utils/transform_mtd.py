@@ -14,18 +14,18 @@ from textmining_mc import configs
 from textmining_mc.resources.model import Article, Gene, AllAnnotation, PmidsGene, ArticleAnnotation
 
 
-def removal_false_positive():
-    """
-    Deletes articles without abstracts
-
-    :return:
-    db
-    """
-    for arti in Article.select():
-        if arti.abstract == "None":
-            arti.delete_instance()
-        elif arti.type != "Journal Article":
-            arti.delete_instance()
+# def removal_false_positive():
+#     """
+#     Deletes articles without abstracts
+#
+#     :return:
+#     db
+#     """
+#     for arti in Article.select():
+#         if arti.abstract == "None":
+#             arti.delete_instance()
+#         elif arti.type != "Journal Article":
+#             arti.delete_instance()
 
 
 # def get_scispacy_annotation():
@@ -98,12 +98,11 @@ def get_pubtator_annotation():
         list_annotation.append(tuple_annot)
         count += 1
         if count == 10000:
-            print('insert')
-            ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
+            ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pub_pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
                                                                    ArticleAnnotation.identifier]).execute()
             list_annotation.clear()
             count = 0
-    ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
+    ArticleAnnotation.insert_many(list_annotation, fields=[ArticleAnnotation.pub_pmid, ArticleAnnotation.mention, ArticleAnnotation.bioconcept,
                                                            ArticleAnnotation.identifier]).execute()
 
 

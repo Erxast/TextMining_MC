@@ -1,16 +1,19 @@
 from Bio import Entrez
 from peewee import *
 
-from textmining_mc.resources.model import Article
+from textmining_mc.resources.model import Article, ArticleDataset
 from textmining_mc.resources.utils.superbasemodel import DatabaseModel
 
 
 class API(object):
 
-    def __init__(self, pmids_list, avaibility_check=None):
+    def __init__(self, pmids_list, article_for_insert_many, dataset_id, pmids_dataset, avaibility_check=None):
         self.pmids_list = pmids_list
+        self.dataset_id = dataset_id
+        self.pmids_dataset = pmids_dataset
         self.avaibility_check = avaibility_check if avaibility_check is not None else 'no'
         self.records = dict()
+        self.article_for_insert_many = article_for_insert_many
         self.efetch()
         self.removal_not_available()
         self.removal_pubmedbookarticle()
@@ -113,7 +116,11 @@ class API(object):
                             break
                         date = date + lettre
                         c += 1
-            Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
+            if publication_type == 'Journal Article' and abstract != 'None':
+                self.article_for_insert_many.append((self.pmids_list[i], title, date, publication_type, abstract))
+                # Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
+                self.pmids_dataset.append((self.pmids_list[i], self.dataset_id))
+
 
 
 

@@ -52,7 +52,7 @@ class KwSynonyms(Model):
 
 # Article/inf
 class Article(Model):
-    id = CharField()
+    id = CharField(primary_key=True)
     title = CharField()
     date = CharField()
     type = CharField()
