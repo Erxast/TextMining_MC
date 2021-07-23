@@ -116,9 +116,8 @@ class API(object):
                             break
                         date = date + lettre
                         c += 1
-            if publication_type == 'Journal Article' and abstract != 'None':
+            if publication_type == 'Journal Article' and abstract != 'None' and date != 'Wint' and date != 'Summ' and date != 'Spri' and date != 'Fall':
                 self.article_for_insert_many.append((self.pmids_list[i], title, date, publication_type, abstract))
-                # Article.create(id=self.pmids_list[i], title=title, date=date, type=publication_type, abstract=abstract)
                 self.pmids_dataset.append((self.pmids_list[i], self.dataset_id))
 
 
