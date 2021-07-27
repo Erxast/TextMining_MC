@@ -22,8 +22,7 @@ import xmltodict
 from textmining_mc import logger, database_proxy, configs
 from textmining_mc import configs
 from textmining_mc.resources.api.api import API
-from textmining_mc.resources.model import create_tables, connect_db, PmidsGene, \
-    Keyword, ArticleAnnotation, Article, KwSynonyms, HistopathKw, ArticleKw, Dataset, ArticleDataset
+from textmining_mc.resources.model import create_tables, connect_db, PmidsGene, ArticleAnnotation, Article, KwSynonyms, HistopathKw, ArticleKw, Dataset, ArticleDataset
 from textmining_mc.resources.utils import func_name
 from textmining_mc.resources.utils.database import connect_proxy_db, create_proxy_db_tables
 from textmining_mc.resources.model import PmidsGene, FArticle, FAnnotation
@@ -604,9 +603,9 @@ class AllArticle(DatabaseModel):
         self.etl_aliases()
         self.process_article_data_mgt()
         self.process_article_data_pubmed('congenital myopathy')
-        self.process_article_data_pubmed('myopathy')
+        # self.process_article_data_pubmed('myopathy')
         self.article_per_keyword()
-        self.negative_set()
+        # self.negative_set()
         get_pubtator_annotation()
         # self.keyword_disease_gene()
         # # self.intersection()

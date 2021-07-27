@@ -276,20 +276,21 @@ db_t.create_tables([PmidsGene])
 KeywordAnnotation stock les identifiants des genes et des maladies ainsi que leurs nobmre d'occurence
 """
 
-db_k = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'keyword'))
+db_k = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'disease_identifier'))
 
 
-class Keyword(Model):
-    keyword = CharField()
-    bioconcept = CharField()
+class Disease(Model):
+    id = CharField()
+    disease_name = CharField()
+    gene_symbols = CharField()
     identifier = CharField()
-    mention = CharField()
+    omim_id = CharField()
 
     class Meta:
         database = db_k
 
 
-db_k.create_tables([Keyword])
+db_k.create_tables([Disease])
 
 
 def connect_db(name=database_proxy, db_type='sqlite', ):
