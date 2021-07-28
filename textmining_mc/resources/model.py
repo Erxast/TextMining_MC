@@ -292,6 +292,20 @@ class Disease(Model):
 
 db_k.create_tables([Disease])
 
+db_der = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'dz_mc'))
+
+
+class DzMC(Model):
+    id = CharField()
+    disease_phenotype = CharField()
+    disease = CharField()
+
+    class Meta:
+        database = db_der
+
+
+db_der.create_tables([DzMC])
+
 
 def connect_db(name=database_proxy, db_type='sqlite', ):
     connect_proxy_db(proxy=database_proxy, name=name, db_type=db_type)
