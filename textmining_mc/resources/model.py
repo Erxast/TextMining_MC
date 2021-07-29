@@ -306,6 +306,20 @@ class DzMC(Model):
 
 db_der.create_tables([DzMC])
 
+db_re = SqliteDatabase(os.path.join(configs['paths']['data']['root'], 'GeneMyopathy'))
+
+
+class GeneM(Model):
+    id = CharField()
+    name = CharField()
+    uniprot = CharField()
+
+    class Meta:
+        database = db_re
+
+
+db_re.create_tables([GeneM])
+
 
 def connect_db(name=database_proxy, db_type='sqlite', ):
     connect_proxy_db(proxy=database_proxy, name=name, db_type=db_type)

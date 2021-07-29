@@ -111,7 +111,7 @@ class AllArticle(DatabaseModel):
                     elmt_query += i
             # Request_for_QK_&_WE
             url_request = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi/?db=pubmed&term=' + str(
-                elmt_query) + '+congenital+myopathy+journal+article[publication%20type]+english[' \
+                elmt_query) + '+myopathy+journal+article[publication%20type]+english[' \
                               'language]&retmode=json&usehistory=y '
             rob = requests.get(url_request)
             count = rob.json()['esearchresult']['count']
@@ -131,7 +131,8 @@ class AllArticle(DatabaseModel):
                     if len(list_id_100) == 100:
                         API(list_id_100, article_for_insert_many, keyword_id, pmids_histopath_kw)
                         list_id_100.clear()
-                API(list_id_100, article_for_insert_many, keyword_id, pmids_histopath_kw)
+                if len(list_id_100) != 0:
+                    API(list_id_100, article_for_insert_many, keyword_id, pmids_histopath_kw)
         list_pmids_in_db = list()
         article_for_insert_many_final = list()
         for article in Article.select():
@@ -598,11 +599,11 @@ class AllArticle(DatabaseModel):
 
     def run(self):
         # TODO: Method populate Article
-        super().check_or_create_db()
-        self.creation_dataset()
-        self.etl_aliases()
-        self.process_article_data_mgt()
-        self.process_article_data_pubmed('congenital myopathy')
+        # super().check_or_create_db()
+        # self.creation_dataset()
+        # self.etl_aliases()
+        # self.process_article_data_mgt()
+        # self.process_article_data_pubmed('congenital myopathy')
         # self.process_article_data_pubmed('myopathy')
         self.article_per_keyword()
         # self.negative_set()
